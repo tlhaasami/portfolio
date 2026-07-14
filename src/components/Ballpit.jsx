@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   Vector3 as a,
   MeshPhysicalMaterial as c,
@@ -747,13 +747,36 @@ function createBallpit(e, t = {}) {
 const Ballpit = ({ className = '', followCursor = true, ...props }) => {
   const canvasRef = useRef(null);
   const spheresInstanceRef = useRef(null);
+  const baseCount = props.count ?? 200;
+  const [responsiveCount, setResponsiveCount] = useState(baseCount);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      let scaledCount = baseCount;
+      if (width < 768) {
+        scaledCount = Math.max(5, Math.round(baseCount * 0.35));
+      } else if (width < 1050) {
+        scaledCount = Math.max(10, Math.round(baseCount * 0.60));
+      }
+      setResponsiveCount(scaledCount);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [baseCount]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
     try {
-      spheresInstanceRef.current = createBallpit(canvas, { followCursor, ...props });
+      spheresInstanceRef.current = createBallpit(canvas, {
+        followCursor,
+        ...props,
+        count: responsiveCount
+      });
     } catch (error) {
       console.error("Failed to initialize Ballpit WebGL:", error);
     }
@@ -767,7 +790,7 @@ const Ballpit = ({ className = '', followCursor = true, ...props }) => {
         }
       }
     };
-  }, [followCursor, props.count, props.gravity, props.friction, props.wallBounce, JSON.stringify(props.colors)]);
+  }, [followCursor, responsiveCount, props.gravity, props.friction, props.wallBounce, JSON.stringify(props.colors)]);
 
   return <canvas className={className} ref={canvasRef} style={{ width: '100%', height: '100%' }} />;
 };
