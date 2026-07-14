@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { usePathname } from "next/navigation";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -149,7 +150,13 @@ function RollLink({ label, href, isActive, onClick, className, textClassName, he
 
 // 2. Main Navbar Component
 export default function Navbar() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+
+  // Do not render navbar on configuration/settings page
+  if (pathname?.startsWith("/tlhaasamii/setting")) {
+    return null;
+  }
   const [theme, setTheme] = useState<"light" | "dark">("dark");
 
   // Sync initial theme
