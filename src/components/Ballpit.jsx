@@ -248,6 +248,11 @@ function S(e) {
     onLeave() { },
     ...e
   };
+  // Disable mouse/touch interactions entirely on screens below 1050px width (mobile & tablet)
+  if (typeof window !== 'undefined' && window.innerWidth < 1050) {
+    t.dispose = () => { };
+    return t;
+  }
   (function (e, t) {
     if (!b.has(e)) {
       b.set(e, t);
@@ -327,12 +332,21 @@ function L() {
 }
 
 function TouchStart(e) {
+  if (e.target && (
+    e.target.closest('button') ||
+    e.target.closest('a') ||
+    e.target.closest('input') ||
+    e.target.closest('textarea') ||
+    e.target.closest('header')
+  )) {
+    return;
+  }
   if (e.touches.length > 0) {
     e.preventDefault();
     A.x = e.touches[0].clientX;
     A.y = e.touches[0].clientY;
 
-    for (const [elem, t] of b) {
+    for (let [elem, t] of b) {
       const rect = elem.getBoundingClientRect();
       if (D(rect)) {
         t.touching = true;
@@ -348,12 +362,21 @@ function TouchStart(e) {
 }
 
 function TouchMove(e) {
+  if (e.target && (
+    e.target.closest('button') ||
+    e.target.closest('a') ||
+    e.target.closest('input') ||
+    e.target.closest('textarea') ||
+    e.target.closest('header')
+  )) {
+    return;
+  }
   if (e.touches.length > 0) {
     e.preventDefault();
     A.x = e.touches[0].clientX;
     A.y = e.touches[0].clientY;
 
-    for (const [elem, t] of b) {
+    for (let [elem, t] of b) {
       const rect = elem.getBoundingClientRect();
       P(t, rect);
 

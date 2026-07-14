@@ -276,7 +276,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: "-100%" }}
             transition={{ type: "spring", damping: 30, stiffness: 200 }}
-            className="fixed inset-0 z-40 bg-zinc-950/95 backdrop-blur-2xl flex flex-col items-center justify-center gap-8"
+            className="fixed inset-0 z-40 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-2xl flex flex-col items-center justify-center gap-8 text-black dark:text-white"
           >
             {/* Stacked Navigation Links with Staggered Roll Effect */}
             <div className="flex flex-col items-center gap-6 w-full max-w-xs">
@@ -293,7 +293,7 @@ export default function Navbar() {
                     href={item.href}
                     isActive={isItemActive(item)}
                     onClick={() => setIsOpen(false)}
-                    className="px-8 py-4 text-xl border-zinc-800/80 hover:bg-zinc-900/50 w-full text-center"
+                    className="px-8 py-4 text-xl border-zinc-200 dark:border-zinc-800/80 hover:bg-zinc-100 dark:hover:bg-zinc-900/50 w-full text-center"
                     textClassName="text-lg md:text-xl h-[30px]"
                     heightClassName="h-[30px]"
                   />
