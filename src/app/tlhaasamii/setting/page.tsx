@@ -140,10 +140,10 @@ export default function AdminSettings() {
       </div>
 
       {/* Main Settings Grid */}
-      <div className="max-w-6xl mx-auto w-full flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-8">
+      <div className="max-w-6xl mx-auto w-full flex-1 grid grid-cols-1 min-[1050px]:grid-cols-12 gap-8 items-start mb-8">
         
         {/* Controls Column (Left) */}
-        <div className="lg:col-span-7 bg-zinc-900/40 border border-zinc-800/80 backdrop-blur-md rounded-3xl p-6 md:p-8 space-y-8 shadow-xl">
+        <div className="min-[1050px]:col-span-7 bg-zinc-900/40 border border-zinc-800/80 backdrop-blur-md rounded-3xl p-6 md:p-8 space-y-8 shadow-xl">
           <h2 className="text-sm font-mono tracking-widest text-zinc-550 flex items-center gap-2">
             <Sparkles className="w-4 h-4 text-amber-500" /> // PHYSICS CONFIGURATION
           </h2>
@@ -304,7 +304,7 @@ export default function AdminSettings() {
         </div>
 
         {/* Live Preview Column (Right) */}
-        <div className="lg:col-span-5 bg-zinc-900/40 border border-zinc-800/80 backdrop-blur-md rounded-3xl p-6 md:p-8 flex flex-col justify-between h-full shadow-xl">
+        <div className="min-[1050px]:col-span-5 bg-zinc-900/40 border border-zinc-800/80 backdrop-blur-md rounded-3xl p-6 md:p-8 flex flex-col justify-between h-full shadow-xl">
           <div>
             <h2 className="text-sm font-mono tracking-widest text-zinc-550 flex items-center gap-2 mb-4">
               <Sparkles className="w-4 h-4 text-amber-500" /> // LIVE WEBGL PREVIEW

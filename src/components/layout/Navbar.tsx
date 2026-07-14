@@ -208,7 +208,7 @@ export default function Navbar() {
   return (
     <>
       {/* Floating Capsule Header - Adapts dynamically to light and dark themes */}
-      <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-white/80 dark:bg-black/70 border border-black/15 dark:border-white/40 backdrop-blur-md rounded-full p-2 pr-4 md:pr-8 flex items-center gap-6 md:gap-8 shadow-[0_10px_30px_rgba(0,0,0,0.15)] dark:shadow-[0_10px_30px_rgba(255,255,255,0.15)] transition-all duration-300 justify-between md:justify-start">
+      <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-white/80 dark:bg-black/70 border border-black/15 dark:border-white/40 backdrop-blur-md rounded-full p-2 pr-4 min-[1050px]:pr-8 flex items-center gap-6 min-[1050px]:gap-8 shadow-[0_10px_30px_rgba(0,0,0,0.15)] dark:shadow-[0_10px_30px_rgba(255,255,255,0.15)] transition-all duration-300 justify-between min-[1050px]:justify-start">
         
         {/* Left Logo (with Rotation on Hover - black background in light theme, white in dark theme) */}
         <motion.a
@@ -228,7 +228,7 @@ export default function Navbar() {
         </motion.a>
 
         {/* Center Navigation Links (Desktop/Tablet) */}
-        <nav className="hidden md:flex items-center gap-2">
+        <nav className="hidden min-[1050px]:flex items-center gap-2">
           {portfolioData.navItems.map((item) => (
             <RollLink
               key={item.label}
@@ -251,7 +251,7 @@ export default function Navbar() {
         {/* Hamburger Menu Trigger (Mobile) */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-black dark:text-white p-2 rounded-full hover:bg-zinc-100 dark:hover:bg-neutral-800 focus:outline-none z-50 transition-colors mr-1"
+          className="min-[1050px]:hidden text-black dark:text-white p-2 rounded-full hover:bg-zinc-100 dark:hover:bg-neutral-800 focus:outline-none z-50 transition-colors mr-1"
           aria-label="Toggle Navigation Menu"
         >
           <AnimatePresence mode="wait" initial={false}>
