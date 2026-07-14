@@ -34,10 +34,8 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
               try {
-                const saved = localStorage.getItem('portfolio-custom-settings-v1');
-                const settings = saved ? JSON.parse(saved) : null;
-                const theme = settings && settings.theme ? settings.theme : 'system';
-                if (theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                const theme = localStorage.getItem('portfolio-theme') || 'dark';
+                if (theme === 'dark') {
                   document.documentElement.classList.add('dark');
                 } else {
                   document.documentElement.classList.remove('dark');
