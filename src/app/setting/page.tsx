@@ -141,7 +141,7 @@ export default function AdminSettings() {
 
       {/* Main Settings Grid */}
       <div className="max-w-6xl mx-auto w-full flex-1 grid grid-cols-1 min-[1050px]:grid-cols-12 gap-8 items-start mb-8">
-        
+
         {/* Controls Column (Left) */}
         <div className="min-[1050px]:col-span-7 bg-zinc-900/40 border border-zinc-800/80 backdrop-blur-md rounded-3xl p-6 md:p-8 space-y-8 shadow-xl">
           <h2 className="text-sm font-mono tracking-widest text-zinc-550 flex items-center gap-2">
@@ -325,7 +325,7 @@ export default function AdminSettings() {
                 followCursor={followCursor}
                 colors={colors}
               />
-              
+
               {/* Overlay styling for preview box */}
               <div className="absolute inset-x-0 bottom-3 text-center pointer-events-none">
                 <span className="text-[8px] font-mono tracking-widest text-zinc-650 bg-zinc-950/70 border border-zinc-850 px-2.5 py-1 rounded-full uppercase">3D Physics Active</span>
