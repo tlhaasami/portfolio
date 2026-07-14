@@ -152,11 +152,6 @@ function RollLink({ label, href, isActive, onClick, className, textClassName, he
 export default function Navbar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-
-  // Do not render navbar on configuration/settings page
-  if (pathname?.startsWith("/tlhaasamii/setting")) {
-    return null;
-  }
   const [theme, setTheme] = useState<"light" | "dark">("dark");
 
   // Sync initial theme
@@ -204,6 +199,11 @@ export default function Navbar() {
     const sectionId = item.href.replace("#", "");
     return activeSection === sectionId;
   };
+
+  // Do not render navbar on configuration/settings page
+  if (pathname === "/setting" || pathname?.startsWith("/setting") || pathname?.startsWith("/tlhaasamii/setting")) {
+    return null;
+  }
 
   return (
     <>
