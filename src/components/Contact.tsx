@@ -302,7 +302,7 @@ export default function Contact() {
                       
                       {isSelectOpen && (
                         <div className="absolute left-0 right-0 mt-2 bg-white/95 dark:bg-zinc-950/95 border border-neutral-200/60 dark:border-zinc-800/50 rounded-2xl shadow-xl backdrop-blur-md z-50 py-1.5 overflow-hidden animate-in fade-in-50 slide-in-from-top-2 duration-200">
-                          {interestOptions.map((option) => (
+                          {interestOptions.map((option: string) => (
                             <button
                               key={option}
                               type="button"
