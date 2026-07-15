@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect, useMemo, useRef } from "react";
-import DEFAULT_PORTFOLIO from "@/data/portfolio-defaults.json";
 import MobileCarousel from "@/components/ui/MobileCarousel";
 import { prefixAsset } from "@/utils/prefixAsset";
 
@@ -13,8 +12,6 @@ interface FeaturedProject {
   liveLink: string;
   techStack: string[];
   details: string;
-
-
 }
 
 interface SecondaryProject {
@@ -43,29 +40,29 @@ export default function Projects() {
   };
 
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem("portfolio-settings");
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        if (parsed.featuredProjects) {
-          setFeatured(parsed.featuredProjects);
+    const prefix = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
+    const loadProjects = async () => {
+      try {
+        const stored = localStorage.getItem("portfolio-settings");
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          if (parsed.featuredProjects) setFeatured(parsed.featuredProjects);
+          if (parsed.secondaryProjects) setSecondary(parsed.secondaryProjects);
         } else {
-          setFeatured((DEFAULT_PORTFOLIO as any).featuredProjects || []);
+          const res = await fetch(`${prefix}/data/profileData/portfolio-defaults.json`);
+          if (res.ok) {
+            const defaults = await res.json();
+            if (defaults.featuredProjects) setFeatured(defaults.featuredProjects);
+            if (defaults.secondaryProjects) setSecondary(defaults.secondaryProjects);
+          }
         }
-        if (parsed.secondaryProjects) {
-          setSecondary(parsed.secondaryProjects);
-        } else {
-          setSecondary((DEFAULT_PORTFOLIO as any).secondaryProjects || []);
-        }
-      } else {
-        setFeatured((DEFAULT_PORTFOLIO as any).featuredProjects || []);
-        setSecondary((DEFAULT_PORTFOLIO as any).secondaryProjects || []);
+      } catch (err) {
+        console.error("Error loading projects:", err);
       }
-    } catch (e) {
-      console.error("Error loading projects data:", e);
-      setFeatured((DEFAULT_PORTFOLIO as any).featuredProjects || []);
-      setSecondary((DEFAULT_PORTFOLIO as any).secondaryProjects || []);
-    }
+    };
+
+    loadProjects();
   }, []);
 
   // Close modal when pressing escape key
@@ -94,10 +91,10 @@ export default function Projects() {
       <div
         key={project.name}
         onClick={() => setSelectedProject(project)}
-        className="group relative overflow-hidden rounded-[28px] border border-neutral-200/10 dark:border-zinc-900 bg-zinc-950/45 dark:bg-zinc-955/45 shadow-sm hover:shadow-xl hover:border-neutral-700/60 dark:hover:border-zinc-800 transition-all duration-350 select-none cursor-pointer flex flex-col justify-between"
+        className="group relative overflow-hidden rounded-[28px] border border-neutral-200 dark:border-zinc-800 bg-white dark:bg-zinc-950/45 shadow-sm hover:shadow-xl hover:border-neutral-400 dark:hover:border-white/30 transition-all duration-350 select-none cursor-pointer flex flex-col justify-between"
       >
         {/* Image panel */}
-        <div className="aspect-[16/9] w-full overflow-hidden relative bg-zinc-900 border-b border-neutral-250/10 dark:border-zinc-900">
+        <div className="aspect-[16/9] w-full overflow-hidden relative bg-neutral-100 dark:bg-zinc-900 border-b border-neutral-200 dark:border-zinc-900">
           {project.image ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
@@ -114,15 +111,15 @@ export default function Projects() {
         {/* Text Content panel */}
         <div className="p-6 space-y-4">
           <div className="space-y-1 text-left">
-            <h4 className="text-xl font-bold tracking-tight text-neutral-100 dark:text-white">
+            <h4 className="text-xl font-bold tracking-tight text-neutral-900 dark:text-white">
               {project.name}
             </h4>
-            <p className="text-xs font-mono tracking-wide text-zinc-400 dark:text-zinc-400">
+            <p className="text-xs font-mono tracking-wide text-zinc-500 dark:text-zinc-400">
               {project.tagline}
             </p>
           </div>
 
-          <p className="text-xs text-neutral-450 dark:text-neutral-450 leading-relaxed font-sans line-clamp-3 text-left">
+          <p className="text-xs text-neutral-600 dark:text-neutral-450 leading-relaxed font-sans line-clamp-3 text-left">
             {project.description}
           </p>
 
@@ -131,7 +128,7 @@ export default function Projects() {
             {project.techStack.map((tech) => (
               <span
                 key={tech}
-                className="px-2 py-1 bg-zinc-900 border border-zinc-800/80 rounded-md font-mono text-[9px] text-zinc-300 font-semibold"
+                className="px-2 py-1 bg-neutral-50 dark:bg-zinc-900 border border-neutral-200 dark:border-zinc-800/80 rounded-md font-mono text-[9px] text-zinc-600 dark:text-zinc-300 font-semibold"
               >
                 {tech}
               </span>
@@ -150,10 +147,10 @@ export default function Projects() {
         href={proj.repoLink}
         target="_blank"
         rel="noopener noreferrer"
-        className="group relative overflow-hidden rounded-[24px] border border-neutral-200/50 dark:border-zinc-900 bg-white dark:bg-zinc-950 hover:border-neutral-355 dark:hover:border-zinc-850 hover:-translate-y-1.5 transition-all duration-300 select-none cursor-pointer flex flex-col justify-between shadow-sm hover:shadow-lg"
+        className="group relative overflow-hidden rounded-[24px] border border-neutral-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 hover:border-neutral-400 dark:hover:border-white/30 hover:-translate-y-1.5 transition-all duration-300 select-none cursor-pointer flex flex-col justify-between shadow-sm hover:shadow-lg"
       >
         {/* Image header container */}
-        <div className="aspect-[16/10] w-full overflow-hidden relative bg-neutral-100 dark:bg-zinc-900 border-b border-neutral-200/50 dark:border-zinc-900">
+        <div className="aspect-[16/10] w-full overflow-hidden relative bg-neutral-50 dark:bg-zinc-900 border-b border-neutral-200 dark:border-zinc-900">
           {proj.image ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
@@ -176,12 +173,12 @@ export default function Projects() {
                 {proj.name}
               </h4>
               {/* GitHub vector icon */}
-              <svg className="w-4 h-4 text-neutral-400 group-hover:text-neutral-950 dark:group-hover:text-white transition-colors shrink-0" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-neutral-450 dark:text-neutral-400 group-hover:text-neutral-950 dark:group-hover:text-white transition-colors shrink-0" fill="currentColor" viewBox="0 0 24 24">
                 <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z"></path>
               </svg>
             </div>
 
-            <p className="text-xs text-neutral-500 dark:text-neutral-450 leading-relaxed font-sans line-clamp-3">
+            <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed font-sans line-clamp-3">
               {proj.description}
             </p>
           </div>
@@ -191,7 +188,7 @@ export default function Projects() {
             {proj.techStack.map((tech) => (
               <span
                 key={tech}
-                className="px-1.5 py-0.5 bg-neutral-100 dark:bg-zinc-900 border border-neutral-200/50 dark:border-zinc-800/60 rounded font-mono text-[8px] text-neutral-500 dark:text-neutral-400 font-semibold"
+                className="px-1.5 py-0.5 bg-neutral-50 dark:bg-zinc-900 border border-neutral-200/60 dark:border-zinc-800/60 rounded font-mono text-[8px] text-neutral-600 dark:text-neutral-300 font-semibold"
               >
                 {tech}
               </span>
@@ -251,10 +248,10 @@ export default function Projects() {
               <div
                 key={project.name}
                 onClick={() => setSelectedProject(project)}
-                className="group relative overflow-hidden rounded-[28px] border border-zinc-700/50 dark:border-zinc-700/50 bg-zinc-950/80 dark:bg-zinc-955/80 shadow-md hover:shadow-xl hover:border-white/40 dark:hover:border-white/40 transition-all duration-350 select-none cursor-pointer flex flex-col justify-between"
+                className="group relative overflow-hidden rounded-[28px] border border-neutral-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950/45 shadow-sm hover:shadow-xl hover:border-neutral-400 dark:hover:border-white/30 transition-all duration-350 select-none cursor-pointer flex flex-col justify-between"
               >
                 {/* Image panel */}
-                <div className="aspect-[16/9] w-full overflow-hidden relative bg-zinc-900 border-b border-neutral-250/10 dark:border-zinc-900">
+                <div className="aspect-[16/9] w-full overflow-hidden relative bg-neutral-100 dark:bg-zinc-900 border-b border-neutral-200 dark:border-zinc-900">
                   {project.image ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -272,15 +269,15 @@ export default function Projects() {
                 {/* Text Content panel */}
                 <div className="p-6 md:p-8 space-y-4">
                   <div className="space-y-1 text-left">
-                    <h4 className="text-xl font-bold tracking-tight text-neutral-100 dark:text-white">
+                    <h4 className="text-xl font-bold tracking-tight text-neutral-900 dark:text-white">
                       {project.name}
                     </h4>
-                    <p className="text-xs font-mono tracking-wide text-zinc-400 dark:text-zinc-400">
+                    <p className="text-xs font-mono tracking-wide text-zinc-500 dark:text-zinc-400">
                       {project.tagline}
                     </p>
                   </div>
 
-                  <p className="text-xs text-neutral-450 dark:text-neutral-450 leading-relaxed font-sans line-clamp-3 text-left">
+                  <p className="text-xs text-neutral-600 dark:text-neutral-450 leading-relaxed font-sans line-clamp-3 text-left">
                     {project.description}
                   </p>
 
@@ -289,7 +286,7 @@ export default function Projects() {
                     {project.techStack.map((tech) => (
                       <span
                         key={tech}
-                        className="px-2 py-1 bg-zinc-900 border border-zinc-800/80 rounded-md font-mono text-[9px] text-zinc-300 font-semibold"
+                        className="px-2 py-1 bg-neutral-50 dark:bg-zinc-900 border border-neutral-200 dark:border-zinc-800/80 rounded-md font-mono text-[9px] text-zinc-600 dark:text-zinc-300 font-semibold"
                       >
                         {tech}
                       </span>
@@ -319,7 +316,7 @@ export default function Projects() {
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => scroll("left")}
-                  className="p-2 rounded-full border border-neutral-200/10 hover:border-white/20 bg-zinc-900/40 text-neutral-400 hover:text-white transition-all cursor-pointer flex items-center justify-center w-8 h-8"
+                  className="p-2 rounded-full border border-neutral-200 dark:border-zinc-800 hover:border-neutral-300 dark:hover:border-zinc-700 bg-white dark:bg-zinc-900 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-all cursor-pointer flex items-center justify-center w-8 h-8 shadow-sm"
                   aria-label="Scroll left"
                 >
                   <svg className="w-4 h-4 stroke-current fill-none" strokeWidth="2.5" viewBox="0 0 24 24">
@@ -328,7 +325,7 @@ export default function Projects() {
                 </button>
                 <button
                   onClick={() => scroll("right")}
-                  className="p-2 rounded-full border border-neutral-200/10 hover:border-white/20 bg-zinc-900/40 text-neutral-400 hover:text-white transition-all cursor-pointer flex items-center justify-center w-8 h-8"
+                  className="p-2 rounded-full border border-neutral-200 dark:border-zinc-800 hover:border-neutral-300 dark:hover:border-zinc-700 bg-white dark:bg-zinc-900 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-all cursor-pointer flex items-center justify-center w-8 h-8 shadow-sm"
                   aria-label="Scroll right"
                 >
                   <svg className="w-4 h-4 stroke-current fill-none" strokeWidth="2.5" viewBox="0 0 24 24">
@@ -350,10 +347,10 @@ export default function Projects() {
                 href={proj.repoLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative overflow-hidden rounded-[24px] border border-neutral-200/10 dark:border-zinc-900 bg-zinc-950/45 dark:bg-zinc-955/45 hover:border-neutral-700/60 dark:hover:border-zinc-800 hover:-translate-y-1.5 transition-all duration-300 select-none cursor-pointer flex flex-col justify-between shadow-sm hover:shadow-lg w-[290px] sm:w-[350px] shrink-0 snap-start"
+                className="group relative overflow-hidden rounded-[24px] border border-neutral-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-900/40 hover:border-neutral-400 dark:hover:border-white/30 hover:-translate-y-1.5 transition-all duration-300 select-none cursor-pointer flex flex-col justify-between shadow-sm hover:shadow-lg w-[290px] sm:w-[350px] shrink-0 snap-start"
               >
                 {/* Image header container */}
-                <div className="aspect-[16/10] w-full overflow-hidden relative bg-zinc-900 border-b border-neutral-250/10 dark:border-zinc-900">
+                <div className="aspect-[16/10] w-full overflow-hidden relative bg-neutral-50 dark:bg-zinc-900 border-b border-neutral-200 dark:border-zinc-900">
                   {proj.image ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -373,16 +370,16 @@ export default function Projects() {
                   <div className="space-y-2 text-left">
                     {/* Header line */}
                     <div className="flex justify-between items-start gap-4">
-                      <h4 className="text-sm font-extrabold text-neutral-100 dark:text-white group-hover:text-white transition-colors">
+                      <h4 className="text-sm font-extrabold text-neutral-900 dark:text-white group-hover:text-neutral-700 dark:group-hover:text-zinc-300 transition-colors">
                         {proj.name}
                       </h4>
                       {/* GitHub vector icon */}
-                      <svg className="w-4 h-4 text-neutral-400 group-hover:text-white transition-colors shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 text-neutral-455 dark:text-neutral-400 group-hover:text-neutral-950 dark:group-hover:text-white transition-colors shrink-0" fill="currentColor" viewBox="0 0 24 24">
                         <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z"></path>
                       </svg>
                     </div>
 
-                    <p className="text-xs text-neutral-400 dark:text-neutral-400 leading-relaxed font-sans line-clamp-3">
+                    <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed font-sans line-clamp-3">
                       {proj.description}
                     </p>
                   </div>
@@ -392,7 +389,7 @@ export default function Projects() {
                     {proj.techStack.map((tech) => (
                       <span
                         key={tech}
-                        className="px-1.5 py-0.5 bg-zinc-900 border border-zinc-800/80 rounded font-mono text-[8px] text-zinc-300 font-semibold"
+                        className="px-1.5 py-0.5 bg-neutral-50 dark:bg-zinc-900 border border-neutral-200/60 dark:border-zinc-800/60 rounded font-mono text-[8px] text-zinc-600 dark:text-zinc-300 font-semibold"
                       >
                         {tech}
                       </span>
@@ -413,17 +410,17 @@ export default function Projects() {
           onClick={() => setSelectedProject(null)} // Close when clicking backdrop
         >
           <div
-            className="w-full max-w-2xl bg-zinc-950 border border-neutral-200/10 dark:border-zinc-900 rounded-[28px] overflow-hidden flex flex-col max-h-[85vh] relative shadow-2xl animate-scale-in overflow-x-hidden"
+            className="w-full max-w-2xl bg-white dark:bg-zinc-950 border border-neutral-200 dark:border-zinc-900 rounded-[28px] overflow-hidden flex flex-col max-h-[85vh] relative shadow-2xl animate-scale-in overflow-x-hidden"
             onClick={(e) => e.stopPropagation()} // Prevent close on modal body click
           >
             {/* Modal Header/Title and Close Toolbar */}
-            <div className="flex justify-between items-center bg-zinc-950 px-6 py-4 border-b border-neutral-200/10 dark:border-zinc-900">
-              <span className="font-mono text-[10px] font-bold text-neutral-455 dark:text-zinc-400 uppercase tracking-widest">
+            <div className="flex justify-between items-center bg-neutral-50 dark:bg-zinc-950 px-6 py-4 border-b border-neutral-200 dark:border-zinc-900">
+              <span className="font-mono text-[10px] font-bold text-neutral-500 dark:text-zinc-400 uppercase tracking-widest">
                 Project Case Study Details
               </span>
               <button
                 onClick={() => setSelectedProject(null)}
-                className="p-1 rounded-lg hover:bg-zinc-900 text-neutral-400 hover:text-white transition-colors cursor-pointer"
+                className="p-1 rounded-lg hover:bg-neutral-100 dark:hover:bg-zinc-900 text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors cursor-pointer"
                 title="Close modal"
               >
                 <svg className="w-5 h-5 stroke-current fill-none" strokeWidth="2.5" viewBox="0 0 24 24">
@@ -448,7 +445,7 @@ export default function Projects() {
 
               {/* Feature image */}
               {selectedProject.image ? (
-                <div className="w-full aspect-[16/10] rounded-2xl overflow-hidden bg-zinc-900 border border-neutral-200/10 dark:border-zinc-900 relative">
+                <div className="w-full aspect-[16/10] rounded-2xl overflow-hidden bg-neutral-100 dark:bg-zinc-900 border border-neutral-200 dark:border-zinc-900 relative">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={prefixAsset(selectedProject.image)}
@@ -460,10 +457,10 @@ export default function Projects() {
 
               {/* Title & Tagline */}
               <div className="space-y-1.5">
-                <h3 className="text-2xl font-black tracking-tight text-white">
+                <h3 className="text-2xl font-black tracking-tight text-neutral-900 dark:text-white">
                   {selectedProject.name}
                 </h3>
-                <p className="text-xs font-mono font-bold text-zinc-400 tracking-wide">
+                <p className="text-xs font-mono font-bold text-zinc-550 dark:text-zinc-400 tracking-wide">
                   {selectedProject.tagline}
                 </p>
               </div>
@@ -472,14 +469,14 @@ export default function Projects() {
               <div className="space-y-4">
                 <div className="space-y-2">
                   <h4 className="font-mono text-[10px] font-bold text-zinc-500 uppercase tracking-wider">Overview</h4>
-                  <p className="text-xs text-zinc-300 leading-relaxed font-sans">
+                  <p className="text-xs text-neutral-600 dark:text-zinc-300 leading-relaxed font-sans">
                     {selectedProject.description}
                   </p>
                 </div>
 
                 <div className="space-y-2">
                   <h4 className="font-mono text-[10px] font-bold text-zinc-500 uppercase tracking-wider">Engineering Specs & Outcomes</h4>
-                  <p className="text-xs text-zinc-300 leading-relaxed font-sans">
+                  <p className="text-xs text-neutral-600 dark:text-zinc-300 leading-relaxed font-sans">
                     {selectedProject.details}
                   </p>
                 </div>
@@ -492,7 +489,7 @@ export default function Projects() {
                   {selectedProject.techStack.map((tech) => (
                     <span
                       key={tech}
-                      className="px-2.5 py-1 bg-zinc-900 border border-zinc-800 rounded-md font-mono text-[9px] text-zinc-200 font-bold"
+                      className="px-2.5 py-1 bg-neutral-50 dark:bg-zinc-900 border border-neutral-200 dark:border-zinc-800 rounded-md font-mono text-[9px] text-neutral-600 dark:text-zinc-200 font-bold"
                     >
                       {tech}
                     </span>
@@ -502,10 +499,10 @@ export default function Projects() {
             </div>
 
             {/* Modal Footer toolbar */}
-            <div className="flex justify-end items-center bg-zinc-950 px-6 py-4 border-t border-neutral-200/10 dark:border-zinc-900 gap-3">
+            <div className="flex justify-end items-center bg-neutral-50 dark:bg-zinc-950 px-6 py-4 border-t border-neutral-200 dark:border-zinc-900 gap-3">
               <button
                 onClick={() => setSelectedProject(null)}
-                className="px-4 py-2 border border-zinc-850 text-zinc-400 hover:text-white rounded-xl transition-all font-mono text-[10px] font-bold cursor-pointer bg-transparent"
+                className="px-4 py-2 border border-neutral-300 dark:border-zinc-850 text-neutral-600 dark:text-zinc-400 hover:text-neutral-900 dark:hover:text-white rounded-xl transition-all font-mono text-[10px] font-bold cursor-pointer bg-transparent"
               >
                 Close Details
               </button>
@@ -514,7 +511,7 @@ export default function Projects() {
                   href={selectedProject.liveLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-5 py-2.5 bg-white hover:bg-zinc-200 text-black font-mono text-[10px] font-bold rounded-xl transition-all shadow-md flex items-center gap-2 cursor-pointer"
+                  className="px-5 py-2.5 bg-neutral-900 hover:bg-neutral-800 dark:bg-white dark:hover:bg-zinc-200 text-white dark:text-black font-mono text-[10px] font-bold rounded-xl transition-all shadow-md flex items-center gap-2 cursor-pointer"
                 >
                   <span>Visit Website</span>
                   <svg className="w-3.5 h-3.5 stroke-current fill-none shrink-0" strokeWidth="2.5" viewBox="0 0 24 24">

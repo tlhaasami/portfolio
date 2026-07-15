@@ -3,475 +3,475 @@
     "name": "React",
     "category": "Frontend",
     "color": "#61dafb",
-    "logo": "/logos/react.svg"
+    "logo": "/logos/technologies/react.svg"
   },
   {
     "name": "Next.js",
     "category": "Frontend",
     "color": "#ffffff",
-    "logo": "/logos/nextdotjs.svg"
+    "logo": "/logos/technologies/nextdotjs.svg"
   },
   {
     "name": "TypeScript",
     "category": "Frontend",
     "color": "#3178c6",
-    "logo": "/logos/typescript.svg"
+    "logo": "/logos/technologies/typescript.svg"
   },
   {
     "name": "Tailwind CSS",
     "category": "Frontend",
     "color": "#38bdf8",
-    "logo": "/logos/tailwindcss.svg"
+    "logo": "/logos/technologies/tailwindcss.svg"
   },
   {
     "name": "HTML5",
     "category": "Frontend",
     "color": "#e34f26",
-    "logo": "/logos/html5.svg"
+    "logo": "/logos/technologies/html5.svg"
   },
   {
     "name": "CSS3",
     "category": "Frontend",
     "color": "#1572b6",
-    "logo": "/logos/css3.svg"
+    "logo": "/logos/technologies/css3.svg"
   },
   {
     "name": "JavaScript",
     "category": "Frontend",
     "color": "#f7df1e",
-    "logo": "/logos/javascript.svg"
+    "logo": "/logos/technologies/javascript.svg"
   },
   {
     "name": "Vue.js",
     "category": "Frontend",
     "color": "#4fc08d",
-    "logo": "/logos/vuedotjs.svg"
+    "logo": "/logos/technologies/vuedotjs.svg"
   },
   {
     "name": "Angular",
     "category": "Frontend",
     "color": "#dd0031",
-    "logo": "/logos/angular.svg"
+    "logo": "/logos/technologies/angular.svg"
   },
   {
     "name": "Svelte",
     "category": "Frontend",
     "color": "#ff3e00",
-    "logo": "/logos/svelte.svg"
+    "logo": "/logos/technologies/svelte.svg"
   },
   {
     "name": "Remix",
     "category": "Frontend",
     "color": "#ffffff",
-    "logo": "/logos/remix.svg"
+    "logo": "/logos/technologies/remix.svg"
   },
   {
     "name": "Astro",
     "category": "Frontend",
     "color": "#ff5d01",
-    "logo": "/logos/astro.svg"
+    "logo": "/logos/technologies/astro.svg"
   },
   {
     "name": "SolidJS",
     "category": "Frontend",
     "color": "#446b9e",
-    "logo": "/logos/solid.svg"
+    "logo": "/logos/technologies/solid.svg"
   },
   {
     "name": "Vite",
     "category": "Frontend",
     "color": "#646cff",
-    "logo": "/logos/vite.svg"
+    "logo": "/logos/technologies/vite.svg"
   },
   {
     "name": "Webpack",
     "category": "Frontend",
     "color": "#8dd6f9",
-    "logo": "/logos/webpack.svg"
+    "logo": "/logos/technologies/webpack.svg"
   },
   {
     "name": "Node.js",
     "category": "Backend",
     "color": "#339933",
-    "logo": "/logos/nodedotjs.svg"
+    "logo": "/logos/technologies/nodedotjs.svg"
   },
   {
     "name": "Express",
     "category": "Backend",
     "color": "#ffffff",
-    "logo": "/logos/express.svg"
+    "logo": "/logos/technologies/express.svg"
   },
   {
     "name": "NestJS",
     "category": "Backend",
     "color": "#ea2845",
-    "logo": "/logos/nestjs.svg"
+    "logo": "/logos/technologies/nestjs.svg"
   },
   {
     "name": "Python",
     "category": "Backend",
     "color": "#3776ab",
-    "logo": "/logos/python.svg"
+    "logo": "/logos/technologies/python.svg"
   },
   {
     "name": "Django",
     "category": "Backend",
     "color": "#092e20",
-    "logo": "/logos/django.svg"
+    "logo": "/logos/technologies/django.svg"
   },
   {
     "name": "FastAPI",
     "category": "Backend",
     "color": "#059669",
-    "logo": "/logos/fastapi.svg"
+    "logo": "/logos/technologies/fastapi.svg"
   },
   {
     "name": "Flask",
     "category": "Backend",
     "color": "#ffffff",
-    "logo": "/logos/flask.svg"
+    "logo": "/logos/technologies/flask.svg"
   },
   {
     "name": "Go (Golang)",
     "category": "Backend",
     "color": "#00add8",
-    "logo": "/logos/go.svg"
+    "logo": "/logos/technologies/go.svg"
   },
   {
     "name": "Rust",
     "category": "Backend",
     "color": "#cea475",
-    "logo": "/logos/rust.svg"
+    "logo": "/logos/technologies/rust.svg"
   },
   {
     "name": "Ruby on Rails",
     "category": "Backend",
     "color": "#cc0000",
-    "logo": "/logos/rubyonrails.svg"
+    "logo": "/logos/technologies/rubyonrails.svg"
   },
   {
     "name": "GraphQL",
     "category": "Backend",
     "color": "#e10098",
-    "logo": "/logos/graphql.svg"
+    "logo": "/logos/technologies/graphql.svg"
   },
   {
     "name": "Laravel",
     "category": "Backend",
     "color": "#ff2d20",
-    "logo": "/logos/laravel.svg"
+    "logo": "/logos/technologies/laravel.svg"
   },
   {
     "name": "Spring Boot",
     "category": "Backend",
     "color": "#6db33f",
-    "logo": "/logos/springboot.svg"
+    "logo": "/logos/technologies/springboot.svg"
   },
   {
     "name": "C# (.NET)",
     "category": "Backend",
     "color": "#178600",
-    "logo": "/logos/csharp.svg"
+    "logo": "/logos/technologies/csharp.svg"
   },
   {
     "name": "Flutter",
     "category": "Mobile",
     "color": "#02569b",
-    "logo": "/logos/flutter.svg"
+    "logo": "/logos/technologies/flutter.svg"
   },
   {
     "name": "React Native",
     "category": "Mobile",
     "color": "#61dafb",
-    "logo": "/logos/react.svg"
+    "logo": "/logos/technologies/react.svg"
   },
   {
     "name": "SwiftUI",
     "category": "Mobile",
     "color": "#f05138",
-    "logo": "/logos/swift.svg"
+    "logo": "/logos/technologies/swift.svg"
   },
   {
     "name": "Kotlin",
     "category": "Mobile",
     "color": "#7f52ff",
-    "logo": "/logos/kotlin.svg"
+    "logo": "/logos/technologies/kotlin.svg"
   },
   {
     "name": "Swift",
     "category": "Mobile",
     "color": "#f05138",
-    "logo": "/logos/swift.svg"
+    "logo": "/logos/technologies/swift.svg"
   },
   {
     "name": "Android SDK",
     "category": "Mobile",
     "color": "#3ddc84",
-    "logo": "/logos/android.svg"
+    "logo": "/logos/technologies/android.svg"
   },
   {
     "name": "Objective-C",
     "category": "Mobile",
     "color": "#438eff",
-    "logo": "/logos/apple.svg"
+    "logo": "/logos/technologies/apple.svg"
   },
   {
     "name": "Ionic",
     "category": "Mobile",
     "color": "#3880ff",
-    "logo": "/logos/ionic.svg"
+    "logo": "/logos/technologies/ionic.svg"
   },
   {
     "name": "PostgreSQL",
     "category": "Databases",
     "color": "#4169e1",
-    "logo": "/logos/postgresql.svg"
+    "logo": "/logos/technologies/postgresql.svg"
   },
   {
     "name": "MongoDB",
     "category": "Databases",
     "color": "#47a248",
-    "logo": "/logos/mongodb.svg"
+    "logo": "/logos/technologies/mongodb.svg"
   },
   {
     "name": "Redis",
     "category": "Databases",
     "color": "#dc382d",
-    "logo": "/logos/redis.svg"
+    "logo": "/logos/technologies/redis.svg"
   },
   {
     "name": "MySQL",
     "category": "Databases",
     "color": "#4479a1",
-    "logo": "/logos/mysql.svg"
+    "logo": "/logos/technologies/mysql.svg"
   },
   {
     "name": "SQLite",
     "category": "Databases",
     "color": "#003b57",
-    "logo": "/logos/sqlite.svg"
+    "logo": "/logos/technologies/sqlite.svg"
   },
   {
     "name": "Supabase",
     "category": "Databases",
     "color": "#3ecf8e",
-    "logo": "/logos/supabase.svg"
+    "logo": "/logos/technologies/supabase.svg"
   },
   {
     "name": "Firebase",
     "category": "Databases",
     "color": "#ffca28",
-    "logo": "/logos/firebase.svg"
+    "logo": "/logos/technologies/firebase.svg"
   },
   {
     "name": "DynamoDB",
     "category": "Databases",
     "color": "#4053d6",
-    "logo": "/logos/amazondynamodb.svg"
+    "logo": "/logos/technologies/amazondynamodb.svg"
   },
   {
     "name": "Elasticsearch",
     "category": "Databases",
     "color": "#005571",
-    "logo": "/logos/elasticsearch.svg"
+    "logo": "/logos/technologies/elasticsearch.svg"
   },
   {
     "name": "MariaDB",
     "category": "Databases",
     "color": "#003545",
-    "logo": "/logos/mariadb.svg"
+    "logo": "/logos/technologies/mariadb.svg"
   },
   {
     "name": "Prisma",
     "category": "Databases",
     "color": "#2d3748",
-    "logo": "/logos/prisma.svg"
+    "logo": "/logos/technologies/prisma.svg"
   },
   {
     "name": "Cassandra",
     "category": "Databases",
     "color": "#1287b1",
-    "logo": "/logos/apachecassandra.svg"
+    "logo": "/logos/technologies/apachecassandra.svg"
   },
   {
     "name": "Docker",
     "category": "DevOps",
     "color": "#2496ed",
-    "logo": "/logos/docker.svg"
+    "logo": "/logos/technologies/docker.svg"
   },
   {
     "name": "Kubernetes",
     "category": "DevOps",
     "color": "#326ce5",
-    "logo": "/logos/kubernetes.svg"
+    "logo": "/logos/technologies/kubernetes.svg"
   },
   {
     "name": "AWS",
     "category": "DevOps",
     "color": "#ff9900",
-    "logo": "/logos/amazonaws.svg"
+    "logo": "/logos/technologies/amazonaws.svg"
   },
   {
     "name": "Google Cloud",
     "category": "DevOps",
     "color": "#4285f4",
-    "logo": "/logos/googlecloud.svg"
+    "logo": "/logos/technologies/googlecloud.svg"
   },
   {
     "name": "Azure",
     "category": "DevOps",
     "color": "#0078d4",
-    "logo": "/logos/microsoftazure.svg"
+    "logo": "/logos/technologies/microsoftazure.svg"
   },
   {
     "name": "GitHub Actions",
     "category": "DevOps",
     "color": "#2088ff",
-    "logo": "/logos/githubactions.svg"
+    "logo": "/logos/technologies/githubactions.svg"
   },
   {
     "name": "GitLab CI/CD",
     "category": "DevOps",
     "color": "#fc6d26",
-    "logo": "/logos/gitlab.svg"
+    "logo": "/logos/technologies/gitlab.svg"
   },
   {
     "name": "Terraform",
     "category": "DevOps",
     "color": "#844fba",
-    "logo": "/logos/terraform.svg"
+    "logo": "/logos/technologies/terraform.svg"
   },
   {
     "name": "Ansible",
     "category": "DevOps",
     "color": "#ee0000",
-    "logo": "/logos/ansible.svg"
+    "logo": "/logos/technologies/ansible.svg"
   },
   {
     "name": "Linux",
     "category": "DevOps",
     "color": "#fcc624",
-    "logo": "/logos/linux.svg"
+    "logo": "/logos/technologies/linux.svg"
   },
   {
     "name": "Vercel",
     "category": "DevOps",
     "color": "#ffffff",
-    "logo": "/logos/vercel.svg"
+    "logo": "/logos/technologies/vercel.svg"
   },
   {
     "name": "Cloudflare",
     "category": "DevOps",
     "color": "#f38020",
-    "logo": "/logos/cloudflare.svg"
+    "logo": "/logos/technologies/cloudflare.svg"
   },
   {
     "name": "Nginx",
     "category": "DevOps",
     "color": "#009639",
-    "logo": "/logos/nginx.svg"
+    "logo": "/logos/technologies/nginx.svg"
   },
   {
     "name": "n8n",
     "category": "Automation",
     "color": "#ff6d5a",
-    "logo": "/logos/n8n.svg"
+    "logo": "/logos/technologies/n8n.svg"
   },
   {
     "name": "Zapier",
     "category": "Automation",
     "color": "#ff4a00",
-    "logo": "/logos/zapier.svg"
+    "logo": "/logos/technologies/zapier.svg"
   },
   {
     "name": "Make (Integromat)",
     "category": "Automation",
     "color": "#7e42f5",
-    "logo": "/logos/make.svg"
+    "logo": "/logos/technologies/make.svg"
   },
   {
     "name": "Twilio",
     "category": "Automation",
     "color": "#f22f46",
-    "logo": "/logos/twilio.svg"
+    "logo": "/logos/technologies/twilio.svg"
   },
   {
     "name": "SendGrid",
     "category": "Automation",
     "color": "#22b573",
-    "logo": "/logos/sendgrid.svg"
+    "logo": "/logos/technologies/sendgrid.svg"
   },
   {
     "name": "Stripe",
     "category": "Automation",
     "color": "#00afe1",
-    "logo": "/logos/stripe.svg"
+    "logo": "/logos/technologies/stripe.svg"
   },
   {
     "name": "Auth0",
     "category": "Automation",
     "color": "#eb5424",
-    "logo": "/logos/auth0.svg"
+    "logo": "/logos/technologies/auth0.svg"
   },
   {
     "name": "Clerk",
     "category": "Automation",
     "color": "#6c47ff",
-    "logo": "/logos/clerk.svg"
+    "logo": "/logos/technologies/clerk.svg"
   },
   {
     "name": "Salesforce",
     "category": "Automation",
     "color": "#009edb",
-    "logo": "/logos/salesforce.svg"
+    "logo": "/logos/technologies/salesforce.svg"
   },
   {
     "name": "HubSpot",
     "category": "Automation",
     "color": "#ff7a59",
-    "logo": "/logos/hubspot.svg"
+    "logo": "/logos/technologies/hubspot.svg"
   },
   {
     "name": "Slack API",
     "category": "Automation",
     "color": "#4a154b",
-    "logo": "/logos/slack.svg"
+    "logo": "/logos/technologies/slack.svg"
   },
   {
     "name": "OpenAI",
     "category": "AI",
     "color": "#10a37f",
-    "logo": "/logos/openai.svg"
+    "logo": "/logos/technologies/openai.svg"
   },
   {
     "name": "Anthropic Claude",
     "category": "AI",
     "color": "#d97706",
-    "logo": "/logos/anthropic.svg"
+    "logo": "/logos/technologies/anthropic.svg"
   },
   {
     "name": "LangChain",
     "category": "AI",
     "color": "#1c3d5a",
-    "logo": "/logos/langchain.svg"
+    "logo": "/logos/technologies/langchain.svg"
   },
   {
     "name": "TensorFlow",
     "category": "AI",
     "color": "#ff6f00",
-    "logo": "/logos/tensorflow.svg"
+    "logo": "/logos/technologies/tensorflow.svg"
   },
   {
     "name": "PyTorch",
     "category": "AI",
     "color": "#ee4c2c",
-    "logo": "/logos/pytorch.svg"
+    "logo": "/logos/technologies/pytorch.svg"
   },
   {
     "name": "Hugging Face",
     "category": "AI",
     "color": "#ffd21e",
-    "logo": "/logos/huggingface.svg"
+    "logo": "/logos/technologies/huggingface.svg"
   },
   {
     "name": "Pinecone",
@@ -483,19 +483,19 @@
     "name": "Qdrant",
     "category": "AI",
     "color": "#ff3838",
-    "logo": "/logos/qdrant.svg"
+    "logo": "/logos/technologies/qdrant.svg"
   },
   {
     "name": "VS Code",
     "category": "Tools",
     "color": "#007acc",
-    "logo": "/logos/visualstudiocode.svg"
+    "logo": "/logos/technologies/visualstudiocode.svg"
   },
   {
     "name": "Visual Studio",
     "category": "Tools",
     "color": "#5c2d91",
-    "logo": "/logos/visualstudio.svg"
+    "logo": "/logos/technologies/visualstudio.svg"
   },
   {
     "name": "DOSBox",
@@ -507,36 +507,36 @@
     "name": "Git",
     "category": "Tools",
     "color": "#f05032",
-    "logo": "/logos/git.svg"
+    "logo": "/logos/technologies/git.svg"
   },
   {
     "name": "GitHub",
     "category": "Tools",
     "color": "#181717",
-    "logo": "/logos/github.svg"
+    "logo": "/logos/technologies/github.svg"
   },
   {
     "name": "Postman",
     "category": "Tools",
     "color": "#ff6c37",
-    "logo": "/logos/postman.svg"
+    "logo": "/logos/technologies/postman.svg"
   },
   {
     "name": "Figma",
     "category": "Tools",
     "color": "#f24e1e",
-    "logo": "/logos/figma.svg"
+    "logo": "/logos/technologies/figma.svg"
   },
   {
     "name": "Neovim",
     "category": "Tools",
     "color": "#57A143",
-    "logo": "/logos/neovim.svg"
+    "logo": "/logos/technologies/neovim.svg"
   },
   {
     "name": "JetBrains",
     "category": "Tools",
     "color": "#000000",
-    "logo": "/logos/jetbrains.svg"
+    "logo": "/logos/technologies/jetbrains.svg"
   }
 ]

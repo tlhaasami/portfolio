@@ -1,11 +1,27 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import DEFAULT_PORTFOLIO from "@/data/portfolio-defaults.json";
 import { prefixAsset } from "@/utils/prefixAsset";
 
+const DEFAULT_PORTFOLIO_FALLBACK = {
+  contactSubheading: "WE'RE HERE TO HELP YOU",
+  contactHeading: "Discuss Your Project & Engineering Needs",
+  contactParagraph: "Are you looking for high-performance systems, robust automation workflows, or backend integrations tailored to your requirements? Reach out to start a conversation.",
+  contactEmail: "talha.sami.dev@gmail.com",
+  contactPhone: "+92 300 1234567",
+  contactInterests: [
+    "Frontend Development",
+    "Backend Systems",
+    "DevOps & Cloud Architecture",
+    "Workflow Automation",
+    "Full-Stack Project",
+    "Consulting / General Inquiry"
+  ],
+  socials: [] as any[]
+};
+
 export default function Contact() {
-  const [data, setData] = useState(DEFAULT_PORTFOLIO);
+  const [data, setData] = useState<any>(DEFAULT_PORTFOLIO_FALLBACK);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -27,35 +43,51 @@ export default function Contact() {
   }, []);
 
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem("portfolio-settings");
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        setData({
-          ...DEFAULT_PORTFOLIO,
-          ...parsed
-        });
+    const prefix = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
-        // Sync first custom interest as default selection
-        const interests = parsed.contactInterests || DEFAULT_PORTFOLIO.contactInterests;
-        if (interests && interests.length > 0) {
-          setFormData((prev) => ({
-            ...prev,
-            interest: interests[0]
-          }));
+    const loadContactData = async () => {
+      let defaults = DEFAULT_PORTFOLIO_FALLBACK;
+      try {
+        const res = await fetch(`${prefix}/data/profileData/portfolio-defaults.json`);
+        if (res.ok) {
+          defaults = await res.json();
         }
-      } else {
-        const interests = DEFAULT_PORTFOLIO.contactInterests;
-        if (interests && interests.length > 0) {
-          setFormData((prev) => ({
-            ...prev,
-            interest: interests[0]
-          }));
-        }
+      } catch (err) {
+        console.error("Error fetching defaults in Contact:", err);
       }
-    } catch (e) {
-      console.error(e);
-    }
+
+      try {
+        const stored = localStorage.getItem("portfolio-settings");
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          setData({
+            ...defaults,
+            ...parsed
+          });
+
+          const interests = parsed.contactInterests || defaults.contactInterests;
+          if (interests && interests.length > 0) {
+            setFormData((prev) => ({
+              ...prev,
+              interest: interests[0]
+            }));
+          }
+        } else {
+          setData(defaults);
+          const interests = defaults.contactInterests;
+          if (interests && interests.length > 0) {
+            setFormData((prev) => ({
+              ...prev,
+              interest: interests[0]
+            }));
+          }
+        }
+      } catch (e) {
+        console.error("Error parsing contact settings:", e);
+      }
+    };
+
+    loadContactData();
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -77,7 +109,7 @@ export default function Contact() {
     setSubmitted(true);
     setTimeout(() => {
       setSubmitted(false);
-      const interests = data.contactInterests || DEFAULT_PORTFOLIO.contactInterests;
+      const interests = data.contactInterests || DEFAULT_PORTFOLIO_FALLBACK.contactInterests;
       setFormData({
         name: "",
         email: "",
@@ -87,8 +119,8 @@ export default function Contact() {
     }, 4500);
   };
 
-  const visibleSocials = (data.socials || []).filter((s) => s.visible);
-  const interestOptions = data.contactInterests || DEFAULT_PORTFOLIO.contactInterests;
+  const visibleSocials = (data.socials || []).filter((s: any) => s.visible);
+  const interestOptions = data.contactInterests || DEFAULT_PORTFOLIO_FALLBACK.contactInterests;
 
   return (
     <section

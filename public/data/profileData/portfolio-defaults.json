@@ -164,49 +164,49 @@
     {
       "name": "Google AI Essentials",
       "issuer": "Google",
-      "image": "/context/assets/Certificates/GoogleAiEssentials.png",
+      "image": "/data/certificates/GoogleAiEssentials.png",
       "link": "https://www.coursera.org/account/accomplishments/verify/VJQYQMIPUMMK",
       "visible": true
     },
     {
       "name": "Google Prompt Essentials",
       "issuer": "Google",
-      "image": "/context/assets/Certificates/GooglePromptingEssentials.png",
+      "image": "/data/certificates/GooglePromptingEssentials.png",
       "link": "https://www.coursera.org/account/accomplishments/verify/TJXKDRICE7HK",
       "visible": true
     },
     {
       "name": "Crash Course on Python",
       "issuer": "Google",
-      "image": "/context/assets/Certificates/CrashCourseOnPython.png",
+      "image": "/data/certificates/CrashCourseOnPython.png",
       "link": "https://www.coursera.org/account/accomplishments/verify/85UBFW25EO2T",
       "visible": true
     },
     {
       "name": "Get Started with Python",
       "issuer": "Google",
-      "image": "/context/assets/Certificates/GetStartedWithPython.png",
+      "image": "/data/certificates/GetStartedWithPython.png",
       "link": "https://www.coursera.org/account/accomplishments/certificate/WHZ03GRBS7HB",
       "visible": true
     },
     {
       "name": "Intro to Machine Learning",
       "issuer": "Kaggle",
-      "image": "/context/assets/Certificates/Talha Sami - Intro to Machine Learning.png",
+      "image": "/data/certificates/Talha Sami - Intro to Machine Learning.png",
       "link": "http://kaggle.com/learn/certification/tlhaasami/intro-to-machine-learning",
       "visible": true
     },
     {
       "name": "Python",
       "issuer": "Kaggle",
-      "image": "/context/assets/Certificates/Talha Sami - Python.png",
+      "image": "/data/certificates/Talha Sami - Python.png",
       "link": "https://www.kaggle.com/learn/certification/tlhaasami/python",
       "visible": true
     },
     {
       "name": "Intro to Programming",
       "issuer": "Kaggle",
-      "image": "/context/assets/Certificates/Talha Sami - Intro to Programming.png",
+      "image": "/data/certificates/Talha Sami - Intro to Programming.png",
       "link": "https://www.kaggle.com/learn/certification/tlhaasami/intro-to-programming",
       "visible": true
     }
@@ -215,28 +215,28 @@
     {
       "name": "NaSCON Speed Programming",
       "issuer": "NaSCON Competition",
-      "image": "/context/assets/CompetitionsWinner/Nascon.png",
+      "image": "/data/competitions/Nascon.png",
       "link": "",
       "visible": true
     },
     {
       "name": "FETX Winner",
       "issuer": "FETX Engineering Competition",
-      "image": "/context/assets/CompetitionsWinner/FETX_Winner.png",
+      "image": "/data/competitions/FETX_Winner.png",
       "link": "",
       "visible": true
     },
     {
       "name": "Bug Buster Winner",
       "issuer": "Speed Programming Competition",
-      "image": "/context/assets/CompetitionsWinner/BugBuster.png",
+      "image": "/data/competitions/BugBuster.png",
       "link": "",
       "visible": true
     },
     {
       "name": "CodeAir Hackathon Winner",
       "issuer": "CodeAir Hackathon",
-      "image": "/context/assets/CompetitionsWinner/CodeAir.png",
+      "image": "/data/competitions/CodeAir.png",
       "link": "",
       "visible": true
     }

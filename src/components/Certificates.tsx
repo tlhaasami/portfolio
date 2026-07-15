@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import LogoLoop, { LogoItem } from "@/components/ui/LogoLoop";
-import DEFAULT_PORTFOLIO from "@/data/portfolio-defaults.json";
 import MobileCarousel from "@/components/ui/MobileCarousel";
 import { prefixAsset } from "@/utils/prefixAsset";
 
@@ -27,29 +26,29 @@ export default function Certificates() {
   const [achievements, setAchievements] = useState<Achievement[]>([]);
 
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem("portfolio-settings");
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        if (parsed.certificates) {
-          setCerts(parsed.certificates);
+    const prefix = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
+    const loadCertificates = async () => {
+      try {
+        const stored = localStorage.getItem("portfolio-settings");
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          if (parsed.certificates) setCerts(parsed.certificates);
+          if (parsed.achievements) setAchievements(parsed.achievements);
         } else {
-          setCerts(DEFAULT_PORTFOLIO.certificates);
+          const res = await fetch(`${prefix}/data/profileData/portfolio-defaults.json`);
+          if (res.ok) {
+            const defaults = await res.json();
+            if (defaults.certificates) setCerts(defaults.certificates);
+            if (defaults.achievements) setAchievements(defaults.achievements);
+          }
         }
-        if (parsed.achievements) {
-          setAchievements(parsed.achievements);
-        } else {
-          setAchievements(DEFAULT_PORTFOLIO.achievements || []);
-        }
-      } else {
-        setCerts(DEFAULT_PORTFOLIO.certificates);
-        setAchievements(DEFAULT_PORTFOLIO.achievements || []);
+      } catch (err) {
+        console.error("Error loading certificates:", err);
       }
-    } catch (e) {
-      console.error("Error loading certificates:", e);
-      setCerts(DEFAULT_PORTFOLIO.certificates);
-      setAchievements(DEFAULT_PORTFOLIO.achievements || []);
-    }
+    };
+
+    loadCertificates();
   }, []);
 
   const visibleCerts = certs.filter((c) => c.visible);

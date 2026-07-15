@@ -2,8 +2,6 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import LogoLoop, { LogoItem } from "@/components/ui/LogoLoop";
-import DEFAULT_PORTFOLIO from "@/data/portfolio-defaults.json";
-import technologies from "@/data/technologies.json";
 import { prefixAsset } from "@/utils/prefixAsset";
 
 interface TechItem {
@@ -15,6 +13,7 @@ interface TechItem {
 
 export default function TechStack() {
   const [brokenLogos, setBrokenLogos] = useState<Record<string, boolean>>({});
+  const [techList, setTechList] = useState<TechItem[]>([]);
   const [settings, setSettings] = useState({
     cardSize: 96,
     logoSize: 48,
@@ -25,23 +24,37 @@ export default function TechStack() {
   });
 
   useEffect(() => {
+    const prefix = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
+    // 1. Fetch technologies list
+    fetch(`${prefix}/data/profileData/technologies.json`)
+      .then((res) => res.json())
+      .then((data) => setTechList(data))
+      .catch((err) => console.error("Error loading technologies:", err));
+
+    // 2. Fetch/Load custom settings
     try {
       const stored = localStorage.getItem("portfolio-settings");
       if (stored) {
         const parsed = JSON.parse(stored);
-        
-        // Load custom loop settings if they exist
         if (parsed.techSettings) {
           setSettings((prev) => ({
             ...prev,
             ...parsed.techSettings
           }));
         }
-      } else if ((DEFAULT_PORTFOLIO as any).techSettings) {
-        setSettings((prev) => ({
-          ...prev,
-          ...(DEFAULT_PORTFOLIO as any).techSettings
-        }));
+      } else {
+        fetch(`${prefix}/data/profileData/portfolio-defaults.json`)
+          .then((res) => res.json())
+          .then((defaults) => {
+            if (defaults.techSettings) {
+              setSettings((prev) => ({
+                ...prev,
+                ...defaults.techSettings
+              }));
+            }
+          })
+          .catch((err) => console.error("Error loading defaults:", err));
       }
     } catch (e) {
       console.error("Error loading settings:", e);
@@ -64,7 +77,7 @@ export default function TechStack() {
 
   const categoryGroups = useMemo(() => {
     return categories.map((cat) => {
-      const techsInCat = (technologies as TechItem[]).filter((t) => {
+      const techsInCat = techList.filter((t) => {
         const mappedCat = categoryMapping[t.category] || t.category;
         return mappedCat === cat;
       });
