@@ -192,7 +192,7 @@ export default function Contact() {
                   Find me on tech platforms:
                 </span>
                 <div className="flex flex-wrap gap-3">
-                  {visibleSocials.map((social) => (
+                  {visibleSocials.map((social: any) => (
                     <a
                       key={social.name}
                       href={social.url}
