@@ -159,7 +159,7 @@
     "name": "gRPC",
     "category": "Backend",
     "color": "#244c5a",
-    "logo": ""
+    "logo": "/logos/grpc.svg"
   },
   {
     "name": "Laravel",
@@ -483,7 +483,7 @@
     "name": "Pinecone",
     "category": "AI",
     "color": "#282a36",
-    "logo": ""
+    "logo": "null"
   },
   {
     "name": "Qdrant",
@@ -507,7 +507,7 @@
     "name": "DOSBox",
     "category": "Tools",
     "color": "#000000",
-    "logo": ""
+    "logo": "null"
   },
   {
     "name": "Git",

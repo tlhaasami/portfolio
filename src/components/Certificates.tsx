@@ -350,7 +350,7 @@ export default function Certificates() {
 
             {/* Mobile/Tablet view slider layout */}
             <div className="block lg:hidden">
-              <MobileCarousel items={certSlides} />
+              <MobileCarousel items={certSlides} autoPlayInterval={5500} />
             </div>
           </div>
         )}
@@ -381,7 +381,7 @@ export default function Certificates() {
 
             {/* Mobile/Tablet view slider layout */}
             <div className="block lg:hidden">
-              <MobileCarousel items={achievementSlides} />
+              <MobileCarousel items={achievementSlides} autoPlayInterval={3800} />
             </div>
           </div>
         )}

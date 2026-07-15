@@ -20,7 +20,7 @@ import DEFAULT_SETTINGS from "@/data/ballpit.json";
 import DEFAULT_PORTFOLIO from "@/data/portfolio-defaults.json";
 
 export default function Home() {
-  const [settings, setSettings] = useState(DEFAULT_SETTINGS);
+  const [settings, setSettings] = useState<any>(DEFAULT_SETTINGS);
   const [portfolioData, setPortfolioData] = useState(DEFAULT_PORTFOLIO);
   const heroRef = useRef<HTMLElement>(null);
 
@@ -60,6 +60,7 @@ export default function Home() {
         <div className="absolute inset-0 w-full h-full pointer-events-auto">
           <Ballpit
             count={settings.count}
+            countMobile={settings.countMobile}
             gravity={settings.gravity}
             friction={settings.friction}
             wallBounce={settings.wallBounce}

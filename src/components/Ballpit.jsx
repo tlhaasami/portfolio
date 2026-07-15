@@ -661,6 +661,7 @@ class Z extends d {
   }
   update(e) {
     this.physics.update(e);
+    const isControlActive = this.config.controlSphere0;
     for (let idx = 0; idx < this.count; idx++) {
       U.position.fromArray(this.physics.positionData, 3 * idx);
       if (idx === 0 && this.config.followCursor === false) {
@@ -670,7 +671,13 @@ class Z extends d {
       }
       U.updateMatrix();
       this.setMatrixAt(idx, U.matrix);
-      if (idx === 0) this.light.position.copy(U.position);
+      if (idx === 0) {
+        if (isControlActive) {
+          this.light.position.copy(U.position);
+        } else {
+          this.light.position.set(0, 0, 10);
+        }
+      }
     }
     this.instanceMatrix.needsUpdate = true;
   }
@@ -744,7 +751,7 @@ function createBallpit(e, t = {}) {
   };
 }
 
-const Ballpit = ({ className = '', followCursor = true, ...props }) => {
+const Ballpit = ({ className = '', followCursor = true, countMobile, ...props }) => {
   const canvasRef = useRef(null);
   const spheresInstanceRef = useRef(null);
   const baseCount = props.count ?? 200;
@@ -753,19 +760,17 @@ const Ballpit = ({ className = '', followCursor = true, ...props }) => {
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
-      let scaledCount = baseCount;
-      if (width < 768) {
-        scaledCount = Math.max(5, Math.round(baseCount * 0.35));
-      } else if (width < 1050) {
-        scaledCount = Math.max(10, Math.round(baseCount * 0.60));
+      let targetCount = baseCount;
+      if (width < 1024) {
+        targetCount = countMobile ?? Math.max(5, Math.round(baseCount * 0.35));
       }
-      setResponsiveCount(scaledCount);
+      setResponsiveCount(targetCount);
     };
 
     handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [baseCount]);
+  }, [baseCount, countMobile]);
 
   useEffect(() => {
     const canvas = canvasRef.current;

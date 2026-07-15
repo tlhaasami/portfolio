@@ -29,13 +29,13 @@ const portfolioData: PortfolioData = {
     { label: "EXPERIENCE", href: "#experience" },
     { label: "TECH STACK", href: "#tech-stack" },
     { label: "PROJECTS", href: "#projects" },
-    { label: "CERTIFICATIONS", href: "#certifications" },
+    { label: "CERTIFICATIONS", href: "#certificates" },
     { label: "CONTACT US", href: "#contact" },
   ],
 };
 
 // Inlined scroll hook
-function useScroll(sectionIds: string[] = ["about", "experience", "tech-stack", "projects", "certifications", "contact"]) {
+function useScroll(sectionIds: string[] = ["about", "experience", "tech-stack", "projects", "certificates", "contact"]) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
 

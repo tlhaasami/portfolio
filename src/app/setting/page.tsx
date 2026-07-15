@@ -50,6 +50,7 @@ export default function AdminSettings() {
 
   // Ballpit Physics Configuration State
   const [count, setCount] = useState(DEFAULT_SETTINGS.count);
+  const [countMobile, setCountMobile] = useState((DEFAULT_SETTINGS as any).countMobile ?? 50);
   const [gravity, setGravity] = useState(DEFAULT_SETTINGS.gravity);
   const [friction, setFriction] = useState(DEFAULT_SETTINGS.friction);
   const [wallBounce, setWallBounce] = useState(DEFAULT_SETTINGS.wallBounce);
@@ -78,6 +79,7 @@ export default function AdminSettings() {
       if (storedPhysics) {
         const parsed = JSON.parse(storedPhysics);
         if (parsed.count !== undefined) setCount(parsed.count);
+        if (parsed.countMobile !== undefined) setCountMobile(parsed.countMobile);
         if (parsed.gravity !== undefined) setGravity(parsed.gravity);
         if (parsed.friction !== undefined) setFriction(parsed.friction);
         if (parsed.wallBounce !== undefined) setWallBounce(parsed.wallBounce);
@@ -100,6 +102,33 @@ export default function AdminSettings() {
   }, []);
 
   // Featured Projects Management
+  const handleAddFeaturedProject = () => {
+    const defaultProj = {
+      name: "New Featured Project",
+      tagline: "High-performance dashboard system",
+      description: "Brief summary description.",
+      image: "",
+      liveLink: "https://example.com",
+      techStack: ["React", "TypeScript"],
+      details: "Detailed case study outcomes."
+    };
+    setPortfolioData((prev: any) => ({
+      ...prev,
+      featuredProjects: [...(prev.featuredProjects || []), defaultProj]
+    }));
+    showToast("Added new featured project!");
+  };
+
+  const handleRemoveFeaturedProject = (indexToRemove: number) => {
+    if (window.confirm(`Are you sure you want to remove featured project "${portfolioData.featuredProjects[indexToRemove].name}"?`)) {
+      setPortfolioData((prev: any) => ({
+        ...prev,
+        featuredProjects: (prev.featuredProjects || []).filter((_: any, idx: number) => idx !== indexToRemove)
+      }));
+      showToast("Featured project removed.", "info");
+    }
+  };
+
   const handleUpdateFeaturedProject = (index: number, field: string, value: any) => {
     setPortfolioData((prev: any) => {
       const copy = [...(prev.featuredProjects || [])];
@@ -107,6 +136,23 @@ export default function AdminSettings() {
         ...copy[index],
         [field]: value
       };
+      return {
+        ...prev,
+        featuredProjects: copy
+      };
+    });
+  };
+
+  const handleMoveFeaturedProject = (index: number, direction: "up" | "down") => {
+    setPortfolioData((prev: any) => {
+      const copy = [...(prev.featuredProjects || [])];
+      const targetIndex = direction === "up" ? index - 1 : index + 1;
+      if (targetIndex < 0 || targetIndex >= copy.length) return prev;
+      
+      const temp = copy[index];
+      copy[index] = copy[targetIndex];
+      copy[targetIndex] = temp;
+      
       return {
         ...prev,
         featuredProjects: copy
@@ -180,7 +226,7 @@ export default function AdminSettings() {
   const handleSave = () => {
     try {
       // Save physics settings
-      const physicsConfig = { count, gravity, friction, wallBounce, followCursor, colors };
+      const physicsConfig = { count, countMobile, gravity, friction, wallBounce, followCursor, colors };
       localStorage.setItem("ballpit-settings", JSON.stringify(physicsConfig));
 
       // Save portfolio content settings
@@ -197,6 +243,7 @@ export default function AdminSettings() {
     if (window.confirm("Are you sure you want to reset all configurations to their original defaults?")) {
       // Reset physics
       setCount(DEFAULT_SETTINGS.count);
+      setCountMobile((DEFAULT_SETTINGS as any).countMobile ?? 50);
       setGravity(DEFAULT_SETTINGS.gravity);
       setFriction(DEFAULT_SETTINGS.friction);
       setWallBounce(DEFAULT_SETTINGS.wallBounce);
@@ -488,7 +535,7 @@ export default function AdminSettings() {
             onClick={() => setActiveTab("general")}
             className={`w-full text-left px-4 py-3.5 rounded-xl border transition-all flex items-center gap-2.5 cursor-pointer shrink-0 lg:shrink ${
               activeTab === "general"
-                ? "bg-white border-zinc-700 text-zinc-950 font-bold"
+                ? "bg-white border-zinc-700 text-black font-bold"
                 : "bg-zinc-900/40 border-zinc-900 hover:bg-zinc-900 text-zinc-400 hover:text-zinc-200"
             }`}
           >
@@ -500,7 +547,7 @@ export default function AdminSettings() {
             onClick={() => setActiveTab("about")}
             className={`w-full text-left px-4 py-3.5 rounded-xl border transition-all flex items-center gap-2.5 cursor-pointer shrink-0 lg:shrink ${
               activeTab === "about"
-                ? "bg-white border-zinc-700 text-zinc-950 font-bold"
+                ? "bg-white border-zinc-700 text-black font-bold"
                 : "bg-zinc-900/40 border-zinc-900 hover:bg-zinc-900 text-zinc-400 hover:text-zinc-200"
             }`}
           >
@@ -512,7 +559,7 @@ export default function AdminSettings() {
             onClick={() => setActiveTab("experience")}
             className={`w-full text-left px-4 py-3.5 rounded-xl border transition-all flex items-center gap-2.5 cursor-pointer shrink-0 lg:shrink ${
               activeTab === "experience"
-                ? "bg-white border-zinc-700 text-zinc-950 font-bold"
+                ? "bg-white border-zinc-700 text-black font-bold"
                 : "bg-zinc-900/40 border-zinc-900 hover:bg-zinc-900 text-zinc-400 hover:text-zinc-200"
             }`}
           >
@@ -524,7 +571,7 @@ export default function AdminSettings() {
             onClick={() => setActiveTab("contact")}
             className={`w-full text-left px-4 py-3.5 rounded-xl border transition-all flex items-center gap-2.5 cursor-pointer shrink-0 lg:shrink ${
               activeTab === "contact"
-                ? "bg-white border-zinc-700 text-zinc-950 font-bold"
+                ? "bg-white border-zinc-700 text-black font-bold"
                 : "bg-zinc-900/40 border-zinc-900 hover:bg-zinc-900 text-zinc-400 hover:text-zinc-200"
             }`}
           >
@@ -536,7 +583,7 @@ export default function AdminSettings() {
             onClick={() => setActiveTab("certificates")}
             className={`w-full text-left px-4 py-3.5 rounded-xl border transition-all flex items-center gap-2.5 cursor-pointer shrink-0 lg:shrink ${
               activeTab === "certificates"
-                ? "bg-white border-zinc-700 text-zinc-950 font-bold"
+                ? "bg-white border-zinc-700 text-black font-bold"
                 : "bg-zinc-900/40 border-zinc-900 hover:bg-zinc-900 text-zinc-400 hover:text-zinc-200"
             }`}
           >
@@ -548,7 +595,7 @@ export default function AdminSettings() {
             onClick={() => setActiveTab("projects")}
             className={`w-full text-left px-4 py-3.5 rounded-xl border transition-all flex items-center gap-2.5 cursor-pointer shrink-0 lg:shrink ${
               activeTab === "projects"
-                ? "bg-white border-zinc-700 text-zinc-950 font-bold"
+                ? "bg-white border-zinc-700 text-black font-bold"
                 : "bg-zinc-900/40 border-zinc-900 hover:bg-zinc-900 text-zinc-400 hover:text-zinc-200"
             }`}
           >
@@ -560,7 +607,7 @@ export default function AdminSettings() {
             onClick={() => setActiveTab("physics")}
             className={`w-full text-left px-4 py-3.5 rounded-xl border transition-all flex items-center gap-2.5 cursor-pointer shrink-0 lg:shrink ${
               activeTab === "physics"
-                ? "bg-white border-zinc-700 text-zinc-950 font-bold"
+                ? "bg-white border-zinc-700 text-black font-bold"
                 : "bg-zinc-900/40 border-zinc-900 hover:bg-zinc-900 text-zinc-400 hover:text-zinc-200"
             }`}
           >
@@ -980,7 +1027,7 @@ export default function AdminSettings() {
                 {/* Balls Count Slider */}
                 <div>
                   <div className="flex justify-between text-xs font-mono mb-2">
-                    <span className="text-zinc-400">BALLS COUNT</span>
+                    <span className="text-zinc-400">DESKTOP BALLS COUNT</span>
                     <span className="text-white font-bold">{count}</span>
                   </div>
                   <input
@@ -989,6 +1036,22 @@ export default function AdminSettings() {
                     max="300"
                     value={count}
                     onChange={(e) => setCount(Number(e.target.value))}
+                    className="w-full h-1.5 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-white"
+                  />
+                </div>
+
+                {/* Mobile Balls Count Slider */}
+                <div>
+                  <div className="flex justify-between text-xs font-mono mb-2">
+                    <span className="text-zinc-400">MOBILE & TABLET BALLS COUNT</span>
+                    <span className="text-white font-bold">{countMobile}</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="5"
+                    max="150"
+                    value={countMobile}
+                    onChange={(e) => setCountMobile(Number(e.target.value))}
                     className="w-full h-1.5 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-white"
                   />
                 </div>
@@ -1138,6 +1201,7 @@ export default function AdminSettings() {
                 <div className="w-[260px] h-[260px] rounded-3xl border border-zinc-800 bg-zinc-950 relative overflow-hidden shadow-inner mx-auto">
                   <Ballpit
                     count={count}
+                    countMobile={countMobile}
                     gravity={gravity}
                     friction={friction}
                     wallBounce={wallBounce}
@@ -1437,24 +1501,65 @@ export default function AdminSettings() {
               
               {/* Section 1: Featured Projects */}
               <div className="space-y-6">
-                <div>
-                  <h2 className="text-sm font-mono tracking-widest text-zinc-550 flex items-center gap-2">
-                    <FolderGit className="w-4.5 h-4.5 text-white" /> // FEATURED SHOWCASES CONFIG
-                  </h2>
-                  <p className="text-[10px] text-zinc-550 font-mono mt-1">Configure details, tags, and images for the 4 featured showcases on the main grid.</p>
+                <div className="flex justify-between items-center border-b border-zinc-800/80 pb-4">
+                  <div>
+                    <h2 className="text-sm font-mono tracking-widest text-zinc-550 flex items-center gap-2">
+                      <FolderGit className="w-4.5 h-4.5 text-white" /> // FEATURED SHOWCASES CONFIG
+                    </h2>
+                    <p className="text-[10px] text-zinc-555 font-mono mt-1">Configure details, tags, and images for the featured showcases on the main grid.</p>
+                  </div>
+                  <button
+                    onClick={handleAddFeaturedProject}
+                    className="px-3.5 py-2 bg-white hover:bg-zinc-200 text-zinc-955 font-mono text-[10px] font-bold rounded-lg flex items-center gap-1.5 transition-colors cursor-pointer"
+                  >
+                    <Plus className="w-3.5 h-3.5" /> Add Featured Project
+                  </button>
                 </div>
 
                 <div className="space-y-8">
-                  {(portfolioData.featuredProjects || []).slice(0, 4).map((project: any, index: number) => (
+                  {(portfolioData.featuredProjects || []).map((project: any, index: number) => (
                     <div 
                       key={index}
                       className="border border-zinc-800 bg-zinc-950/40 rounded-2xl p-6 relative space-y-4 hover:border-zinc-700 transition-colors shadow-sm"
                     >
-                      <div className="flex items-center gap-2 text-[10px] font-mono font-bold text-zinc-400 border-b border-zinc-900 pb-2.5">
-                        <span className="w-5 h-5 rounded-full bg-zinc-800 text-zinc-300 flex items-center justify-center text-[9px] font-bold">
-                          {index + 1}
-                        </span>
-                        <span>FEATURED SHOWCASE ITEM</span>
+                      {/* Toolbar: Reorder & Delete */}
+                      <div className="flex justify-between items-center bg-zinc-950 border-b border-zinc-900 -mx-6 -mt-6 px-6 py-2.5 rounded-t-2xl">
+                        <div className="flex items-center gap-2 text-[10px] font-mono font-bold text-zinc-400">
+                          <span className="w-5 h-5 rounded-full bg-zinc-800 text-zinc-300 flex items-center justify-center text-[9px] font-bold">
+                            {index + 1}
+                          </span>
+                          <span>FEATURED SHOWCASE ITEM</span>
+                        </div>
+                        
+                        <div className="flex items-center gap-1.5">
+                          <button
+                            type="button"
+                            disabled={index === 0}
+                            onClick={() => handleMoveFeaturedProject(index, "up")}
+                            className="p-1 hover:bg-zinc-850 text-zinc-400 hover:text-white rounded disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer"
+                            title="Move Up"
+                          >
+                            <ArrowUp className="w-3.5 h-3.5" />
+                          </button>
+                          <button
+                            type="button"
+                            disabled={index === portfolioData.featuredProjects.length - 1}
+                            onClick={() => handleMoveFeaturedProject(index, "down")}
+                            className="p-1 hover:bg-zinc-850 text-zinc-400 hover:text-white rounded disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer"
+                            title="Move Down"
+                          >
+                            <ArrowDown className="w-3.5 h-3.5" />
+                          </button>
+                          <div className="w-px h-3 bg-zinc-800 mx-1" />
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveFeaturedProject(index)}
+                            className="p-1 hover:bg-rose-950/30 text-zinc-450 hover:text-rose-400 rounded cursor-pointer"
+                            title="Delete"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
                       </div>
 
                       {/* Inputs Row 1: Name and Tagline */}
@@ -1544,14 +1649,14 @@ export default function AdminSettings() {
               <div className="space-y-6 pt-6 border-t border-zinc-800/80">
                 <div className="flex justify-between items-center border-b border-zinc-800/80 pb-4">
                   <div>
-                    <h2 className="text-sm font-mono tracking-widest text-zinc-550 flex items-center gap-2">
+                    <h2 className="text-sm font-mono tracking-widest text-zinc-555 flex items-center gap-2">
                       <FolderGit className="w-4.5 h-4.5 text-white" /> // SECONDARY REPOSITORIES
                     </h2>
-                    <p className="text-[10px] text-zinc-555 font-mono mt-1">Manage repositories list, github URLs, descriptions, and category tabs.</p>
+                    <p className="text-[10px] text-zinc-555 font-mono mt-1">Manage repositories list, GitHub URLs, descriptions, and pictures.</p>
                   </div>
                   <button
                     onClick={handleAddSecondaryProject}
-                    className="px-3.5 py-2 bg-white hover:bg-zinc-200 text-zinc-955 font-mono text-[10px] font-bold rounded-lg flex items-center gap-1.5 transition-colors cursor-pointer"
+                    className="px-3.5 py-2 bg-white hover:bg-zinc-200 text-zinc-950 font-mono text-[10px] font-bold rounded-lg flex items-center gap-1.5 transition-colors cursor-pointer"
                   >
                     <Plus className="w-3.5 h-3.5" /> Add Project
                   </button>
@@ -1608,8 +1713,8 @@ export default function AdminSettings() {
                           </div>
                         </div>
 
-                        {/* Inputs: Name, Category, Repo URL */}
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        {/* Inputs: Name, Repo URL */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           <div className="space-y-1.5">
                             <label className="text-[10px] font-mono text-zinc-400 uppercase">Project Name</label>
                             <input
@@ -1621,18 +1726,6 @@ export default function AdminSettings() {
                           </div>
 
                           <div className="space-y-1.5">
-                            <label className="text-[10px] font-mono text-zinc-400 uppercase">Category Tab</label>
-                            <select
-                              value={proj.category || "professional"}
-                              onChange={(e) => handleUpdateSecondaryProject(index, "category", e.target.value)}
-                              className="w-full bg-zinc-900 border border-zinc-800 px-3 py-2.5 rounded-xl focus:border-white/50 outline-none text-xs transition-all font-mono text-zinc-300"
-                            >
-                              <option value="professional">Professional Projects</option>
-                              <option value="university">University Work / Academic</option>
-                            </select>
-                          </div>
-
-                          <div className="space-y-1.5">
                             <label className="text-[10px] font-mono text-zinc-400 uppercase">GitHub Repo URL</label>
                             <input
                               type="text"
@@ -1641,6 +1734,17 @@ export default function AdminSettings() {
                               className="w-full bg-zinc-900 border border-zinc-800 px-3 py-2 rounded-xl focus:border-white/50 outline-none text-xs transition-all font-mono"
                             />
                           </div>
+                        </div>
+
+                        {/* Cover Image Path */}
+                        <div className="space-y-1.5">
+                          <label className="text-[10px] font-mono text-zinc-400 uppercase">Cover Image Path / URL</label>
+                          <input
+                            type="text"
+                            value={proj.image || ""}
+                            onChange={(e) => handleUpdateSecondaryProject(index, "image", e.target.value)}
+                            className="w-full bg-zinc-900 border border-zinc-800 px-3 py-2 rounded-xl focus:border-white/50 outline-none text-xs transition-all font-mono text-zinc-350"
+                          />
                         </div>
 
                         {/* Tech stack */}

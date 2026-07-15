@@ -15,10 +15,10 @@ interface TechItem {
 export default function TechStack() {
   const [brokenLogos, setBrokenLogos] = useState<Record<string, boolean>>({});
   const [settings, setSettings] = useState({
-    cardSize: 108,
-    logoSize: 58,
+    cardSize: 96,
+    logoSize: 48,
     speed: 25,
-    gap: 20,
+    gap: 16,
     pauseOnHover: true,
     scaleOnHover: true
   });
@@ -69,7 +69,7 @@ export default function TechStack() {
       });
       
       const logos: LogoItem[] = techsInCat.map((t) => {
-        const isBroken = brokenLogos[t.name];
+        const isBroken = brokenLogos[t.name] || !t.logo || t.logo === "null" || t.logo === "";
         
         return {
           node: (
@@ -154,7 +154,7 @@ export default function TechStack() {
       </div>
 
       {/* Categorized Rows list (expanded width container for larger side coverage!) */}
-      <div className="max-w-[1600px] xl:max-w-[1820px] mx-auto px-6 md:px-12 relative z-10 space-y-8 py-4">
+      <div className="max-w-[1600px] xl:max-w-[1820px] mx-auto relative z-10 space-y-8 py-4">
         {categoryGroups.map((group, idx) => {
           if (group.logos.length === 0) return null;
           return (
@@ -163,7 +163,7 @@ export default function TechStack() {
               className="py-2 space-y-3"
             >
               {/* Heading above the loop (aligned with expanded bounds) */}
-              <div className="flex items-center pl-1">
+              <div className="flex items-center px-6 md:px-12 pl-7 md:pl-13">
                 <h3 className="font-mono text-[10px] md:text-xs uppercase tracking-wider font-extrabold text-neutral-400 dark:text-neutral-550">
                   {group.name}
                 </h3>

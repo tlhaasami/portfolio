@@ -188,7 +188,7 @@ export default function Experience({ experiences = [] }: ExperienceProps) {
                             {/* Company Logo Box - No background/borders */}
                             <div className="w-14 h-14 shrink-0 flex items-center justify-center">
                               {/* eslint-disable-next-line @next/next/no-img-element */}
-                              {activeExp.logo ? (
+                              {activeExp.logo && activeExp.logo !== "null" && activeExp.logo !== "" ? (
                                 <img
                                   src={activeExp.logo}
                                   alt={`${activeExp.company} logo`}

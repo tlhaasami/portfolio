@@ -168,7 +168,7 @@ export default function Contact() {
                       className="w-11 h-11 rounded-xl bg-neutral-50 dark:bg-zinc-900/40 border border-neutral-200/50 dark:border-zinc-800/50 flex items-center justify-center hover:border-neutral-350 dark:hover:border-zinc-700 hover:bg-neutral-100/30 dark:hover:bg-zinc-900/80 transition-all duration-300 hover:-translate-y-1 group"
                       title={social.name}
                     >
-                      {social.logo ? (
+                      {social.logo && social.logo !== "null" && social.logo !== "" ? (
                         /* eslint-disable-next-line @next/next/no-img-element */
                         <img
                           src={social.logo}
@@ -181,7 +181,7 @@ export default function Contact() {
                           }}
                         />
                       ) : null}
-                      <span className={`${social.logo ? "hidden" : "inline"} text-[10px] font-mono font-bold text-neutral-500 dark:text-neutral-450`}>
+                      <span className={`${social.logo && social.logo !== "null" && social.logo !== "" ? "hidden" : "inline"} text-[10px] font-mono font-bold text-neutral-500 dark:text-neutral-450`}>
                         {social.name.substring(0, 2).toUpperCase()}
                       </span>
                     </a>

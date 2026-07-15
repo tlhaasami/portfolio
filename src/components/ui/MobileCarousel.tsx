@@ -75,8 +75,8 @@ export default function MobileCarousel({ items, autoPlayInterval = 4000 }: Mobil
                 onClick={() => handleDotClick(idx)}
                 className={`transition-all duration-300 ease-out cursor-pointer focus:outline-none ${
                   isActive
-                    ? "w-8 h-2 rounded-full bg-amber-600 dark:bg-amber-500 shadow-sm"
-                    : "w-2.5 h-2.5 rounded-full bg-neutral-250 hover:bg-neutral-350 dark:bg-zinc-800 dark:hover:bg-zinc-700"
+                    ? "w-8 h-2 rounded-full bg-neutral-950 dark:bg-white shadow-sm"
+                    : "w-2.5 h-2.5 rounded-full bg-neutral-250 hover:bg-neutral-355 dark:bg-zinc-800 dark:hover:bg-zinc-700"
                 }`}
                 aria-label={`Go to slide ${idx + 1}`}
               />
