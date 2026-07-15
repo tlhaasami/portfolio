@@ -43,17 +43,17 @@ export default function MobileCarousel({ items, autoPlayInterval = 4000 }: Mobil
   return (
     <div className="w-full flex flex-col items-center">
       {/* Cards Display Window */}
-      <div className="relative w-full overflow-hidden min-h-[360px] xs:min-h-[380px] sm:min-h-[420px] md:min-h-[460px]">
+      <div className="relative w-full">
         {items.map((item, idx) => {
           const isActive = idx === activeIndex;
           
           return (
             <div
               key={idx}
-              className={`absolute inset-x-0 top-0 transition-all duration-700 ease-in-out transform flex justify-center ${
+              className={`transition-all duration-500 ease-in-out transform flex justify-center ${
                 isActive
-                  ? "opacity-100 translate-x-0 scale-100 z-10 pointer-events-auto"
-                  : "opacity-0 translate-x-12 scale-95 pointer-events-none z-0"
+                  ? "relative w-full opacity-100 scale-100 z-10 pointer-events-auto"
+                  : "absolute inset-0 opacity-0 scale-95 pointer-events-none z-0 invisible"
               }`}
             >
               <div className="w-full max-w-lg px-2">

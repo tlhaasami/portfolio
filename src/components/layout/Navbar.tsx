@@ -29,13 +29,13 @@ const portfolioData: PortfolioData = {
     { label: "EXPERIENCE", href: "#experience" },
     { label: "TECH STACK", href: "#tech-stack" },
     { label: "PROJECTS", href: "#projects" },
-    { label: "CERTIFICATIONS", href: "#certificates" },
+    { label: "CERTIFICATIONS", href: "#certifications" },
     { label: "CONTACT US", href: "#contact" },
   ],
 };
 
 // Inlined scroll hook
-function useScroll(sectionIds: string[] = ["about", "experience", "tech-stack", "projects", "certificates", "contact"]) {
+function useScroll(sectionIds: string[] = ["about", "experience", "tech-stack", "projects", "certifications", "contact"]) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
 
@@ -209,7 +209,7 @@ export default function Navbar() {
     <>
       {/* Floating Capsule Header - Adapts dynamically to light and dark themes */}
       <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-white/80 dark:bg-black/70 border border-black/15 dark:border-white/40 backdrop-blur-md rounded-full p-2 pr-4 min-[1050px]:pr-8 flex items-center gap-6 min-[1050px]:gap-8 shadow-[0_10px_30px_rgba(0,0,0,0.15)] dark:shadow-[0_10px_30px_rgba(255,255,255,0.15)] transition-all duration-300 justify-between min-[1050px]:justify-start">
-        
+
         {/* Left Logo (with Rotation on Hover - black background in light theme, white in dark theme) */}
         <motion.a
           href="#home"

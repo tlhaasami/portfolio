@@ -91,7 +91,7 @@ export default function Certificates() {
                   {cert.name}
                 </h3>
               </div>
-              
+
               {cert.link && (
                 <a
                   href={cert.link}
@@ -151,7 +151,7 @@ export default function Certificates() {
                   {ach.name}
                 </h3>
               </div>
-              
+
               {ach.link && (
                 <a
                   href={ach.link}
@@ -210,7 +210,7 @@ export default function Certificates() {
                 {cert.name}
               </h3>
             </div>
-            
+
             {cert.link && (
               <a
                 href={cert.link}
@@ -266,7 +266,7 @@ export default function Certificates() {
                 {ach.name}
               </h3>
             </div>
-            
+
             {ach.link && (
               <a
                 href={ach.link}
@@ -323,7 +323,7 @@ export default function Certificates() {
 
       {/* Loop content (expanded width container for larger side coverage) */}
       <div className="max-w-[1600px] xl:max-w-[1820px] mx-auto px-6 md:px-12 relative z-10 space-y-12">
-        
+
         {/* Row 1: Certifications */}
         {visibleCerts.length > 0 && (
           <div className="w-full overflow-hidden relative py-1">

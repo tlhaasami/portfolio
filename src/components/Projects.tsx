@@ -27,35 +27,17 @@ export default function Projects() {
   const [featured, setFeatured] = useState<FeaturedProject[]>([]);
   const [secondary, setSecondary] = useState<SecondaryProject[]>([]);
   const [selectedProject, setSelectedProject] = useState<FeaturedProject | null>(null);
-  const [isHovered, setIsHovered] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
       const { scrollLeft, clientWidth } = scrollRef.current;
-      const scrollTo = direction === "left" 
-        ? scrollLeft - clientWidth * 0.75 
+      const scrollTo = direction === "left"
+        ? scrollLeft - clientWidth * 0.75
         : scrollLeft + clientWidth * 0.75;
       scrollRef.current.scrollTo({ left: scrollTo, behavior: "smooth" });
     }
   };
-
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
-    if (!isHovered && secondary.length > 0) {
-      interval = setInterval(() => {
-        if (scrollRef.current) {
-          const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-          if (scrollLeft >= scrollWidth - clientWidth - 10) {
-            scrollRef.current.scrollTo({ left: 0, behavior: "smooth" });
-          } else {
-            scrollRef.current.scrollTo({ left: scrollLeft + 360, behavior: "smooth" });
-          }
-        }
-      }, 3500);
-    }
-    return () => clearInterval(interval);
-  }, [isHovered, secondary.length]);
 
   useEffect(() => {
     try {
@@ -252,7 +234,7 @@ export default function Projects() {
 
       {/* Outer grid container (matches the wide layout edges) */}
       <div className="max-w-[1600px] xl:max-w-[1820px] mx-auto px-6 md:px-12 relative z-10 space-y-20">
-        
+
         {/* SECTION 1: PINNED / FEATURED PROJECTS */}
         <div>
           <div className="mb-8 pl-1">
@@ -266,7 +248,7 @@ export default function Projects() {
               <div
                 key={project.name}
                 onClick={() => setSelectedProject(project)}
-                className="group relative overflow-hidden rounded-[28px] border border-neutral-200/10 dark:border-zinc-900 bg-zinc-950/45 dark:bg-zinc-955/45 shadow-sm hover:shadow-xl hover:border-neutral-700/60 dark:hover:border-zinc-800 transition-all duration-350 select-none cursor-pointer flex flex-col justify-between"
+                className="group relative overflow-hidden rounded-[28px] border border-zinc-700/50 dark:border-zinc-700/50 bg-zinc-950/80 dark:bg-zinc-955/80 shadow-md hover:shadow-xl hover:border-white/40 dark:hover:border-white/40 transition-all duration-350 select-none cursor-pointer flex flex-col justify-between"
               >
                 {/* Image panel */}
                 <div className="aspect-[16/9] w-full overflow-hidden relative bg-zinc-900 border-b border-neutral-250/10 dark:border-zinc-900">
@@ -279,7 +261,7 @@ export default function Projects() {
                       loading="lazy"
                     />
                   ) : null}
-                  
+
                   {/* Gloss reflection sweep */}
                   <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-white/10 to-transparent z-15 pointer-events-none" />
                 </div>
@@ -328,107 +310,102 @@ export default function Projects() {
                 Other Projects & Repositories
               </h3>
             </div>
+
+            {/* Scroll Navigation Arrows */}
+            {secondary.length > 0 && (
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => scroll("left")}
+                  className="p-2 rounded-full border border-neutral-200/10 hover:border-white/20 bg-zinc-900/40 text-neutral-400 hover:text-white transition-all cursor-pointer flex items-center justify-center w-8 h-8"
+                  aria-label="Scroll left"
+                >
+                  <svg className="w-4 h-4 stroke-current fill-none" strokeWidth="2.5" viewBox="0 0 24 24">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                  </svg>
+                </button>
+                <button
+                  onClick={() => scroll("right")}
+                  className="p-2 rounded-full border border-neutral-200/10 hover:border-white/20 bg-zinc-900/40 text-neutral-400 hover:text-white transition-all cursor-pointer flex items-center justify-center w-8 h-8"
+                  aria-label="Scroll right"
+                >
+                  <svg className="w-4 h-4 stroke-current fill-none" strokeWidth="2.5" viewBox="0 0 24 24">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </button>
+              </div>
+            )}
           </div>
 
-          {/* Relative wrapper holding track and overlay arrows */}
-          <div className="relative group/track w-full">
-            {/* Left arrow on side */}
-            {secondary.length > 0 && (
-              <button
-                onClick={() => scroll("left")}
-                className="absolute -left-5 sm:-left-8 top-[45%] -translate-y-1/2 z-30 p-2.5 rounded-full border border-neutral-200/10 bg-zinc-900/85 hover:bg-zinc-900 text-neutral-400 hover:text-white transition-all cursor-pointer flex items-center justify-center w-9 h-9 shadow-lg backdrop-blur-md opacity-0 group-hover/track:opacity-100 focus:opacity-100"
-                aria-label="Scroll left"
+          {/* Horizontal Scrolling Track (One Line Layout for all screens!) */}
+          <div
+            ref={scrollRef}
+            className="flex flex-row overflow-x-auto gap-6 sm:gap-8 pb-6 pt-2 scrollbar-none snap-x snap-mandatory scroll-smooth no-scrollbar"
+          >
+            {secondary.map((proj) => (
+              <a
+                key={proj.name}
+                href={proj.repoLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative overflow-hidden rounded-[24px] border border-neutral-200/10 dark:border-zinc-900 bg-zinc-950/45 dark:bg-zinc-955/45 hover:border-neutral-700/60 dark:hover:border-zinc-800 hover:-translate-y-1.5 transition-all duration-300 select-none cursor-pointer flex flex-col justify-between shadow-sm hover:shadow-lg w-[290px] sm:w-[350px] shrink-0 snap-start"
               >
-                <svg className="w-4 h-4 stroke-current fill-none" strokeWidth="2.5" viewBox="0 0 24 24">
-                  <polyline points="15 18 9 12 15 6"></polyline>
-                </svg>
-              </button>
-            )}
+                {/* Image header container */}
+                <div className="aspect-[16/10] w-full overflow-hidden relative bg-zinc-900 border-b border-neutral-250/10 dark:border-zinc-900">
+                  {proj.image ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={proj.image}
+                      alt={`${proj.name} preview`}
+                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.025] transition-transform duration-500"
+                      loading="lazy"
+                    />
+                  ) : null}
 
-            {/* Right arrow on side */}
-            {secondary.length > 0 && (
-              <button
-                onClick={() => scroll("right")}
-                className="absolute -right-5 sm:-right-8 top-[45%] -translate-y-1/2 z-30 p-2.5 rounded-full border border-neutral-200/10 bg-zinc-900/85 hover:bg-zinc-900 text-neutral-400 hover:text-white transition-all cursor-pointer flex items-center justify-center w-9 h-9 shadow-lg backdrop-blur-md opacity-0 group-hover/track:opacity-100 focus:opacity-100"
-                aria-label="Scroll right"
-              >
-                <svg className="w-4 h-4 stroke-current fill-none" strokeWidth="2.5" viewBox="0 0 24 24">
-                  <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
-              </button>
-            )}
+                  {/* Gloss reflection sweep */}
+                  <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-white/10 to-transparent z-15 pointer-events-none" />
+                </div>
 
-            {/* Horizontal Scrolling Track (One Line Layout for all screens!) */}
-            <div 
-              ref={scrollRef}
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
-              className="flex flex-row overflow-x-auto gap-6 sm:gap-8 pb-6 pt-2 scrollbar-none snap-x snap-mandatory scroll-smooth no-scrollbar px-6 md:px-10"
-            >
-              {secondary.map((proj) => (
-                <a
-                  key={proj.name}
-                  href={proj.repoLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group relative overflow-hidden rounded-[24px] border border-neutral-200/10 dark:border-zinc-900 bg-zinc-950/45 dark:bg-zinc-955/45 hover:border-neutral-700/60 dark:hover:border-zinc-800 hover:-translate-y-1.5 transition-all duration-300 select-none cursor-pointer flex flex-col justify-between shadow-sm hover:shadow-lg w-[290px] sm:w-[350px] shrink-0 snap-start"
-                >
-                  {/* Image header container */}
-                  <div className="aspect-[16/10] w-full overflow-hidden relative bg-zinc-900 border-b border-neutral-250/10 dark:border-zinc-900">
-                    {proj.image ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={proj.image}
-                        alt={`${proj.name} preview`}
-                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.025] transition-transform duration-500"
-                        loading="lazy"
-                      />
-                    ) : null}
-                    
-                    {/* Gloss reflection sweep */}
-                    <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-white/10 to-transparent z-15 pointer-events-none" />
-                  </div>
-
-                  {/* Copy content and tags */}
-                  <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
-                    <div className="space-y-2 text-left">
-                      {/* Header line */}
-                      <div className="flex justify-between items-start gap-4">
-                        <h4 className="text-sm font-extrabold text-neutral-100 dark:text-white group-hover:text-white transition-colors">
-                          {proj.name}
-                        </h4>
-                        {/* GitHub vector icon */}
-                        <svg className="w-4 h-4 text-neutral-400 group-hover:text-white transition-colors shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                          <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z"></path>
-                        </svg>
-                      </div>
-
-                      <p className="text-xs text-neutral-400 dark:text-neutral-400 leading-relaxed font-sans line-clamp-3">
-                        {proj.description}
-                      </p>
+                {/* Copy content and tags */}
+                <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
+                  <div className="space-y-2 text-left">
+                    {/* Header line */}
+                    <div className="flex justify-between items-start gap-4">
+                      <h4 className="text-sm font-extrabold text-neutral-100 dark:text-white group-hover:text-white transition-colors">
+                        {proj.name}
+                      </h4>
+                      {/* GitHub vector icon */}
+                      <svg className="w-4 h-4 text-neutral-400 group-hover:text-white transition-colors shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                        <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z"></path>
+                      </svg>
                     </div>
 
-                    {/* Tech stack lists */}
-                    <div className="flex flex-wrap gap-1 text-left">
-                      {proj.techStack.map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-1.5 py-0.5 bg-zinc-900 border border-zinc-800/80 rounded font-mono text-[8px] text-zinc-300 font-semibold"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
+                    <p className="text-xs text-neutral-400 dark:text-neutral-400 leading-relaxed font-sans line-clamp-3">
+                      {proj.description}
+                    </p>
                   </div>
-                </a>
-              ))}
-            </div>
+
+                  {/* Tech stack lists */}
+                  <div className="flex flex-wrap gap-1 text-left">
+                    {proj.techStack.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-1.5 py-0.5 bg-zinc-900 border border-zinc-800/80 rounded font-mono text-[8px] text-zinc-300 font-semibold"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </a>
+            ))}
           </div>
         </div>
 
       </div>
+
+      {/* FEATURED PROJECT DETAILS OVERLAY MODAL */}
       {selectedProject && (
-        <div 
+        <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6 bg-black/75 backdrop-blur-md animate-fade-in"
           onClick={() => setSelectedProject(null)} // Close when clicking backdrop
         >

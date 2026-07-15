@@ -156,12 +156,6 @@
     "logo": "/logos/graphql.svg"
   },
   {
-    "name": "gRPC",
-    "category": "Backend",
-    "color": "#244c5a",
-    "logo": "/logos/grpc.svg"
-  },
-  {
     "name": "Laravel",
     "category": "Backend",
     "color": "#ff2d20",
