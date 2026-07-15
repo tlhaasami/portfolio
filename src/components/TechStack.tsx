@@ -4,6 +4,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import LogoLoop, { LogoItem } from "@/components/ui/LogoLoop";
 import DEFAULT_PORTFOLIO from "@/data/portfolio-defaults.json";
 import technologies from "@/data/technologies.json";
+import { prefixAsset } from "@/utils/prefixAsset";
 
 interface TechItem {
   name: string;
@@ -94,7 +95,7 @@ export default function TechStack() {
               ) : (
                 /* eslint-disable-next-line @next/next/no-img-element */
                 <img
-                  src={t.logo}
+                  src={prefixAsset(t.logo)}
                   alt={`${t.name} logo`}
                   onError={() => {
                     setBrokenLogos((prev) => ({

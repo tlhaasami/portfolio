@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import DEFAULT_PORTFOLIO from "@/data/portfolio-defaults.json";
+import { prefixAsset } from "@/utils/prefixAsset";
 
 export default function Contact() {
   const [data, setData] = useState(DEFAULT_PORTFOLIO);
@@ -171,7 +172,7 @@ export default function Contact() {
                       {social.logo && social.logo !== "null" && social.logo !== "" ? (
                         /* eslint-disable-next-line @next/next/no-img-element */
                         <img
-                          src={social.logo}
+                          src={prefixAsset(social.logo)}
                           alt={social.name}
                           className="w-5 h-5 object-contain transition-transform duration-300 group-hover:scale-125"
                           onError={(e) => {
