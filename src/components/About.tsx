@@ -3,6 +3,7 @@
 import TiltedCard from "@/components/ui/TiltedCard";
 import BorderGlow from "@/components/ui/BorderGlow";
 import { motion } from "framer-motion";
+import { prefixAsset } from "@/utils/prefixAsset";
 
 interface AboutProps {
   heading?: string;
@@ -32,7 +33,7 @@ export default function About({
             className="md:col-span-5 w-full max-w-[416px] min-h-[400px] md:min-h-[520px] md:h-auto md:ml-auto max-md:mx-auto relative rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.35)] dark:shadow-[0_20px_50px_rgba(255,255,255,0.06)] border border-neutral-200 dark:border-neutral-900 group"
           >
             <TiltedCard
-              imageSrc={image}
+              imageSrc={prefixAsset(image)}
               altText="Talha Sami"
               captionText="Talha Sami - Software Engineer"
               containerHeight="100%"

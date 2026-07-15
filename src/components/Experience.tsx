@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import LineSidebar from "@/components/ui/LineSidebar";
 import BorderGlow from "@/components/ui/BorderGlow";
+import { prefixAsset } from "@/utils/prefixAsset";
 
 interface ExperienceItem {
   company: string;
@@ -190,7 +191,7 @@ export default function Experience({ experiences = [] }: ExperienceProps) {
                               {/* eslint-disable-next-line @next/next/no-img-element */}
                               {activeExp.logo && activeExp.logo !== "null" && activeExp.logo !== "" ? (
                                 <img
-                                  src={activeExp.logo}
+                                  src={prefixAsset(activeExp.logo)}
                                   alt={`${activeExp.company} logo`}
                                   className="w-full h-full object-contain rounded-xl"
                                 />

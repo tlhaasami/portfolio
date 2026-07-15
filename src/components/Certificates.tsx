@@ -4,6 +4,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import LogoLoop, { LogoItem } from "@/components/ui/LogoLoop";
 import DEFAULT_PORTFOLIO from "@/data/portfolio-defaults.json";
 import MobileCarousel from "@/components/ui/MobileCarousel";
+import { prefixAsset } from "@/utils/prefixAsset";
 
 interface Certificate {
   name: string;
@@ -65,7 +66,7 @@ export default function Certificates() {
           {/* Background cover image - clean, bright and full color by default */}
           {cert.image ? (
             <img
-              src={cert.image}
+              src={prefixAsset(cert.image)}
               alt={`${cert.name} certificate`}
               className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
               loading="lazy"
@@ -125,7 +126,7 @@ export default function Certificates() {
           {/* Background cover image - clean, bright and full color by default */}
           {ach.image ? (
             <img
-              src={ach.image}
+              src={prefixAsset(ach.image)}
               alt={`${ach.name} achievement`}
               className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
               loading="lazy"
@@ -184,7 +185,7 @@ export default function Certificates() {
       >
         {cert.image ? (
           <img
-            src={cert.image}
+            src={prefixAsset(cert.image)}
             alt={`${cert.name} certificate`}
             className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
             loading="lazy"
@@ -240,7 +241,7 @@ export default function Certificates() {
       >
         {ach.image ? (
           <img
-            src={ach.image}
+            src={prefixAsset(ach.image)}
             alt={`${ach.name} achievement`}
             className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
             loading="lazy"

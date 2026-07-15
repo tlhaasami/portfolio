@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import DEFAULT_PORTFOLIO from "@/data/portfolio-defaults.json";
 import MobileCarousel from "@/components/ui/MobileCarousel";
+import { prefixAsset } from "@/utils/prefixAsset";
 
 interface FeaturedProject {
   name: string;
@@ -98,7 +99,7 @@ export default function Projects() {
           {project.image ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
-              src={project.image}
+              src={prefixAsset(project.image)}
               alt={`${project.name} preview`}
               className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.025] transition-transform duration-500"
               loading="lazy"
@@ -255,7 +256,7 @@ export default function Projects() {
                   {project.image ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
-                      src={project.image}
+                      src={prefixAsset(project.image)}
                       alt={`${project.name} preview`}
                       className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.025] transition-transform duration-500"
                       loading="lazy"
@@ -354,7 +355,7 @@ export default function Projects() {
                   {proj.image ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
-                      src={proj.image}
+                      src={prefixAsset(proj.image)}
                       alt={`${proj.name} preview`}
                       className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.025] transition-transform duration-500"
                       loading="lazy"
@@ -448,7 +449,7 @@ export default function Projects() {
                 <div className="w-full aspect-[16/10] rounded-2xl overflow-hidden bg-zinc-900 border border-neutral-200/10 dark:border-zinc-900 relative">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={selectedProject.image}
+                    src={prefixAsset(selectedProject.image)}
                     alt={`${selectedProject.name} layout`}
                     className="absolute inset-0 w-full h-full object-cover"
                   />

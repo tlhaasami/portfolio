@@ -11,6 +11,9 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   basePath: isGithubActions ? repoName : "",
+  env: {
+    NEXT_PUBLIC_BASE_PATH: isGithubActions ? repoName : "",
+  },
   allowedDevOrigins: ['172.20.161.39'],
 };
 
