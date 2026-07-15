@@ -16,12 +16,12 @@ export default function About({
   image = "/profile.png"
 }: AboutProps) {
   return (
-    <section id="about" className="relative bg-white dark:bg-black text-neutral-900 dark:text-white py-24 overflow-hidden border-t border-neutral-200 dark:border-neutral-900">
+    <section id="about" className="relative bg-transparent text-neutral-900 dark:text-white py-24 overflow-hidden">
       {/* Background radial accent */}
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-neutral-200/25 dark:bg-neutral-900/20 rounded-full blur-[120px] -z-10 pointer-events-none" />
 
       <div className="max-w-7xl lg:max-w-[1300px] xl:max-w-[1400px] mx-auto px-6 md:px-10 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-stretch">
 
           {/* Left Column (Image - spanning 5 columns, sliding in from left) */}
           <motion.div
@@ -29,7 +29,7 @@ export default function About({
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="md:col-span-5 w-full max-w-[416px] h-[520px] md:ml-auto max-md:mx-auto relative rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.35)] dark:shadow-[0_20px_50px_rgba(255,255,255,0.06)] border border-neutral-200 dark:border-neutral-900 group"
+            className="md:col-span-5 w-full max-w-[416px] min-h-[400px] md:min-h-[520px] md:h-auto md:ml-auto max-md:mx-auto relative rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.35)] dark:shadow-[0_20px_50px_rgba(255,255,255,0.06)] border border-neutral-200 dark:border-neutral-900 group"
           >
             <TiltedCard
               imageSrc={image}
@@ -57,7 +57,7 @@ export default function About({
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-            className="md:col-span-7 w-full h-auto min-h-[400px] md:h-[520px] backdrop-blur-md"
+            className="md:col-span-7 w-full min-h-[400px] md:min-h-[520px] md:h-auto backdrop-blur-md"
           >
             <BorderGlow
               edgeSensitivity={30}

@@ -20,7 +20,11 @@ import {
   Briefcase, 
   Settings, 
   Palette,
-  Eye
+  Eye,
+  EyeOff,
+  Mail,
+  Award,
+  FolderGit
 } from "lucide-react";
 
 const Ballpit = dynamic(() => import("@/components/Ballpit"), {
@@ -38,7 +42,7 @@ const PALETTES = [
   { name: "Sunset Horizon", colors: ["#f97316", "#ef4444", "#ec4899"] },
 ];
 
-type TabType = "general" | "about" | "experience" | "physics";
+type TabType = "general" | "about" | "experience" | "contact" | "physics" | "certificates" | "projects";
 
 export default function AdminSettings() {
   // Active Tab
@@ -55,12 +59,12 @@ export default function AdminSettings() {
 
   // Dynamic Portfolio Content Configuration State
   const [portfolioData, setPortfolioData] = useState<any>({
-    name: DEFAULT_PORTFOLIO.name,
+    ...DEFAULT_PORTFOLIO,
     titles: [...DEFAULT_PORTFOLIO.titles],
-    aboutHeading: DEFAULT_PORTFOLIO.aboutHeading,
-    aboutParagraph: DEFAULT_PORTFOLIO.aboutParagraph,
-    aboutImage: DEFAULT_PORTFOLIO.aboutImage,
-    experiences: JSON.parse(JSON.stringify(DEFAULT_PORTFOLIO.experiences))
+    experiences: JSON.parse(JSON.stringify(DEFAULT_PORTFOLIO.experiences)),
+    certificates: JSON.parse(JSON.stringify(DEFAULT_PORTFOLIO.certificates || [])),
+    featuredProjects: JSON.parse(JSON.stringify((DEFAULT_PORTFOLIO as any).featuredProjects || [])),
+    secondaryProjects: JSON.parse(JSON.stringify((DEFAULT_PORTFOLIO as any).secondaryProjects || []))
   });
 
   const [newTitle, setNewTitle] = useState("");
@@ -94,6 +98,79 @@ export default function AdminSettings() {
       console.error("Error reading stored settings:", e);
     }
   }, []);
+
+  // Featured Projects Management
+  const handleUpdateFeaturedProject = (index: number, field: string, value: any) => {
+    setPortfolioData((prev: any) => {
+      const copy = [...(prev.featuredProjects || [])];
+      copy[index] = {
+        ...copy[index],
+        [field]: value
+      };
+      return {
+        ...prev,
+        featuredProjects: copy
+      };
+    });
+  };
+
+  // Secondary Projects Management
+  const handleAddSecondaryProject = () => {
+    const defaultProj = {
+      name: "New Project",
+      description: "Short project summary details.",
+      category: "professional" as const,
+      image: "",
+      repoLink: "https://github.com",
+      techStack: ["TypeScript"]
+    };
+    setPortfolioData((prev: any) => ({
+      ...prev,
+      secondaryProjects: [defaultProj, ...(prev.secondaryProjects || [])]
+    }));
+    showToast("Added new secondary project!");
+  };
+
+  const handleRemoveSecondaryProject = (indexToRemove: number) => {
+    if (window.confirm(`Are you sure you want to remove secondary project "${portfolioData.secondaryProjects[indexToRemove].name}"?`)) {
+      setPortfolioData((prev: any) => ({
+        ...prev,
+        secondaryProjects: (prev.secondaryProjects || []).filter((_: any, idx: number) => idx !== indexToRemove)
+      }));
+      showToast("Secondary project removed.", "info");
+    }
+  };
+
+  const handleUpdateSecondaryProject = (index: number, field: string, value: any) => {
+    setPortfolioData((prev: any) => {
+      const copy = [...(prev.secondaryProjects || [])];
+      copy[index] = {
+        ...copy[index],
+        [field]: value
+      };
+      return {
+        ...prev,
+        secondaryProjects: copy
+      };
+    });
+  };
+
+  const handleMoveSecondaryProject = (index: number, direction: "up" | "down") => {
+    setPortfolioData((prev: any) => {
+      const copy = [...(prev.secondaryProjects || [])];
+      const targetIndex = direction === "up" ? index - 1 : index + 1;
+      if (targetIndex < 0 || targetIndex >= copy.length) return prev;
+      
+      const temp = copy[index];
+      copy[index] = copy[targetIndex];
+      copy[targetIndex] = temp;
+      
+      return {
+        ...prev,
+        secondaryProjects: copy
+      };
+    });
+  };
 
   const showToast = (message: string, type: "success" | "info" = "success") => {
     setToast({ message, type });
@@ -222,6 +299,120 @@ export default function AdminSettings() {
     });
   };
 
+  // Certificates Management
+  const handleAddCertificate = () => {
+    const defaultCert = {
+      name: "New Certification",
+      issuer: "Provider Issuer",
+      image: "/context/assets/Certificates/GoogleAiEssentials.png",
+      link: "https://www.coursera.org",
+      visible: true
+    };
+    setPortfolioData((prev: any) => ({
+      ...prev,
+      certificates: [defaultCert, ...(prev.certificates || [])]
+    }));
+    showToast("Added new certificate at index #1!");
+  };
+
+  const handleRemoveCertificate = (indexToRemove: number) => {
+    if (window.confirm(`Are you sure you want to remove the certificate "${portfolioData.certificates[indexToRemove].name}"?`)) {
+      setPortfolioData((prev: any) => ({
+        ...prev,
+        certificates: (prev.certificates || []).filter((_: any, idx: number) => idx !== indexToRemove)
+      }));
+      showToast("Certificate removed.", "info");
+    }
+  };
+
+  const handleUpdateCertificate = (index: number, field: string, value: any) => {
+    setPortfolioData((prev: any) => {
+      const copy = [...(prev.certificates || [])];
+      copy[index] = {
+        ...copy[index],
+        [field]: value
+      };
+      return {
+        ...prev,
+        certificates: copy
+      };
+    });
+  };
+
+  const handleMoveCertificate = (index: number, direction: "up" | "down") => {
+    setPortfolioData((prev: any) => {
+      const copy = [...(prev.certificates || [])];
+      const targetIndex = direction === "up" ? index - 1 : index + 1;
+      if (targetIndex < 0 || targetIndex >= copy.length) return prev;
+      
+      const temp = copy[index];
+      copy[index] = copy[targetIndex];
+      copy[targetIndex] = temp;
+      
+      return {
+        ...prev,
+        certificates: copy
+      };
+    });
+  };
+
+  // Achievements Management
+  const handleAddAchievement = () => {
+    const defaultAch = {
+      name: "New Achievement",
+      issuer: "Competition Issuer",
+      image: "/context/assets/CompetitionsWinner/Nascon.png",
+      link: "",
+      visible: true
+    };
+    setPortfolioData((prev: any) => ({
+      ...prev,
+      achievements: [defaultAch, ...(prev.achievements || [])]
+    }));
+    showToast("Added new achievement at index #1!");
+  };
+
+  const handleRemoveAchievement = (indexToRemove: number) => {
+    if (window.confirm(`Are you sure you want to remove the achievement "${portfolioData.achievements[indexToRemove].name}"?`)) {
+      setPortfolioData((prev: any) => ({
+        ...prev,
+        achievements: (prev.achievements || []).filter((_: any, idx: number) => idx !== indexToRemove)
+      }));
+      showToast("Achievement removed.", "info");
+    }
+  };
+
+  const handleUpdateAchievement = (index: number, field: string, value: any) => {
+    setPortfolioData((prev: any) => {
+      const copy = [...(prev.achievements || [])];
+      copy[index] = {
+        ...copy[index],
+        [field]: value
+      };
+      return {
+        ...prev,
+        achievements: copy
+      };
+    });
+  };
+
+  const handleMoveAchievement = (index: number, direction: "up" | "down") => {
+    setPortfolioData((prev: any) => {
+      const copy = [...(prev.achievements || [])];
+      const targetIndex = direction === "up" ? index - 1 : index + 1;
+      if (targetIndex < 0 || targetIndex >= copy.length) return prev;
+      
+      const temp = copy[index];
+      copy[index] = copy[targetIndex];
+      copy[targetIndex] = temp;
+      
+      return {
+        ...prev,
+        achievements: copy
+      };
+    });
+  };
+
   // Ballpit Colors Management
   const handleAddColor = () => {
     const formattedColor = newColor.toLowerCase();
@@ -292,7 +483,7 @@ export default function AdminSettings() {
       <div className="max-w-6xl mx-auto w-full flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-8">
         
         {/* Navigation Sidebar (3 columns) */}
-        <div className="lg:col-span-3 flex flex-row lg:flex-col gap-2 overflow-x-auto pb-2 lg:pb-0 font-mono text-xs">
+        <div className="lg:col-span-3 lg:sticky lg:top-8 flex flex-row lg:flex-col gap-2 overflow-x-auto pb-2 lg:pb-0 font-mono text-xs z-30">
           <button
             onClick={() => setActiveTab("general")}
             className={`w-full text-left px-4 py-3.5 rounded-xl border transition-all flex items-center gap-2.5 cursor-pointer shrink-0 lg:shrink ${
@@ -327,6 +518,42 @@ export default function AdminSettings() {
           >
             <Briefcase className="w-4 h-4" />
             <span>Experiences ({portfolioData.experiences.length})</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab("contact")}
+            className={`w-full text-left px-4 py-3.5 rounded-xl border transition-all flex items-center gap-2.5 cursor-pointer shrink-0 lg:shrink ${
+              activeTab === "contact"
+                ? "bg-white border-zinc-700 text-zinc-950 font-bold"
+                : "bg-zinc-900/40 border-zinc-900 hover:bg-zinc-900 text-zinc-400 hover:text-zinc-200"
+            }`}
+          >
+            <Mail className="w-4 h-4" />
+            <span>Contact & Socials</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab("certificates")}
+            className={`w-full text-left px-4 py-3.5 rounded-xl border transition-all flex items-center gap-2.5 cursor-pointer shrink-0 lg:shrink ${
+              activeTab === "certificates"
+                ? "bg-white border-zinc-700 text-zinc-950 font-bold"
+                : "bg-zinc-900/40 border-zinc-900 hover:bg-zinc-900 text-zinc-400 hover:text-zinc-200"
+            }`}
+          >
+            <Award className="w-4 h-4" />
+            <span>Certifications ({(portfolioData.certificates || []).length})</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab("projects")}
+            className={`w-full text-left px-4 py-3.5 rounded-xl border transition-all flex items-center gap-2.5 cursor-pointer shrink-0 lg:shrink ${
+              activeTab === "projects"
+                ? "bg-white border-zinc-700 text-zinc-950 font-bold"
+                : "bg-zinc-900/40 border-zinc-900 hover:bg-zinc-900 text-zinc-400 hover:text-zinc-200"
+            }`}
+          >
+            <FolderGit className="w-4 h-4" />
+            <span>Projects ({(portfolioData.featuredProjects || []).length + (portfolioData.secondaryProjects || []).length})</span>
           </button>
 
           <button
@@ -604,6 +831,141 @@ export default function AdminSettings() {
             </div>
           )}
 
+          {/* TAB: CONTACT & SOCIALS */}
+          {activeTab === "contact" && (
+            <div className="space-y-8">
+              <div>
+                <h2 className="text-sm font-mono tracking-widest text-zinc-550 flex items-center gap-2 mb-2">
+                  <Mail className="w-4 h-4 text-white" /> // CONTACT & SOCIAL NETWORKS
+                </h2>
+                <p className="text-[10px] font-mono text-zinc-500">
+                  Configure titles, headers, email/phone contact information, and toggle visibility of tech social links.
+                </p>
+              </div>
+
+              {/* General Contact Info fields */}
+              <div className="space-y-4 bg-zinc-950/45 p-6 rounded-2xl border border-zinc-800/80">
+                <h3 className="text-xs font-mono text-zinc-400 uppercase tracking-wider mb-2">Contact General Info</h3>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] font-mono text-zinc-400 uppercase">Subheading</label>
+                    <input
+                      type="text"
+                      value={portfolioData.contactSubheading || ""}
+                      onChange={(e) => setPortfolioData({ ...portfolioData, contactSubheading: e.target.value })}
+                      className="w-full bg-zinc-900 border border-zinc-800 px-3 py-2 rounded-xl focus:border-white/50 outline-none text-xs transition-all font-mono"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] font-mono text-zinc-400 uppercase">Heading</label>
+                    <input
+                      type="text"
+                      value={portfolioData.contactHeading || ""}
+                      onChange={(e) => setPortfolioData({ ...portfolioData, contactHeading: e.target.value })}
+                      className="w-full bg-zinc-900 border border-zinc-800 px-3 py-2 rounded-xl focus:border-white/50 outline-none text-xs transition-all font-mono"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-mono text-zinc-400 uppercase">Paragraph Description</label>
+                  <textarea
+                    value={portfolioData.contactParagraph || ""}
+                    onChange={(e) => setPortfolioData({ ...portfolioData, contactParagraph: e.target.value })}
+                    rows={2}
+                    className="w-full bg-zinc-900 border border-zinc-800 px-3 py-2 rounded-xl focus:border-white/50 outline-none text-xs transition-all leading-relaxed font-sans"
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] font-mono text-zinc-400 uppercase">Email Address</label>
+                    <input
+                      type="email"
+                      value={portfolioData.contactEmail || ""}
+                      onChange={(e) => setPortfolioData({ ...portfolioData, contactEmail: e.target.value })}
+                      className="w-full bg-zinc-900 border border-zinc-800 px-3 py-2 rounded-xl focus:border-white/50 outline-none text-xs transition-all font-mono"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] font-mono text-zinc-400 uppercase">Phone Number</label>
+                    <input
+                      type="text"
+                      value={portfolioData.contactPhone || ""}
+                      onChange={(e) => setPortfolioData({ ...portfolioData, contactPhone: e.target.value })}
+                      className="w-full bg-zinc-900 border border-zinc-800 px-3 py-2 rounded-xl focus:border-white/50 outline-none text-xs transition-all font-mono"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Social Networks Manager */}
+              <div className="space-y-4">
+                <h3 className="text-xs font-mono text-zinc-400 uppercase tracking-wider">Configure Social Links</h3>
+                
+                <div className="space-y-3">
+                  {(portfolioData.socials || []).map((social: any, index: number) => (
+                    <div 
+                      key={social.name}
+                      className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 rounded-xl border border-zinc-850 bg-zinc-950/40 hover:bg-zinc-950/80 transition-colors duration-200"
+                    >
+                      {/* Name & Icon Preview */}
+                      <div className="flex items-center gap-3 md:w-44 shrink-0">
+                        {social.logo && (
+                          <div className="w-8 h-8 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center shrink-0">
+                            {social.logo ? (
+                              <img src={social.logo} alt={social.name} className="w-4.5 h-4.5 object-contain" />
+                            ) : (
+                              <span className="text-[10px] font-mono font-bold text-zinc-500">
+                                {social.name.substring(0, 2).toUpperCase()}
+                              </span>
+                            )}
+                          </div>
+                        )}
+                        <span className="font-mono text-xs font-bold text-white">{social.name}</span>
+                      </div>
+
+                      {/* URL Edit Input */}
+                      <div className="flex-1 space-y-1">
+                        <input
+                          type="text"
+                          value={social.url}
+                          placeholder={`Enter ${social.name} profile URL`}
+                          onChange={(e) => {
+                            const updated = [...portfolioData.socials];
+                            updated[index] = { ...updated[index], url: e.target.value };
+                            setPortfolioData({ ...portfolioData, socials: updated });
+                          }}
+                          className="w-full bg-zinc-900 border border-zinc-800 px-3 py-2 rounded-lg focus:border-white/40 outline-none text-xs transition-all font-mono text-zinc-300"
+                        />
+                      </div>
+
+                      {/* Visibility Toggle */}
+                      <div className="flex items-center gap-2 md:w-28 justify-end shrink-0">
+                        <span className="text-[10px] font-mono text-zinc-500">VISIBLE</span>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const updated = [...portfolioData.socials];
+                            updated[index] = { ...updated[index], visible: !social.visible };
+                            setPortfolioData({ ...portfolioData, socials: updated });
+                          }}
+                          className={`w-10 h-5 rounded-full p-0.5 transition-all duration-300 ${social.visible ? "bg-white" : "bg-zinc-800"}`}
+                        >
+                          <div className={`w-4 h-4 rounded-full bg-zinc-950 transition-all duration-300 ${social.visible ? "translate-x-5" : "translate-x-0"}`} />
+                        </button>
+                      </div>
+
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* TAB 4: PHYSICS BALLPIT CONFIG */}
           {activeTab === "physics" && (
             <div className="space-y-8">
@@ -787,6 +1149,527 @@ export default function AdminSettings() {
                   </div>
                 </div>
               </div>
+            </div>
+          )}
+
+          {/* TAB 5: CERTIFICATIONS & ACHIEVEMENTS */}
+          {activeTab === "certificates" && (
+            <div className="space-y-8">
+              {/* Section 1: Certifications */}
+              <div className="space-y-6">
+                <div className="flex justify-between items-center border-b border-zinc-800/80 pb-4">
+                  <div>
+                    <h2 className="text-sm font-mono tracking-widest text-zinc-550 flex items-center gap-2">
+                      <Award className="w-4.5 h-4.5 text-white" /> // CERTIFICATION RECORDS LIST
+                    </h2>
+                    <p className="text-[10px] text-zinc-550 font-mono mt-1">Manage verified credentials, cover images, and verification links.</p>
+                  </div>
+                  <button
+                    onClick={handleAddCertificate}
+                    className="px-3.5 py-2 bg-white hover:bg-zinc-200 text-zinc-955 font-mono text-[10px] font-bold rounded-lg flex items-center gap-1.5 transition-colors cursor-pointer"
+                  >
+                    <Plus className="w-3.5 h-3.5" /> Add Certificate
+                  </button>
+                </div>
+
+                {(!portfolioData.certificates || portfolioData.certificates.length === 0) ? (
+                  <div className="text-center py-10 bg-zinc-950/20 border border-dashed border-zinc-850 rounded-2xl font-mono text-zinc-500 text-xs">
+                    No certifications defined. Click "Add Certificate" to create your first entry.
+                  </div>
+                ) : (
+                  <div className="space-y-8">
+                    {portfolioData.certificates.map((cert: any, index: number) => (
+                      <div 
+                        key={index}
+                        className="border border-zinc-800 bg-zinc-950/40 rounded-2xl p-6 relative space-y-4 hover:border-zinc-700 transition-colors shadow-sm"
+                      >
+                        {/* Top Header toolbar: Reorder & Delete */}
+                        <div className="flex justify-between items-center bg-zinc-950 border-b border-zinc-900 -mx-6 -mt-6 px-6 py-2.5 rounded-t-2xl">
+                          <div className="flex items-center gap-2 text-[10px] font-mono font-bold text-zinc-400">
+                            <span className="w-5 h-5 rounded-full bg-zinc-800 text-zinc-300 flex items-center justify-center text-[9px] font-bold">
+                              {index + 1}
+                            </span>
+                            <span>CERTIFICATE RECORD</span>
+                          </div>
+                          
+                          <div className="flex items-center gap-1.5">
+                            <button
+                              type="button"
+                              disabled={index === 0}
+                              onClick={() => handleMoveCertificate(index, "up")}
+                              className="p-1 hover:bg-zinc-850 text-zinc-400 hover:text-white rounded disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer"
+                              title="Move Up"
+                            >
+                              <ArrowUp className="w-3.5 h-3.5" />
+                            </button>
+                            <button
+                              type="button"
+                              disabled={index === portfolioData.certificates.length - 1}
+                              onClick={() => handleMoveCertificate(index, "down")}
+                              className="p-1 hover:bg-zinc-850 text-zinc-400 hover:text-white rounded disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer"
+                              title="Move Down"
+                            >
+                              <ArrowDown className="w-3.5 h-3.5" />
+                            </button>
+                            <div className="w-px h-3 bg-zinc-800 mx-1" />
+                            <button
+                              type="button"
+                              onClick={() => handleRemoveCertificate(index)}
+                              className="p-1 hover:bg-red-950/30 text-zinc-400 hover:text-red-400 rounded cursor-pointer"
+                              title="Delete"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
+                        </div>
+
+                        {/* Inputs Row 1: Name and Issuer */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div className="space-y-1.5">
+                            <label className="text-[10px] font-mono text-zinc-400 uppercase">Certification Name</label>
+                            <input
+                              type="text"
+                              value={cert.name || ""}
+                              onChange={(e) => handleUpdateCertificate(index, "name", e.target.value)}
+                              className="w-full bg-zinc-900 border border-zinc-800 px-3 py-2 rounded-xl focus:border-white/50 outline-none text-xs transition-all font-mono"
+                            />
+                          </div>
+
+                          <div className="space-y-1.5">
+                            <label className="text-[10px] font-mono text-zinc-400 uppercase">Issuer Provider</label>
+                            <input
+                              type="text"
+                              value={cert.issuer || ""}
+                              onChange={(e) => handleUpdateCertificate(index, "issuer", e.target.value)}
+                              className="w-full bg-zinc-900 border border-zinc-800 px-3 py-2 rounded-xl focus:border-white/50 outline-none text-xs transition-all font-mono"
+                            />
+                          </div>
+                        </div>
+
+                        {/* Inputs Row 2: Image Path and Link */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div className="space-y-1.5">
+                            <label className="text-[10px] font-mono text-zinc-400 uppercase">Cover Image Path / URL</label>
+                            <input
+                              type="text"
+                              value={cert.image || ""}
+                              onChange={(e) => handleUpdateCertificate(index, "image", e.target.value)}
+                              className="w-full bg-zinc-900 border border-zinc-800 px-3 py-2 rounded-xl focus:border-white/50 outline-none text-xs transition-all font-mono"
+                            />
+                          </div>
+
+                          <div className="space-y-1.5">
+                            <label className="text-[10px] font-mono text-zinc-400 uppercase">Verification Link URL</label>
+                            <input
+                              type="text"
+                              value={cert.link || ""}
+                              onChange={(e) => handleUpdateCertificate(index, "link", e.target.value)}
+                              className="w-full bg-zinc-900 border border-zinc-800 px-3 py-2 rounded-xl focus:border-white/50 outline-none text-xs transition-all font-mono"
+                            />
+                          </div>
+                        </div>
+
+                        {/* Visibility Checkbox toggle */}
+                        <div className="flex items-center gap-2 pt-2">
+                          <span className="text-[10px] font-mono text-zinc-500 uppercase">Status Visibility</span>
+                          <button
+                            type="button"
+                            onClick={() => handleUpdateCertificate(index, "visible", !cert.visible)}
+                            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-[10px] font-mono font-bold transition-all cursor-pointer ${
+                              cert.visible
+                                ? "bg-zinc-900 border-zinc-700 text-white"
+                                : "bg-zinc-950/20 border-zinc-900 text-zinc-500"
+                            }`}
+                          >
+                            {cert.visible ? <Eye className="w-3.5 h-3.5 text-white" /> : <EyeOff className="w-3.5 h-3.5 text-zinc-500" />}
+                            <span>{cert.visible ? "VISIBLE IN LIST" : "HIDDEN"}</span>
+                          </button>
+                        </div>
+
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Section 2: Achievements */}
+              <div className="space-y-6 pt-6 border-t border-zinc-800/80">
+                <div className="flex justify-between items-center border-b border-zinc-800/80 pb-4">
+                  <div>
+                    <h2 className="text-sm font-mono tracking-widest text-zinc-550 flex items-center gap-2">
+                      <Award className="w-4.5 h-4.5 text-white" /> // COMPETITIONS & ACHIEVEMENTS LIST
+                    </h2>
+                    <p className="text-[10px] text-zinc-550 font-mono mt-1">Manage competitions won, placement details, and honors certificate assets.</p>
+                  </div>
+                  <button
+                    onClick={handleAddAchievement}
+                    className="px-3.5 py-2 bg-white hover:bg-zinc-200 text-zinc-955 font-mono text-[10px] font-bold rounded-lg flex items-center gap-1.5 transition-colors cursor-pointer"
+                  >
+                    <Plus className="w-3.5 h-3.5" /> Add Achievement
+                  </button>
+                </div>
+
+                {(!portfolioData.achievements || portfolioData.achievements.length === 0) ? (
+                  <div className="text-center py-10 bg-zinc-950/20 border border-dashed border-zinc-850 rounded-2xl font-mono text-zinc-500 text-xs">
+                    No honors or achievements defined. Click "Add Achievement" to create your first entry.
+                  </div>
+                ) : (
+                  <div className="space-y-8">
+                    {portfolioData.achievements.map((ach: any, index: number) => (
+                      <div 
+                        key={index}
+                        className="border border-zinc-800 bg-zinc-950/40 rounded-2xl p-6 relative space-y-4 hover:border-zinc-700 transition-colors shadow-sm"
+                      >
+                        {/* Top Header toolbar: Reorder & Delete */}
+                        <div className="flex justify-between items-center bg-zinc-950 border-b border-zinc-900 -mx-6 -mt-6 px-6 py-2.5 rounded-t-2xl">
+                          <div className="flex items-center gap-2 text-[10px] font-mono font-bold text-zinc-400">
+                            <span className="w-5 h-5 rounded-full bg-zinc-800 text-zinc-300 flex items-center justify-center text-[9px] font-bold">
+                              {index + 1}
+                            </span>
+                            <span>ACHIEVEMENT RECORD</span>
+                          </div>
+                          
+                          <div className="flex items-center gap-1.5">
+                            <button
+                              type="button"
+                              disabled={index === 0}
+                              onClick={() => handleMoveAchievement(index, "up")}
+                              className="p-1 hover:bg-zinc-850 text-zinc-400 hover:text-white rounded disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer"
+                              title="Move Up"
+                            >
+                              <ArrowUp className="w-3.5 h-3.5" />
+                            </button>
+                            <button
+                              type="button"
+                              disabled={index === portfolioData.achievements.length - 1}
+                              onClick={() => handleMoveAchievement(index, "down")}
+                              className="p-1 hover:bg-zinc-850 text-zinc-400 hover:text-white rounded disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer"
+                              title="Move Down"
+                            >
+                              <ArrowDown className="w-3.5 h-3.5" />
+                            </button>
+                            <div className="w-px h-3 bg-zinc-800 mx-1" />
+                            <button
+                              type="button"
+                              onClick={() => handleRemoveAchievement(index)}
+                              className="p-1 hover:bg-red-950/30 text-zinc-400 hover:text-red-400 rounded cursor-pointer"
+                              title="Delete"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
+                        </div>
+
+                        {/* Inputs Row 1: Name and Issuer */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div className="space-y-1.5">
+                            <label className="text-[10px] font-mono text-zinc-400 uppercase">Achievement Title</label>
+                            <input
+                              type="text"
+                              value={ach.name || ""}
+                              onChange={(e) => handleUpdateAchievement(index, "name", e.target.value)}
+                              className="w-full bg-zinc-900 border border-zinc-800 px-3 py-2 rounded-xl focus:border-white/50 outline-none text-xs transition-all font-mono"
+                            />
+                          </div>
+
+                          <div className="space-y-1.5">
+                            <label className="text-[10px] font-mono text-zinc-400 uppercase">Competition Issuer</label>
+                            <input
+                              type="text"
+                              value={ach.issuer || ""}
+                              onChange={(e) => handleUpdateAchievement(index, "issuer", e.target.value)}
+                              className="w-full bg-zinc-900 border border-zinc-800 px-3 py-2 rounded-xl focus:border-white/50 outline-none text-xs transition-all font-mono"
+                            />
+                          </div>
+                        </div>
+
+                        {/* Inputs Row 2: Image Path and Link */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div className="space-y-1.5">
+                            <label className="text-[10px] font-mono text-zinc-400 uppercase">Cover Image Path / URL</label>
+                            <input
+                              type="text"
+                              value={ach.image || ""}
+                              onChange={(e) => handleUpdateAchievement(index, "image", e.target.value)}
+                              className="w-full bg-zinc-900 border border-zinc-800 px-3 py-2 rounded-xl focus:border-white/50 outline-none text-xs transition-all font-mono"
+                            />
+                          </div>
+
+                          <div className="space-y-1.5">
+                            <label className="text-[10px] font-mono text-zinc-400 uppercase">Verification Link URL</label>
+                            <input
+                              type="text"
+                              value={ach.link || ""}
+                              onChange={(e) => handleUpdateAchievement(index, "link", e.target.value)}
+                              className="w-full bg-zinc-900 border border-zinc-800 px-3 py-2 rounded-xl focus:border-white/50 outline-none text-xs transition-all font-mono"
+                            />
+                          </div>
+                        </div>
+
+                        {/* Visibility Checkbox toggle */}
+                        <div className="flex items-center gap-2 pt-2">
+                          <span className="text-[10px] font-mono text-zinc-500 uppercase">Status Visibility</span>
+                          <button
+                            type="button"
+                            onClick={() => handleUpdateAchievement(index, "visible", !ach.visible)}
+                            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-[10px] font-mono font-bold transition-all cursor-pointer ${
+                              ach.visible
+                                ? "bg-zinc-900 border-zinc-700 text-white"
+                                : "bg-zinc-950/20 border-zinc-900 text-zinc-500"
+                            }`}
+                          >
+                            {ach.visible ? <Eye className="w-3.5 h-3.5 text-white" /> : <EyeOff className="w-3.5 h-3.5 text-zinc-500" />}
+                            <span>{ach.visible ? "VISIBLE IN LIST" : "HIDDEN"}</span>
+                          </button>
+                        </div>
+
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* TAB 7: PROJECTS CONFIG */}
+          {activeTab === "projects" && (
+            <div className="space-y-8 animate-fade-in">
+              
+              {/* Section 1: Featured Projects */}
+              <div className="space-y-6">
+                <div>
+                  <h2 className="text-sm font-mono tracking-widest text-zinc-550 flex items-center gap-2">
+                    <FolderGit className="w-4.5 h-4.5 text-white" /> // FEATURED SHOWCASES CONFIG
+                  </h2>
+                  <p className="text-[10px] text-zinc-550 font-mono mt-1">Configure details, tags, and images for the 4 featured showcases on the main grid.</p>
+                </div>
+
+                <div className="space-y-8">
+                  {(portfolioData.featuredProjects || []).slice(0, 4).map((project: any, index: number) => (
+                    <div 
+                      key={index}
+                      className="border border-zinc-800 bg-zinc-950/40 rounded-2xl p-6 relative space-y-4 hover:border-zinc-700 transition-colors shadow-sm"
+                    >
+                      <div className="flex items-center gap-2 text-[10px] font-mono font-bold text-zinc-400 border-b border-zinc-900 pb-2.5">
+                        <span className="w-5 h-5 rounded-full bg-zinc-800 text-zinc-300 flex items-center justify-center text-[9px] font-bold">
+                          {index + 1}
+                        </span>
+                        <span>FEATURED SHOWCASE ITEM</span>
+                      </div>
+
+                      {/* Inputs Row 1: Name and Tagline */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-1.5">
+                          <label className="text-[10px] font-mono text-zinc-400 uppercase">Project Name</label>
+                          <input
+                            type="text"
+                            value={project.name || ""}
+                            onChange={(e) => handleUpdateFeaturedProject(index, "name", e.target.value)}
+                            className="w-full bg-zinc-900 border border-zinc-800 px-3 py-2 rounded-xl focus:border-white/50 outline-none text-xs transition-all font-mono"
+                          />
+                        </div>
+
+                        <div className="space-y-1.5">
+                          <label className="text-[10px] font-mono text-zinc-400 uppercase">Tagline</label>
+                          <input
+                            type="text"
+                            value={project.tagline || ""}
+                            onChange={(e) => handleUpdateFeaturedProject(index, "tagline", e.target.value)}
+                            className="w-full bg-zinc-900 border border-zinc-800 px-3 py-2 rounded-xl focus:border-white/50 outline-none text-xs transition-all font-mono"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Inputs Row 2: Image and Live Link */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-1.5">
+                          <label className="text-[10px] font-mono text-zinc-400 uppercase">Image Path / URL</label>
+                          <input
+                            type="text"
+                            value={project.image || ""}
+                            onChange={(e) => handleUpdateFeaturedProject(index, "image", e.target.value)}
+                            className="w-full bg-zinc-900 border border-zinc-800 px-3 py-2 rounded-xl focus:border-white/50 outline-none text-xs transition-all font-mono"
+                          />
+                        </div>
+
+                        <div className="space-y-1.5">
+                          <label className="text-[10px] font-mono text-zinc-400 uppercase">Live Demo Link</label>
+                          <input
+                            type="text"
+                            value={project.liveLink || ""}
+                            onChange={(e) => handleUpdateFeaturedProject(index, "liveLink", e.target.value)}
+                            className="w-full bg-zinc-900 border border-zinc-800 px-3 py-2 rounded-xl focus:border-white/50 outline-none text-xs transition-all font-mono"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Tech stack */}
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] font-mono text-zinc-400 uppercase">Tech Stack (comma separated)</label>
+                        <input
+                          type="text"
+                          value={project.techStack ? project.techStack.join(", ") : ""}
+                          onChange={(e) => handleUpdateFeaturedProject(index, "techStack", e.target.value.split(",").map(s => s.trim()))}
+                          className="w-full bg-zinc-900 border border-zinc-800 px-3 py-2 rounded-xl focus:border-white/50 outline-none text-xs transition-all font-mono text-zinc-355"
+                        />
+                      </div>
+
+                      {/* Description Textarea */}
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] font-mono text-zinc-400 uppercase">Short Summary Description</label>
+                        <textarea
+                          value={project.description || ""}
+                          onChange={(e) => handleUpdateFeaturedProject(index, "description", e.target.value)}
+                          rows={2}
+                          className="w-full bg-zinc-900 border border-zinc-800 px-3 py-2 rounded-xl focus:border-white/50 outline-none text-xs transition-all font-sans text-zinc-300 animate-none resize-y"
+                        />
+                      </div>
+
+                      {/* Details specs textarea */}
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] font-mono text-zinc-400 uppercase">Case Study Detailed Specs (shown in modal popup)</label>
+                        <textarea
+                          value={project.details || ""}
+                          onChange={(e) => handleUpdateFeaturedProject(index, "details", e.target.value)}
+                          rows={4}
+                          className="w-full bg-zinc-900 border border-zinc-800 px-3 py-2 rounded-xl focus:border-white/50 outline-none text-xs transition-all font-sans text-zinc-300 animate-none resize-y"
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Section 2: Secondary Repositories */}
+              <div className="space-y-6 pt-6 border-t border-zinc-800/80">
+                <div className="flex justify-between items-center border-b border-zinc-800/80 pb-4">
+                  <div>
+                    <h2 className="text-sm font-mono tracking-widest text-zinc-550 flex items-center gap-2">
+                      <FolderGit className="w-4.5 h-4.5 text-white" /> // SECONDARY REPOSITORIES
+                    </h2>
+                    <p className="text-[10px] text-zinc-555 font-mono mt-1">Manage repositories list, github URLs, descriptions, and category tabs.</p>
+                  </div>
+                  <button
+                    onClick={handleAddSecondaryProject}
+                    className="px-3.5 py-2 bg-white hover:bg-zinc-200 text-zinc-955 font-mono text-[10px] font-bold rounded-lg flex items-center gap-1.5 transition-colors cursor-pointer"
+                  >
+                    <Plus className="w-3.5 h-3.5" /> Add Project
+                  </button>
+                </div>
+
+                {(!portfolioData.secondaryProjects || portfolioData.secondaryProjects.length === 0) ? (
+                  <div className="text-center py-10 bg-zinc-950/20 border border-dashed border-zinc-850 rounded-2xl font-mono text-zinc-500 text-xs">
+                    No secondary projects defined. Click "Add Project" to get started.
+                  </div>
+                ) : (
+                  <div className="space-y-8">
+                    {portfolioData.secondaryProjects.map((proj: any, index: number) => (
+                      <div 
+                        key={index}
+                        className="border border-zinc-800 bg-zinc-950/40 rounded-2xl p-6 relative space-y-4 hover:border-zinc-700 transition-colors shadow-sm"
+                      >
+                        {/* Toolbar: Reorder & Delete */}
+                        <div className="flex justify-between items-center bg-zinc-950 border-b border-zinc-900 -mx-6 -mt-6 px-6 py-2.5 rounded-t-2xl">
+                          <div className="flex items-center gap-2 text-[10px] font-mono font-bold text-zinc-400">
+                            <span className="w-5 h-5 rounded-full bg-zinc-800 text-zinc-300 flex items-center justify-center text-[9px] font-bold">
+                              {index + 1}
+                            </span>
+                            <span>SECONDARY REPOSITORY ITEM</span>
+                          </div>
+                          
+                          <div className="flex items-center gap-1.5">
+                            <button
+                              type="button"
+                              disabled={index === 0}
+                              onClick={() => handleMoveSecondaryProject(index, "up")}
+                              className="p-1 hover:bg-zinc-850 text-zinc-400 hover:text-white rounded disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer"
+                              title="Move Up"
+                            >
+                              <ArrowUp className="w-3.5 h-3.5" />
+                            </button>
+                            <button
+                              type="button"
+                              disabled={index === portfolioData.secondaryProjects.length - 1}
+                              onClick={() => handleMoveSecondaryProject(index, "down")}
+                              className="p-1 hover:bg-zinc-850 text-zinc-400 hover:text-white rounded disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer"
+                              title="Move Down"
+                            >
+                              <ArrowDown className="w-3.5 h-3.5" />
+                            </button>
+                            <div className="w-px h-3 bg-zinc-800 mx-1" />
+                            <button
+                              type="button"
+                              onClick={() => handleRemoveSecondaryProject(index)}
+                              className="p-1 hover:bg-red-950/30 text-zinc-400 hover:text-red-400 rounded cursor-pointer"
+                              title="Delete"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
+                        </div>
+
+                        {/* Inputs: Name, Category, Repo URL */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                          <div className="space-y-1.5">
+                            <label className="text-[10px] font-mono text-zinc-400 uppercase">Project Name</label>
+                            <input
+                              type="text"
+                              value={proj.name || ""}
+                              onChange={(e) => handleUpdateSecondaryProject(index, "name", e.target.value)}
+                              className="w-full bg-zinc-900 border border-zinc-800 px-3 py-2 rounded-xl focus:border-white/50 outline-none text-xs transition-all font-mono"
+                            />
+                          </div>
+
+                          <div className="space-y-1.5">
+                            <label className="text-[10px] font-mono text-zinc-400 uppercase">Category Tab</label>
+                            <select
+                              value={proj.category || "professional"}
+                              onChange={(e) => handleUpdateSecondaryProject(index, "category", e.target.value)}
+                              className="w-full bg-zinc-900 border border-zinc-800 px-3 py-2.5 rounded-xl focus:border-white/50 outline-none text-xs transition-all font-mono text-zinc-300"
+                            >
+                              <option value="professional">Professional Projects</option>
+                              <option value="university">University Work / Academic</option>
+                            </select>
+                          </div>
+
+                          <div className="space-y-1.5">
+                            <label className="text-[10px] font-mono text-zinc-400 uppercase">GitHub Repo URL</label>
+                            <input
+                              type="text"
+                              value={proj.repoLink || ""}
+                              onChange={(e) => handleUpdateSecondaryProject(index, "repoLink", e.target.value)}
+                              className="w-full bg-zinc-900 border border-zinc-800 px-3 py-2 rounded-xl focus:border-white/50 outline-none text-xs transition-all font-mono"
+                            />
+                          </div>
+                        </div>
+
+                        {/* Tech stack */}
+                        <div className="space-y-1.5">
+                          <label className="text-[10px] font-mono text-zinc-400 uppercase">Tech Stack (comma separated)</label>
+                          <input
+                            type="text"
+                            value={proj.techStack ? proj.techStack.join(", ") : ""}
+                            onChange={(e) => handleUpdateSecondaryProject(index, "techStack", e.target.value.split(",").map(s => s.trim()))}
+                            className="w-full bg-zinc-900 border border-zinc-800 px-3 py-2 rounded-xl focus:border-white/50 outline-none text-xs transition-all font-mono text-zinc-350"
+                          />
+                        </div>
+
+                        {/* Description Textarea */}
+                        <div className="space-y-1.5">
+                          <label className="text-[10px] font-mono text-zinc-400 uppercase">Short Description</label>
+                          <textarea
+                            value={proj.description || ""}
+                            onChange={(e) => handleUpdateSecondaryProject(index, "description", e.target.value)}
+                            rows={2}
+                            className="w-full bg-zinc-900 border border-zinc-800 px-3 py-2 rounded-xl focus:border-white/50 outline-none text-xs transition-all font-sans text-zinc-350 animate-none resize-y"
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
             </div>
           )}
 

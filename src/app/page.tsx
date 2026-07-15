@@ -7,6 +7,10 @@ import RotatingText from "@/components/ui/RotatingText";
 import VariableProximity from "@/components/ui/VariableProximity";
 import About from "@/components/About";
 import Experience from "@/components/Experience";
+import TechStack from "@/components/TechStack";
+import Projects from "@/components/Projects";
+import Certificates from "@/components/Certificates";
+import Contact from "@/components/Contact";
 
 const Ballpit = dynamic(() => import("@/components/Ballpit"), {
   ssr: false,
@@ -45,7 +49,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="w-full bg-white dark:bg-zinc-950">
+    <main className="w-full bg-transparent">
       {/* Hero Section */}
       <section
         id="home"
@@ -141,6 +145,11 @@ export default function Home() {
       <Experience
         experiences={portfolioData.experiences}
       />
+
+      <TechStack />
+      <Projects />
+      <Certificates />
+      <Contact />
     </main>
   );
 }

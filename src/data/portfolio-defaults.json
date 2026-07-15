@@ -37,24 +37,6 @@
       "website": "https://netflix.com"
     },
     {
-      "company": "Google",
-      "role": "Senior Software Engineer",
-      "duration": "Jan 2025 - Present",
-      "logo": "https://img.icons8.com/color/144/google-logo.png",
-      "description": "Architected next-generation cloud infrastructure that handles millions of requests daily with extremely low latency.\nSpearheaded a distributed pipeline engine that automated complex continuous deployment across 4 global server clusters.\nCollaborated key product iterations alongside business analysts to deliver clean APIs and actionable engineering roadmaps.\nMentored junior developers on software engineering principles and streamlined team workflow systems.",
-      "linkedin": "https://linkedin.com/company/google",
-      "website": "https://google.com"
-    },
-    {
-      "company": "Meta",
-      "role": "Software Engineer II",
-      "duration": "Mar 2023 - Dec 2024",
-      "logo": "https://img.icons8.com/color/144/meta-logo.png",
-      "description": "Developed robust cross-platform features using React Native, cutting startup load delays by 25% on mid-range phones.\nLed key frontend modernization processes that improved overall user interactions and system performance metric counts.\nResolved high-severity memory leak events and optimized client-side state caching mechanisms on core dashboards.\nCoordinated interface standards with graphic designers to publish accessible component sets.",
-      "linkedin": "https://linkedin.com/company/meta",
-      "website": "https://meta.com"
-    },
-    {
       "company": "Netflix",
       "role": "Backend Engineer",
       "duration": "Jun 2022 - Feb 2023",
@@ -62,60 +44,289 @@
       "description": "Engineered event-driven microservices processing high-frequency messaging queues using Node.js and Redis setups.\nBuilt visual preference screens that improved user content recommendations and navigation click rates.\nRefined service logging protocols and automated testing runs, boosting overall deployment reliability metrics.\nReduced service bottlenecks through index adjustments on central document store environments.",
       "linkedin": "https://linkedin.com/company/netflix",
       "website": "https://netflix.com"
+    }
+  ],
+  "techSettings": {
+    "cardSize": 96,
+    "logoSize": 60,
+    "gap": 44,
+    "speed": 45,
+    "pauseOnHover": true,
+    "scaleOnHover": true
+  },
+  "contactSubheading": "WE'RE HERE TO HELP YOU",
+  "contactHeading": "Discuss Your Project & Engineering Needs",
+  "contactParagraph": "Are you looking for high-performance systems, robust automation workflows, or backend integrations tailored to your requirements? Reach out to start a conversation.",
+  "contactEmail": "talha.sami.dev@gmail.com",
+  "contactPhone": "+92 300 1234567",
+  "socials": [
+    {
+      "name": "LinkedIn",
+      "url": "https://linkedin.com",
+      "logo": "/logos/socials/linkedin.svg",
+      "visible": true
     },
     {
-      "company": "Google",
-      "role": "Senior Software Engineer",
-      "duration": "Jan 2025 - Present",
-      "logo": "https://img.icons8.com/color/144/google-logo.png",
-      "description": "Architected next-generation cloud infrastructure that handles millions of requests daily with extremely low latency.\nSpearheaded a distributed pipeline engine that automated complex continuous deployment across 4 global server clusters.\nCollaborated key product iterations alongside business analysts to deliver clean APIs and actionable engineering roadmaps.\nMentored junior developers on software engineering principles and streamlined team workflow systems.",
-      "linkedin": "https://linkedin.com/company/google",
-      "website": "https://google.com"
+      "name": "GitHub",
+      "url": "https://github.com",
+      "logo": "/logos/socials/github.svg",
+      "visible": true
     },
     {
-      "company": "Meta",
-      "role": "Software Engineer II",
-      "duration": "Mar 2023 - Dec 2024",
-      "logo": "https://img.icons8.com/color/144/meta-logo.png",
-      "description": "Developed robust cross-platform features using React Native, cutting startup load delays by 25% on mid-range phones.\nLed key frontend modernization processes that improved overall user interactions and system performance metric counts.\nResolved high-severity memory leak events and optimized client-side state caching mechanisms on core dashboards.\nCoordinated interface standards with graphic designers to publish accessible component sets.",
-      "linkedin": "https://linkedin.com/company/meta",
-      "website": "https://meta.com"
+      "name": "WhatsApp",
+      "url": "https://whatsapp.com",
+      "logo": "/logos/socials/whatsapp.svg",
+      "visible": true
     },
     {
-      "company": "Netflix",
-      "role": "Backend Engineer",
-      "duration": "Jun 2022 - Feb 2023",
-      "logo": "https://img.icons8.com/color/144/netflix.png",
-      "description": "Engineered event-driven microservices processing high-frequency messaging queues using Node.js and Redis setups.\nBuilt visual preference screens that improved user content recommendations and navigation click rates.\nRefined service logging protocols and automated testing runs, boosting overall deployment reliability metrics.\nReduced service bottlenecks through index adjustments on central document store environments.",
-      "linkedin": "https://linkedin.com/company/netflix",
-      "website": "https://netflix.com"
+      "name": "LeetCode",
+      "url": "https://leetcode.com",
+      "logo": "/logos/socials/leetcode.svg",
+      "visible": true
     },
     {
-      "company": "Google",
-      "role": "Senior Software Engineer",
-      "duration": "Jan 2025 - Present",
-      "logo": "https://img.icons8.com/color/144/google-logo.png",
-      "description": "Architected next-generation cloud infrastructure that handles millions of requests daily with extremely low latency.\nSpearheaded a distributed pipeline engine that automated complex continuous deployment across 4 global server clusters.\nCollaborated key product iterations alongside business analysts to deliver clean APIs and actionable engineering roadmaps.\nMentored junior developers on software engineering principles and streamlined team workflow systems.",
-      "linkedin": "https://linkedin.com/company/google",
-      "website": "https://google.com"
+      "name": "Codeforces",
+      "url": "https://codeforces.com",
+      "logo": "/logos/socials/codeforces.svg",
+      "visible": true
     },
     {
-      "company": "Meta",
-      "role": "Software Engineer II",
-      "duration": "Mar 2023 - Dec 2024",
-      "logo": "https://img.icons8.com/color/144/meta-logo.png",
-      "description": "Developed robust cross-platform features using React Native, cutting startup load delays by 25% on mid-range phones.\nLed key frontend modernization processes that improved overall user interactions and system performance metric counts.\nResolved high-severity memory leak events and optimized client-side state caching mechanisms on core dashboards.\nCoordinated interface standards with graphic designers to publish accessible component sets.",
-      "linkedin": "https://linkedin.com/company/meta",
-      "website": "https://meta.com"
+      "name": "Kaggle",
+      "url": "https://kaggle.com",
+      "logo": "/logos/socials/kaggle.svg",
+      "visible": true
     },
     {
-      "company": "Netflix",
-      "role": "Backend Engineer",
-      "duration": "Jun 2022 - Feb 2023",
-      "logo": "https://img.icons8.com/color/144/netflix.png",
-      "description": "Engineered event-driven microservices processing high-frequency messaging queues using Node.js and Redis setups.\nBuilt visual preference screens that improved user content recommendations and navigation click rates.\nRefined service logging protocols and automated testing runs, boosting overall deployment reliability metrics.\nReduced service bottlenecks through index adjustments on central document store environments.",
-      "linkedin": "https://linkedin.com/company/netflix",
-      "website": "https://netflix.com"
+      "name": "Twitter / X",
+      "url": "https://x.com",
+      "logo": "/logos/socials/x.svg",
+      "visible": false
+    },
+    {
+      "name": "Stack Overflow",
+      "url": "https://stackoverflow.com",
+      "logo": "/logos/socials/stackoverflow.svg",
+      "visible": false
+    },
+    {
+      "name": "Dev.to",
+      "url": "https://dev.to",
+      "logo": "/logos/socials/devto.svg",
+      "visible": false
+    },
+    {
+      "name": "Medium",
+      "url": "https://medium.com",
+      "logo": "/logos/socials/medium.svg",
+      "visible": false
+    },
+    {
+      "name": "Discord",
+      "url": "https://discord.com",
+      "logo": "/logos/socials/discord.svg",
+      "visible": false
+    },
+    {
+      "name": "Telegram",
+      "url": "https://telegram.org",
+      "logo": "/logos/socials/telegram.svg",
+      "visible": false
+    },
+    {
+      "name": "Gmail",
+      "url": "mailto:talha.sami.dev@gmail.com",
+      "logo": "/logos/socials/gmail.svg",
+      "visible": true
+    },
+    {
+      "name": "Upwork",
+      "url": "https://upwork.com",
+      "logo": "/logos/socials/upwork.svg",
+      "visible": true
+    },
+    {
+      "name": "Fiverr",
+      "url": "https://fiverr.com",
+      "logo": "/logos/socials/fiverr.svg",
+      "visible": true
+    }
+  ],
+  "accentColor": "#0066FF",
+  "contactInterests": [
+    "Frontend Development",
+    "Backend Systems",
+    "DevOps & Cloud Architecture",
+    "Workflow Automation",
+    "Full-Stack Project",
+    "Consulting / General Inquiry"
+  ],
+  "certificates": [
+    {
+      "name": "Google AI Essentials",
+      "issuer": "Google",
+      "image": "/context/assets/Certificates/GoogleAiEssentials.png",
+      "link": "https://www.coursera.org/account/accomplishments/verify/VJQYQMIPUMMK",
+      "visible": true
+    },
+    {
+      "name": "Google Prompt Essentials",
+      "issuer": "Google",
+      "image": "/context/assets/Certificates/GooglePromptingEssentials.png",
+      "link": "https://www.coursera.org/account/accomplishments/verify/TJXKDRICE7HK",
+      "visible": true
+    },
+    {
+      "name": "Crash Course on Python",
+      "issuer": "Google",
+      "image": "/context/assets/Certificates/CrashCourseOnPython.png",
+      "link": "https://www.coursera.org/account/accomplishments/verify/85UBFW25EO2T",
+      "visible": true
+    },
+    {
+      "name": "Get Started with Python",
+      "issuer": "Google",
+      "image": "/context/assets/Certificates/GetStartedWithPython.png",
+      "link": "https://www.coursera.org/account/accomplishments/certificate/WHZ03GRBS7HB",
+      "visible": true
+    },
+    {
+      "name": "Intro to Machine Learning",
+      "issuer": "Kaggle",
+      "image": "/context/assets/Certificates/Talha Sami - Intro to Machine Learning.png",
+      "link": "http://kaggle.com/learn/certification/tlhaasami/intro-to-machine-learning",
+      "visible": true
+    },
+    {
+      "name": "Python",
+      "issuer": "Kaggle",
+      "image": "/context/assets/Certificates/Talha Sami - Python.png",
+      "link": "https://www.kaggle.com/learn/certification/tlhaasami/python",
+      "visible": true
+    },
+    {
+      "name": "Intro to Programming",
+      "issuer": "Kaggle",
+      "image": "/context/assets/Certificates/Talha Sami - Intro to Programming.png",
+      "link": "https://www.kaggle.com/learn/certification/tlhaasami/intro-to-programming",
+      "visible": true
+    }
+  ],
+  "achievements": [
+    {
+      "name": "NaSCON Speed Programming",
+      "issuer": "NaSCON Competition",
+      "image": "/context/assets/CompetitionsWinner/Nascon.png",
+      "link": "",
+      "visible": true
+    },
+    {
+      "name": "FETX Winner",
+      "issuer": "FETX Engineering Competition",
+      "image": "/context/assets/CompetitionsWinner/FETX_Winner.png",
+      "link": "",
+      "visible": true
+    },
+    {
+      "name": "Bug Buster Winner",
+      "issuer": "Speed Programming Competition",
+      "image": "/context/assets/CompetitionsWinner/BugBuster.png",
+      "link": "",
+      "visible": true
+    },
+    {
+      "name": "CodeAir Hackathon Winner",
+      "issuer": "CodeAir Hackathon",
+      "image": "/context/assets/CompetitionsWinner/CodeAir.png",
+      "link": "",
+      "visible": true
+    }
+  ],
+  "featuredProjects": [
+    {
+      "name": "Orbit Orchestrator",
+      "tagline": "Cloud CI/CD & Deployments Pipeline Dashboard",
+      "description": "A high-performance visual release orchestrator handling continuous delivery pipelines, real-time node logs streaming, and automated canary container clusters testing. Engineered with Next.js, Go microservices, and Kubernetes API integrations.",
+      "image": "/projects/orbit_ci.png",
+      "liveLink": "https://orbit-ci.dev",
+      "techStack": ["Next.js", "Go", "Docker", "Kubernetes", "gRPC"],
+      "details": "Orbit CI/CD visualizes container deployment life-cycles in real-time. Features include automated canary test pipelines, multi-region cluster status reports, low-latency live build log streams over WebSockets, and one-click rollback operations. Reduced deployment drift rates by 38%."
+    },
+    {
+      "name": "Synapse Studio",
+      "tagline": "Agentic AI Workflow & Node Automation Workspace",
+      "description": "An interactive drag-and-drop workspace to model, schedule, and execute complex LLM multi-agent workflows, data scraping runs, and cron jobs. Built using React, Python FastAPI, and LangChain orchestration.",
+      "image": "/projects/synapse_ai.png",
+      "liveLink": "https://synapse-studio.ai",
+      "techStack": ["React", "FastAPI", "Python", "LangChain", "n8n"],
+      "details": "Synapse Studio enables engineers to construct stateful multi-agent workflows. It provides custom n8n-style node components, sandbox code execution environments, memory-persistent agents, and API webhook triggers. Automated over 120 client business operations with 99.8% reliability."
+    },
+    {
+      "name": "Helix Stream Engine",
+      "tagline": "Real-time Telemetry & Data Stream Aggregator",
+      "description": "A low-latency event broker UI rendering live data charts, stream metrics, memory bottlenecks, and active worker node configurations. Powering high-frequency messaging workloads.",
+      "image": "/projects/helix_streaming.png",
+      "liveLink": "https://helix-stream.io",
+      "techStack": ["TypeScript", "Node.js", "Redis", "Kafka", "Elasticsearch"],
+      "details": "Helix is a telemetry frontend visualizing high-frequency Kafka cluster feeds. It provides automatic partition balancing alerts, sub-millisecond chart rendering using WebGL canvas graphs, Redis caching indicators, and visual system diagnostics panels."
+    },
+    {
+      "name": "Quantum Pay Analytics",
+      "tagline": "Sleek Mobile Fintech Payment & Transfer Dashboard",
+      "description": "A mobile-responsive finance application illustrating monthly revenue analytics, international card transactions, ledger transfers, and crypto token wallet balances.",
+      "image": "/projects/quantum_pay.png",
+      "liveLink": "https://quantum-pay.finance",
+      "techStack": ["React Native", "Tailwind CSS", "Express", "PostgreSQL", "Stripe"],
+      "details": "Quantum Pay connects secure banking APIs through a smooth, responsive UI wrapper. It integrates Stripe connect APIs, automated ledger tracking calculations, monthly balance projections, and real-time transaction push notifications."
+    }
+  ],
+  "secondaryProjects": [
+    {
+      "name": "Workflow Automator Custom Nodes",
+      "description": "A collection of custom n8n and Make.com automation nodes built to interface with CRM and GHL systems.",
+      "category": "professional",
+      "image": "/projects/orbit_ci.png",
+      "repoLink": "https://github.com/talha-sami/n8n-custom-nodes",
+      "techStack": ["TypeScript", "n8n", "Zapier", "GHL"]
+    },
+    {
+      "name": "Ledger API Microservice",
+      "description": "A transactional double-entry ledger database microservice designed with audit logs and Redis locking.",
+      "category": "professional",
+      "image": "/projects/helix_streaming.png",
+      "repoLink": "https://github.com/talha-sami/ledger-microservice",
+      "techStack": ["Go", "PostgreSQL", "Redis", "Docker"]
+    },
+    {
+      "name": "Autonomous Web Scraper Bot",
+      "description": "A distributed web crawler utilizing puppeteer cluster blocks to extract and categorize listings.",
+      "category": "professional",
+      "image": "/projects/synapse_ai.png",
+      "repoLink": "https://github.com/talha-sami/distributed-scraper",
+      "techStack": ["Node.js", "Puppeteer", "MongoDB"]
+    },
+    {
+      "name": "Compiler Design Lexer",
+      "description": "A custom lexical analyzer and parser generator built for a subset of C-like programming languages.",
+      "category": "university",
+      "image": "/projects/helix_streaming.png",
+      "repoLink": "https://github.com/talha-sami/compiler-lexer",
+      "techStack": ["C++", "Flex", "Bison"]
+    },
+    {
+      "name": "Distributed Chat Application",
+      "description": "A peer-to-peer messaging platform designed with RSA encryption and socket handshakes.",
+      "category": "university",
+      "image": "/projects/quantum_pay.png",
+      "repoLink": "https://github.com/talha-sami/p2p-chat-app",
+      "techStack": ["Python", "Sockets", "PyQt5"]
+    },
+    {
+      "name": "Database Management System Mock",
+      "description": "A university project implementing basic SQL queries, B-Tree index structures, and file buffering.",
+      "category": "university",
+      "image": "/projects/orbit_ci.png",
+      "repoLink": "https://github.com/talha-sami/dbms-mock",
+      "techStack": ["Java", "SQL", "B-Tree"]
     }
   ]
 }

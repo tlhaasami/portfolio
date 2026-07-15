@@ -21,7 +21,7 @@ interface ExperienceProps {
 
 export default function Experience({ experiences = [] }: ExperienceProps) {
   const [activeIndex, setActiveIndex] = useState<number>(0);
-  const [showAll, setShowAll] = useState<boolean>(false);
+  const [startIndex, setStartIndex] = useState<number>(0);
   const [isMounted, setIsMounted] = useState<boolean>(false);
 
   useEffect(() => {
@@ -30,23 +30,40 @@ export default function Experience({ experiences = [] }: ExperienceProps) {
 
   if (experiences.length === 0) return null;
 
-  // Render top 6 unless expanded
-  const visibleExperiences = showAll ? experiences : experiences.slice(0, 6);
-
-  // Make sure the active index is within bounds of visible items
-  const activeExp = experiences[activeIndex < experiences.length ? activeIndex : 0];
+  // Windowed navigation: show only 8 experiences at a time
+  const visibleExperiences = experiences.slice(startIndex, startIndex + 8);
   const items = visibleExperiences.map((exp) => exp.company);
 
-  const handleItemClick = (index: number) => {
-    setActiveIndex(index);
+  // Active experience based on absolute index
+  const activeExp = experiences[activeIndex < experiences.length ? activeIndex : 0];
+
+  const handleItemClick = (indexInVisibleList: number) => {
+    // Map visible list index back to absolute index
+    setActiveIndex(startIndex + indexInVisibleList);
   };
 
-  const handleToggleShowAll = () => {
-    // If collapsing and active index is out of visible bounds, reset to 0
-    if (showAll && activeIndex >= 6) {
-      setActiveIndex(0);
+  // Up Arrow (above list): slides window UP (towards index 0)
+  const handleScrollUpWindow = () => {
+    if (startIndex > 0) {
+      const nextStart = startIndex - 1;
+      setStartIndex(nextStart);
+      // Auto-adjust activeIndex if it exceeds the new window boundaries
+      if (activeIndex >= nextStart + 8) {
+        setActiveIndex(nextStart + 7);
+      }
     }
-    setShowAll(!showAll);
+  };
+
+  // Down Arrow (below list): slides window DOWN (towards older experiences)
+  const handleScrollDownWindow = () => {
+    if (startIndex < experiences.length - 8) {
+      const nextStart = startIndex + 1;
+      setStartIndex(nextStart);
+      // Auto-adjust activeIndex if it falls behind the new window
+      if (activeIndex < nextStart) {
+        setActiveIndex(nextStart);
+      }
+    }
   };
 
   // Split description by newlines to render as individual lines
@@ -55,7 +72,7 @@ export default function Experience({ experiences = [] }: ExperienceProps) {
     : [];
 
   return (
-    <section id="experience" className="relative bg-white dark:bg-black text-neutral-900 dark:text-white py-24 overflow-hidden border-t border-neutral-200 dark:border-neutral-900">
+    <section id="experience" className="relative bg-transparent text-neutral-900 dark:text-white py-24 overflow-hidden">
       {/* Background ambient accent */}
       <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-neutral-200/25 dark:bg-neutral-900/10 rounded-full blur-[120px] -z-10 pointer-events-none" />
 
@@ -64,7 +81,7 @@ export default function Experience({ experiences = [] }: ExperienceProps) {
         {/* Section Title */}
         <div className="mb-16">
           <span className="text-xs font-mono tracking-widest text-zinc-550 uppercase mb-3 block flex items-center gap-2">
-            <svg className="w-3.5 h-3.5 stroke-neutral-950 dark:stroke-white fill-none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+            <svg className="w-3.5 h-3.5 stroke-neutral-955 dark:stroke-white fill-none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
               <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
               <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
             </svg>
@@ -75,14 +92,47 @@ export default function Experience({ experiences = [] }: ExperienceProps) {
           </h2>
         </div>
 
-        {/* Experience Split Grid - Narrower gap */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 items-start">
+        {/* Experience Split Grid - 10 Column tight packing */}
+        <div className="grid grid-cols-1 md:grid-cols-10 gap-3 md:gap-4 items-center">
           
-          {/* Left Column - Navigation Sidebar (Spans 4 columns, no background/border) */}
-          <div className="md:col-span-4 flex flex-col">
+          {/* Mobile Horizontal Navigation (Visible only on mobile screen widths) */}
+          <div className="col-span-1 md:hidden w-full flex flex-row overflow-x-auto scrollbar-none gap-2 pb-4 mb-4 fade-mask-horizontal">
+            {experiences.map((exp, index) => (
+              <button
+                key={index}
+                onClick={() => setActiveIndex(index)}
+                className={`px-4 py-2 rounded-xl text-xs font-mono tracking-wider uppercase transition-all shrink-0 cursor-pointer ${
+                  activeIndex === index
+                    ? "bg-neutral-900 dark:bg-white text-white dark:text-neutral-950 font-bold shadow-sm"
+                    : "bg-neutral-50 dark:bg-neutral-950 text-neutral-500 hover:text-neutral-800 dark:hover:text-zinc-200 border border-neutral-200/50 dark:border-neutral-900/50"
+                }`}
+              >
+                {exp.company}
+              </button>
+            ))}
+          </div>
+
+          {/* Left Column - Navigation Sidebar (Spans 2 columns, centered list, strictly windowed to 8 items, hidden on mobile) */}
+          <div className="hidden md:flex md:col-span-2 flex-col items-center justify-center py-2">
+            
+            {/* Up arrow navigation (above list): shifts window UP (towards index 0) */}
+            {experiences.length > 8 && (
+              <button
+                onClick={handleScrollUpWindow}
+                disabled={startIndex === 0}
+                className="mb-2 text-neutral-400 dark:text-neutral-500 hover:text-neutral-950 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-900/80 p-2 rounded-full disabled:opacity-10 disabled:pointer-events-none transition-all duration-250 cursor-pointer flex items-center justify-center hover:-translate-y-0.5 hover:scale-110"
+                title="Scroll Up"
+              >
+                <svg className="w-6 h-6 stroke-current fill-none" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                  <polyline points="18 15 12 9 6 15"></polyline>
+                </svg>
+              </button>
+            )}
+
             <LineSidebar
               items={items}
-              defaultActive={activeIndex}
+              defaultActive={activeIndex - startIndex} // Sync active index relative to the visible window
+              indexOffset={startIndex} // Sync list count numbering with offset position
               onItemClick={handleItemClick}
               accentColor="var(--foreground)" // Neutral foreground
               textColor="var(--foreground)"
@@ -91,12 +141,18 @@ export default function Experience({ experiences = [] }: ExperienceProps) {
               itemGap={18}
               smoothing={150}
             />
-            {experiences.length > 6 && (
+
+            {/* Down arrow navigation (below list): shifts window DOWN (towards older experiences) */}
+            {experiences.length > 8 && (
               <button
-                onClick={handleToggleShowAll}
-                className="mt-6 px-4 py-2.5 text-[10px] font-mono font-bold tracking-wider uppercase text-neutral-900 dark:text-white border border-neutral-200 dark:border-zinc-800 rounded-xl hover:bg-neutral-100 dark:hover:bg-zinc-900 transition-all w-full flex items-center justify-center gap-1.5 cursor-pointer"
+                onClick={handleScrollDownWindow}
+                disabled={startIndex === experiences.length - 8}
+                className="mt-2 text-neutral-400 dark:text-neutral-500 hover:text-neutral-955 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-900/80 p-2 rounded-full disabled:opacity-10 disabled:pointer-events-none transition-all duration-250 cursor-pointer flex items-center justify-center hover:translate-y-0.5 hover:scale-110"
+                title="Scroll Down"
               >
-                {showAll ? "Show Less" : `Show More (${experiences.length - 6} more)`}
+                <svg className="w-6 h-6 stroke-current fill-none" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
               </button>
             )}
           </div>
@@ -106,7 +162,7 @@ export default function Experience({ experiences = [] }: ExperienceProps) {
             <AnimatePresence mode="wait">
               {isMounted && activeExp && (
                 <motion.div
-                  key={activeExp.company}
+                  key={activeExp.company + activeIndex} // Include index to trigger animation on click
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -15 }}
@@ -132,11 +188,17 @@ export default function Experience({ experiences = [] }: ExperienceProps) {
                             {/* Company Logo Box - No background/borders */}
                             <div className="w-14 h-14 shrink-0 flex items-center justify-center">
                               {/* eslint-disable-next-line @next/next/no-img-element */}
-                              <img
-                                src={activeExp.logo}
-                                alt={`${activeExp.company} logo`}
-                                className="w-full h-full object-contain rounded-xl"
-                              />
+                              {activeExp.logo ? (
+                                <img
+                                  src={activeExp.logo}
+                                  alt={`${activeExp.company} logo`}
+                                  className="w-full h-full object-contain rounded-xl"
+                                />
+                              ) : (
+                                <div className="w-full h-full bg-neutral-100 dark:bg-zinc-900 rounded-xl flex items-center justify-center font-bold text-lg text-neutral-400 dark:text-neutral-500 font-mono">
+                                  {activeExp.company.charAt(0).toUpperCase()}
+                                </div>
+                              )}
                             </div>
                             
                             <div>
@@ -178,7 +240,7 @@ export default function Experience({ experiences = [] }: ExperienceProps) {
                                 title="Company Website"
                                 className="transition-transform duration-250 text-neutral-900 dark:text-white hover:scale-115 flex items-center justify-center"
                               >
-                                <svg className="w-8 h-8 stroke-current fill-none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                                <svg className="w-8 h-8 stroke-current fill-none" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                                   <circle cx="12" cy="12" r="10"></circle>
                                   <line x1="2" y1="12" x2="22" y2="12"></line>
                                   <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>

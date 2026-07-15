@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Minimalist Developer Portfolio",
+  title: "TALHA SAMI | Portfolio",
   description: "A premium interactive developer portfolio built with Next.js, Tailwind CSS, and Framer Motion.",
 };
 

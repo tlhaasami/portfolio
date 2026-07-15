@@ -29,6 +29,7 @@ interface LineSidebarProps {
   defaultActive?: number | null;
   onItemClick?: (index: number, label: string) => void;
   className?: string;
+  indexOffset?: number;
 }
 
 const LineSidebar = ({
@@ -50,7 +51,8 @@ const LineSidebar = ({
   smoothing = 100,
   defaultActive = null,
   onItemClick,
-  className = ''
+  className = '',
+  indexOffset = 0
 }: LineSidebarProps) => {
   const listRef = useRef<HTMLUListElement>(null);
   const itemRefs = useRef<(HTMLLIElement | null)[]>([]);
@@ -137,6 +139,24 @@ const LineSidebar = ({
   }, [defaultActive]);
 
   useEffect(() => {
+    if (activeIndex === null) return;
+    const activeEl = itemRefs.current[activeIndex];
+    const list = listRef.current;
+    if (activeEl && list) {
+      const elTop = activeEl.offsetTop;
+      const elHeight = activeEl.offsetHeight;
+      const listHeight = list.clientHeight;
+      const listScrollTop = list.scrollTop;
+
+      if (elTop < listScrollTop) {
+        list.scrollTo({ top: elTop - 10, behavior: 'smooth' });
+      } else if (elTop + elHeight > listScrollTop + listHeight) {
+        list.scrollTo({ top: elTop + elHeight - listHeight + 10, behavior: 'smooth' });
+      }
+    }
+  }, [activeIndex]);
+
+  useEffect(() => {
     startLoop();
   }, [activeIndex, startLoop]);
 
@@ -176,7 +196,7 @@ const LineSidebar = ({
           >
             {showMarker && <span className="line-sidebar__marker" aria-hidden="true" />}
             <span className="line-sidebar__label">
-              {showIndex && <span className="line-sidebar__index">{String(index + 1).padStart(2, '0')}</span>}
+              {showIndex && <span className="line-sidebar__index">{String(index + 1 + indexOffset).padStart(2, '0')}</span>}
               <span className="line-sidebar__text">{label}</span>
             </span>
           </li>
