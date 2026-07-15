@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { prefixAsset } from "@/utils/prefixAsset";
+import { prefixAsset, getPrefix } from "@/utils/prefixAsset";
 
 const DEFAULT_PORTFOLIO_FALLBACK = {
   contactSubheading: "WE'RE HERE TO HELP YOU",
@@ -43,7 +43,7 @@ export default function Contact() {
   }, []);
 
   useEffect(() => {
-    const prefix = process.env.NEXT_PUBLIC_BASE_PATH || "";
+    const prefix = getPrefix();
 
     const loadContactData = async () => {
       let defaults = DEFAULT_PORTFOLIO_FALLBACK;

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import MobileCarousel from "@/components/ui/MobileCarousel";
-import { prefixAsset } from "@/utils/prefixAsset";
+import { prefixAsset, getPrefix } from "@/utils/prefixAsset";
 
 interface FeaturedProject {
   name: string;
@@ -40,7 +40,7 @@ export default function Projects() {
   };
 
   useEffect(() => {
-    const prefix = process.env.NEXT_PUBLIC_BASE_PATH || "";
+    const prefix = getPrefix();
 
     const loadProjects = async () => {
       try {

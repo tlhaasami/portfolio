@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import LogoLoop, { LogoItem } from "@/components/ui/LogoLoop";
 import MobileCarousel from "@/components/ui/MobileCarousel";
-import { prefixAsset } from "@/utils/prefixAsset";
+import { prefixAsset, getPrefix } from "@/utils/prefixAsset";
 
 interface Certificate {
   name: string;
@@ -26,7 +26,7 @@ export default function Certificates() {
   const [achievements, setAchievements] = useState<Achievement[]>([]);
 
   useEffect(() => {
-    const prefix = process.env.NEXT_PUBLIC_BASE_PATH || "";
+    const prefix = getPrefix();
 
     const loadCertificates = async () => {
       try {

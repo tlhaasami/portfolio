@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import LogoLoop, { LogoItem } from "@/components/ui/LogoLoop";
-import { prefixAsset } from "@/utils/prefixAsset";
+import { prefixAsset, getPrefix } from "@/utils/prefixAsset";
 
 interface TechItem {
   name: string;
@@ -24,7 +24,7 @@ export default function TechStack() {
   });
 
   useEffect(() => {
-    const prefix = process.env.NEXT_PUBLIC_BASE_PATH || "";
+    const prefix = getPrefix();
 
     // 1. Fetch technologies list
     fetch(`${prefix}/data/profileData/technologies.json`)

@@ -11,6 +11,7 @@ import TechStack from "@/components/TechStack";
 import Projects from "@/components/Projects";
 import Certificates from "@/components/Certificates";
 import Contact from "@/components/Contact";
+import { getPrefix } from "@/utils/prefixAsset";
 
 const Ballpit = dynamic(() => import("@/components/Ballpit"), {
   ssr: false,
@@ -36,7 +37,7 @@ export default function Home() {
   const heroRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const prefix = process.env.NEXT_PUBLIC_BASE_PATH || "";
+    const prefix = getPrefix();
 
     const loadData = async () => {
       let defaultsPhysics = {

@@ -30,6 +30,7 @@ import {
 const Ballpit = dynamic(() => import("@/components/Ballpit"), {
   ssr: false,
 });
+import { getPrefix } from "@/utils/prefixAsset";
 
 const PALETTES = [
   { name: "Monochrome Black & White", colors: ["#ffffff", "#71717a", "#000000"] },
@@ -73,7 +74,7 @@ export default function AdminSettings() {
 
   // Load configuration from local storage on mount
   useEffect(() => {
-    const prefix = process.env.NEXT_PUBLIC_BASE_PATH || "";
+    const prefix = getPrefix();
 
     const loadSettingsData = async () => {
       let defaultsPhysics = {
