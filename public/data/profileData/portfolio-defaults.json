@@ -7,7 +7,7 @@
   ],
   "aboutHeading": "Bridging the gap between complex engineering and clear strategy.",
   "aboutParagraph": "I am a software engineer specializing in building robust, scalable applications from the ground up, with a technical foundation spanning full-stack web architectures, cross-platform mobile development, and workflow automation. Writing clean, high-performance code is only half the equation; my true strength lies in communication strategy—translating intricate technical requirements into clear, actionable roadmaps that bridge the divide between development teams and stakeholders to deliver a seamless user experience aligned with the business vision.",
-  "aboutImage": "/profile.png",
+  "aboutImage": "/data/images/profile.png",
   "experiences": [
     {
       "company": "Google",
@@ -246,7 +246,7 @@
       "name": "Orbit Orchestrator",
       "tagline": "Cloud CI/CD & Deployments Pipeline Dashboard",
       "description": "A high-performance visual release orchestrator handling continuous delivery pipelines, real-time node logs streaming, and automated canary container clusters testing. Engineered with Next.js, Go microservices, and Kubernetes API integrations.",
-      "image": "/projects/orbit_ci.png",
+      "image": "/data/projects/orbit_ci.png",
       "liveLink": "https://orbit-ci.dev",
       "techStack": ["Next.js", "Go", "Docker", "Kubernetes", "gRPC"],
       "details": "Orbit CI/CD visualizes container deployment life-cycles in real-time. Features include automated canary test pipelines, multi-region cluster status reports, low-latency live build log streams over WebSockets, and one-click rollback operations. Reduced deployment drift rates by 38%."
@@ -255,7 +255,7 @@
       "name": "Synapse Studio",
       "tagline": "Agentic AI Workflow & Node Automation Workspace",
       "description": "An interactive drag-and-drop workspace to model, schedule, and execute complex LLM multi-agent workflows, data scraping runs, and cron jobs. Built using React, Python FastAPI, and LangChain orchestration.",
-      "image": "/projects/synapse_ai.png",
+      "image": "/data/projects/synapse_ai.png",
       "liveLink": "https://synapse-studio.ai",
       "techStack": ["React", "FastAPI", "Python", "LangChain", "n8n"],
       "details": "Synapse Studio enables engineers to construct stateful multi-agent workflows. It provides custom n8n-style node components, sandbox code execution environments, memory-persistent agents, and API webhook triggers. Automated over 120 client business operations with 99.8% reliability."
@@ -264,7 +264,7 @@
       "name": "Helix Stream Engine",
       "tagline": "Real-time Telemetry & Data Stream Aggregator",
       "description": "A low-latency event broker UI rendering live data charts, stream metrics, memory bottlenecks, and active worker node configurations. Powering high-frequency messaging workloads.",
-      "image": "/projects/helix_streaming.png",
+      "image": "/data/projects/helix_streaming.png",
       "liveLink": "https://helix-stream.io",
       "techStack": ["TypeScript", "Node.js", "Redis", "Kafka", "Elasticsearch"],
       "details": "Helix is a telemetry frontend visualizing high-frequency Kafka cluster feeds. It provides automatic partition balancing alerts, sub-millisecond chart rendering using WebGL canvas graphs, Redis caching indicators, and visual system diagnostics panels."
@@ -273,7 +273,7 @@
       "name": "Quantum Pay Analytics",
       "tagline": "Sleek Mobile Fintech Payment & Transfer Dashboard",
       "description": "A mobile-responsive finance application illustrating monthly revenue analytics, international card transactions, ledger transfers, and crypto token wallet balances.",
-      "image": "/projects/quantum_pay.png",
+      "image": "/data/projects/quantum_pay.png",
       "liveLink": "https://quantum-pay.finance",
       "techStack": ["React Native", "Tailwind CSS", "Express", "PostgreSQL", "Stripe"],
       "details": "Quantum Pay connects secure banking APIs through a smooth, responsive UI wrapper. It integrates Stripe connect APIs, automated ledger tracking calculations, monthly balance projections, and real-time transaction push notifications."
@@ -284,7 +284,7 @@
       "name": "Workflow Automator Custom Nodes",
       "description": "A collection of custom n8n and Make.com automation nodes built to interface with CRM and GHL systems.",
       "category": "professional",
-      "image": "/projects/orbit_ci.png",
+      "image": "/data/projects/orbit_ci.png",
       "repoLink": "https://github.com/talha-sami/n8n-custom-nodes",
       "techStack": ["TypeScript", "n8n", "Zapier", "GHL"]
     },
@@ -292,7 +292,7 @@
       "name": "Ledger API Microservice",
       "description": "A transactional double-entry ledger database microservice designed with audit logs and Redis locking.",
       "category": "professional",
-      "image": "/projects/helix_streaming.png",
+      "image": "/data/projects/helix_streaming.png",
       "repoLink": "https://github.com/talha-sami/ledger-microservice",
       "techStack": ["Go", "PostgreSQL", "Redis", "Docker"]
     },
@@ -300,7 +300,7 @@
       "name": "Autonomous Web Scraper Bot",
       "description": "A distributed web crawler utilizing puppeteer cluster blocks to extract and categorize listings.",
       "category": "professional",
-      "image": "/projects/synapse_ai.png",
+      "image": "/data/projects/synapse_ai.png",
       "repoLink": "https://github.com/talha-sami/distributed-scraper",
       "techStack": ["Node.js", "Puppeteer", "MongoDB"]
     },
@@ -308,7 +308,7 @@
       "name": "Compiler Design Lexer",
       "description": "A custom lexical analyzer and parser generator built for a subset of C-like programming languages.",
       "category": "university",
-      "image": "/projects/helix_streaming.png",
+      "image": "/data/projects/helix_streaming.png",
       "repoLink": "https://github.com/talha-sami/compiler-lexer",
       "techStack": ["C++", "Flex", "Bison"]
     },
@@ -316,7 +316,7 @@
       "name": "Distributed Chat Application",
       "description": "A peer-to-peer messaging platform designed with RSA encryption and socket handshakes.",
       "category": "university",
-      "image": "/projects/quantum_pay.png",
+      "image": "/data/projects/quantum_pay.png",
       "repoLink": "https://github.com/talha-sami/p2p-chat-app",
       "techStack": ["Python", "Sockets", "PyQt5"]
     },
@@ -324,7 +324,7 @@
       "name": "Database Management System Mock",
       "description": "A university project implementing basic SQL queries, B-Tree index structures, and file buffering.",
       "category": "university",
-      "image": "/projects/orbit_ci.png",
+      "image": "/data/projects/orbit_ci.png",
       "repoLink": "https://github.com/talha-sami/dbms-mock",
       "techStack": ["Java", "SQL", "B-Tree"]
     }

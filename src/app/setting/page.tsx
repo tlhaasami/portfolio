@@ -404,7 +404,7 @@ export default function AdminSettings() {
     const defaultCert = {
       name: "New Certification",
       issuer: "Provider Issuer",
-      image: "/context/assets/Certificates/GoogleAiEssentials.png",
+      image: "/data/certificates/GoogleAiEssentials.png",
       link: "https://www.coursera.org",
       visible: true
     };
@@ -461,7 +461,7 @@ export default function AdminSettings() {
     const defaultAch = {
       name: "New Achievement",
       issuer: "Competition Issuer",
-      image: "/context/assets/CompetitionsWinner/Nascon.png",
+      image: "/data/competitions/Nascon.png",
       link: "",
       visible: true
     };

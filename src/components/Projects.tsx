@@ -154,7 +154,7 @@ export default function Projects() {
           {proj.image ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
-              src={proj.image}
+              src={prefixAsset(proj.image)}
               alt={`${proj.name} preview`}
               className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.025] transition-transform duration-500"
               loading="lazy"
