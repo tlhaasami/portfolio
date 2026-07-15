@@ -1,29 +1,15 @@
+const PORTFOLIO_CONTENT_CDN = "https://cdn.jsdelivr.net/gh/tlhaasami/portfoliocontent@main";
+
 export function getPrefix(): string {
-  if (typeof window === "undefined") {
-    return process.env.NEXT_PUBLIC_BASE_PATH || "";
-  }
-
-  // If next public base path is configured at build time, use it
-  const buildTimeBase = process.env.NEXT_PUBLIC_BASE_PATH;
-  if (buildTimeBase) return buildTimeBase;
-
-  // Otherwise detect from hostname/pathname
-  const hostname = window.location.hostname;
-  const pathname = window.location.pathname;
-
-  if (hostname.endsWith(".github.io")) {
-    const segments = pathname.split("/").filter(Boolean);
-    // If it's a project page (not user page which is <username>.github.io), the first segment is the repo name
-    if (segments.length > 0 && !hostname.startsWith(segments[0])) {
-      return `/${segments[0]}`;
-    }
-  }
-
-  return "";
+  // All configuration/content data (portfolio-defaults, ballpit, technologies)
+  // are hosted decoupled in the portfoliocontent repository.
+  return PORTFOLIO_CONTENT_CDN;
 }
 
 export function prefixAsset(path: string): string {
   if (!path) return path;
+
+  // If it's already an absolute URL, return it
   if (
     path.startsWith("http://") ||
     path.startsWith("https://") ||
@@ -31,9 +17,23 @@ export function prefixAsset(path: string): string {
   ) {
     return path;
   }
-  const base = getPrefix();
+
+  // Prepend content base URL for content assets (starting with /data/ or /logos/)
+  if (
+    path.startsWith("/data/") ||
+    path.startsWith("data/") ||
+    path.startsWith("/logos/") ||
+    path.startsWith("logos/")
+  ) {
+    const cleanPath = path.startsWith("/") ? path : `/${path}`;
+    return `${PORTFOLIO_CONTENT_CDN}${cleanPath}`;
+  }
+
+  // Fallback to local next base prefix if there are any other local assets
+  const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
   // Avoid double prefixing
   if (base && path.startsWith(base)) return path;
   return `${base}${path.startsWith('/') ? '' : '/'}${path}`;
 }
+
 
