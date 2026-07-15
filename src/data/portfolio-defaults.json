@@ -1,0 +1,121 @@
+{
+  "name": "TALHA SAMI",
+  "titles": [
+    "Full Stack Engineer",
+    "Automation Expert",
+    "Mobile Developer"
+  ],
+  "aboutHeading": "Bridging the gap between complex engineering and clear strategy.",
+  "aboutParagraph": "I am a software engineer specializing in building robust, scalable applications from the ground up, with a technical foundation spanning full-stack web architectures, cross-platform mobile development, and workflow automation. Writing clean, high-performance code is only half the equation; my true strength lies in communication strategy—translating intricate technical requirements into clear, actionable roadmaps that bridge the divide between development teams and stakeholders to deliver a seamless user experience aligned with the business vision.",
+  "aboutImage": "/profile.png",
+  "experiences": [
+    {
+      "company": "Google",
+      "role": "Senior Software Engineer",
+      "duration": "Jan 2025 - Present",
+      "logo": "https://img.icons8.com/color/144/google-logo.png",
+      "description": "Architected next-generation cloud infrastructure that handles millions of requests daily with extremely low latency.\nSpearheaded a distributed pipeline engine that automated complex continuous deployment across 4 global server clusters.\nCollaborated key product iterations alongside business analysts to deliver clean APIs and actionable engineering roadmaps.\nMentored junior developers on software engineering principles and streamlined team workflow systems.",
+      "linkedin": "https://linkedin.com/company/google",
+      "website": "https://google.com"
+    },
+    {
+      "company": "Meta",
+      "role": "Software Engineer II",
+      "duration": "Mar 2023 - Dec 2024",
+      "logo": "https://img.icons8.com/color/144/meta-logo.png",
+      "description": "Developed robust cross-platform features using React Native, cutting startup load delays by 25% on mid-range phones.\nLed key frontend modernization processes that improved overall user interactions and system performance metric counts.\nResolved high-severity memory leak events and optimized client-side state caching mechanisms on core dashboards.\nCoordinated interface standards with graphic designers to publish accessible component sets.",
+      "linkedin": "https://linkedin.com/company/meta",
+      "website": "https://meta.com"
+    },
+    {
+      "company": "Netflix",
+      "role": "Backend Engineer",
+      "duration": "Jun 2022 - Feb 2023",
+      "logo": "https://img.icons8.com/color/144/netflix.png",
+      "description": "Engineered event-driven microservices processing high-frequency messaging queues using Node.js and Redis setups.\nBuilt visual preference screens that improved user content recommendations and navigation click rates.\nRefined service logging protocols and automated testing runs, boosting overall deployment reliability metrics.\nReduced service bottlenecks through index adjustments on central document store environments.",
+      "linkedin": "https://linkedin.com/company/netflix",
+      "website": "https://netflix.com"
+    },
+    {
+      "company": "Google",
+      "role": "Senior Software Engineer",
+      "duration": "Jan 2025 - Present",
+      "logo": "https://img.icons8.com/color/144/google-logo.png",
+      "description": "Architected next-generation cloud infrastructure that handles millions of requests daily with extremely low latency.\nSpearheaded a distributed pipeline engine that automated complex continuous deployment across 4 global server clusters.\nCollaborated key product iterations alongside business analysts to deliver clean APIs and actionable engineering roadmaps.\nMentored junior developers on software engineering principles and streamlined team workflow systems.",
+      "linkedin": "https://linkedin.com/company/google",
+      "website": "https://google.com"
+    },
+    {
+      "company": "Meta",
+      "role": "Software Engineer II",
+      "duration": "Mar 2023 - Dec 2024",
+      "logo": "https://img.icons8.com/color/144/meta-logo.png",
+      "description": "Developed robust cross-platform features using React Native, cutting startup load delays by 25% on mid-range phones.\nLed key frontend modernization processes that improved overall user interactions and system performance metric counts.\nResolved high-severity memory leak events and optimized client-side state caching mechanisms on core dashboards.\nCoordinated interface standards with graphic designers to publish accessible component sets.",
+      "linkedin": "https://linkedin.com/company/meta",
+      "website": "https://meta.com"
+    },
+    {
+      "company": "Netflix",
+      "role": "Backend Engineer",
+      "duration": "Jun 2022 - Feb 2023",
+      "logo": "https://img.icons8.com/color/144/netflix.png",
+      "description": "Engineered event-driven microservices processing high-frequency messaging queues using Node.js and Redis setups.\nBuilt visual preference screens that improved user content recommendations and navigation click rates.\nRefined service logging protocols and automated testing runs, boosting overall deployment reliability metrics.\nReduced service bottlenecks through index adjustments on central document store environments.",
+      "linkedin": "https://linkedin.com/company/netflix",
+      "website": "https://netflix.com"
+    },
+    {
+      "company": "Google",
+      "role": "Senior Software Engineer",
+      "duration": "Jan 2025 - Present",
+      "logo": "https://img.icons8.com/color/144/google-logo.png",
+      "description": "Architected next-generation cloud infrastructure that handles millions of requests daily with extremely low latency.\nSpearheaded a distributed pipeline engine that automated complex continuous deployment across 4 global server clusters.\nCollaborated key product iterations alongside business analysts to deliver clean APIs and actionable engineering roadmaps.\nMentored junior developers on software engineering principles and streamlined team workflow systems.",
+      "linkedin": "https://linkedin.com/company/google",
+      "website": "https://google.com"
+    },
+    {
+      "company": "Meta",
+      "role": "Software Engineer II",
+      "duration": "Mar 2023 - Dec 2024",
+      "logo": "https://img.icons8.com/color/144/meta-logo.png",
+      "description": "Developed robust cross-platform features using React Native, cutting startup load delays by 25% on mid-range phones.\nLed key frontend modernization processes that improved overall user interactions and system performance metric counts.\nResolved high-severity memory leak events and optimized client-side state caching mechanisms on core dashboards.\nCoordinated interface standards with graphic designers to publish accessible component sets.",
+      "linkedin": "https://linkedin.com/company/meta",
+      "website": "https://meta.com"
+    },
+    {
+      "company": "Netflix",
+      "role": "Backend Engineer",
+      "duration": "Jun 2022 - Feb 2023",
+      "logo": "https://img.icons8.com/color/144/netflix.png",
+      "description": "Engineered event-driven microservices processing high-frequency messaging queues using Node.js and Redis setups.\nBuilt visual preference screens that improved user content recommendations and navigation click rates.\nRefined service logging protocols and automated testing runs, boosting overall deployment reliability metrics.\nReduced service bottlenecks through index adjustments on central document store environments.",
+      "linkedin": "https://linkedin.com/company/netflix",
+      "website": "https://netflix.com"
+    },
+    {
+      "company": "Google",
+      "role": "Senior Software Engineer",
+      "duration": "Jan 2025 - Present",
+      "logo": "https://img.icons8.com/color/144/google-logo.png",
+      "description": "Architected next-generation cloud infrastructure that handles millions of requests daily with extremely low latency.\nSpearheaded a distributed pipeline engine that automated complex continuous deployment across 4 global server clusters.\nCollaborated key product iterations alongside business analysts to deliver clean APIs and actionable engineering roadmaps.\nMentored junior developers on software engineering principles and streamlined team workflow systems.",
+      "linkedin": "https://linkedin.com/company/google",
+      "website": "https://google.com"
+    },
+    {
+      "company": "Meta",
+      "role": "Software Engineer II",
+      "duration": "Mar 2023 - Dec 2024",
+      "logo": "https://img.icons8.com/color/144/meta-logo.png",
+      "description": "Developed robust cross-platform features using React Native, cutting startup load delays by 25% on mid-range phones.\nLed key frontend modernization processes that improved overall user interactions and system performance metric counts.\nResolved high-severity memory leak events and optimized client-side state caching mechanisms on core dashboards.\nCoordinated interface standards with graphic designers to publish accessible component sets.",
+      "linkedin": "https://linkedin.com/company/meta",
+      "website": "https://meta.com"
+    },
+    {
+      "company": "Netflix",
+      "role": "Backend Engineer",
+      "duration": "Jun 2022 - Feb 2023",
+      "logo": "https://img.icons8.com/color/144/netflix.png",
+      "description": "Engineered event-driven microservices processing high-frequency messaging queues using Node.js and Redis setups.\nBuilt visual preference screens that improved user content recommendations and navigation click rates.\nRefined service logging protocols and automated testing runs, boosting overall deployment reliability metrics.\nReduced service bottlenecks through index adjustments on central document store environments.",
+      "linkedin": "https://linkedin.com/company/netflix",
+      "website": "https://netflix.com"
+    }
+  ]
+}

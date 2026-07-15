@@ -1,19 +1,24 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import RotatingText from "@/components/ui/RotatingText";
+import VariableProximity from "@/components/ui/VariableProximity";
 import About from "@/components/About";
+import Experience from "@/components/Experience";
 
 const Ballpit = dynamic(() => import("@/components/Ballpit"), {
   ssr: false,
 });
 
 import DEFAULT_SETTINGS from "@/data/ballpit.json";
+import DEFAULT_PORTFOLIO from "@/data/portfolio-defaults.json";
 
 export default function Home() {
   const [settings, setSettings] = useState(DEFAULT_SETTINGS);
+  const [portfolioData, setPortfolioData] = useState(DEFAULT_PORTFOLIO);
+  const heroRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     try {
@@ -25,8 +30,17 @@ export default function Home() {
           ...parsed,
         });
       }
+
+      const storedPortfolio = localStorage.getItem("portfolio-settings");
+      if (storedPortfolio) {
+        const parsedPortfolio = JSON.parse(storedPortfolio);
+        setPortfolioData({
+          ...DEFAULT_PORTFOLIO,
+          ...parsedPortfolio,
+        });
+      }
     } catch (e) {
-      console.error("Error loading ballpit settings:", e);
+      console.error("Error loading settings:", e);
     }
   }, []);
 
@@ -35,6 +49,7 @@ export default function Home() {
       {/* Hero Section */}
       <section
         id="home"
+        ref={heroRef}
         className="relative w-full min-h-screen overflow-hidden flex flex-col items-center justify-start pt-[20vh] md:pt-[25vh] text-center px-4"
       >
         {/* Ballpit Background - Restricted to the Hero Section */}
@@ -59,9 +74,15 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
             className="font-black text-5xl sm:text-7xl md:text-8xl lg:text-9xl tracking-tighter uppercase leading-none mb-6 pointer-events-auto"
           >
-            <span className="bg-gradient-to-b from-neutral-900 to-neutral-500 dark:from-white dark:to-neutral-400 bg-clip-text text-transparent">
-              TALHA SAMI
-            </span>
+            <VariableProximity
+              label={portfolioData.name || "TALHA SAMI"}
+              className="bg-gradient-to-b from-neutral-900 to-neutral-500 dark:from-white dark:to-neutral-400 bg-clip-text text-transparent"
+              fromFontVariationSettings="'wght' 400, 'opsz' 9"
+              toFontVariationSettings="'wght' 850, 'opsz' 40"
+              containerRef={heroRef}
+              radius={200}
+              falloff="linear"
+            />
           </motion.h1>
 
           {/* Titles with RotatingText */}
@@ -72,18 +93,20 @@ export default function Home() {
             className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 text-lg sm:text-2xl md:text-3xl font-mono text-neutral-500 dark:text-neutral-400 uppercase tracking-widest mb-12 max-w-3xl px-4 text-center pointer-events-auto"
           >
             <span className="whitespace-nowrap">I AM A</span>
-            <RotatingText
-              texts={['Full Stack Engineer', 'Automation Expert', 'Mobile Developer']}
-              mainClassName="px-3 sm:px-4 py-1 sm:py-1.5 bg-neutral-900 dark:bg-white text-white dark:text-zinc-950 font-bold rounded-xl inline-flex justify-center border border-neutral-850 dark:border-neutral-200 shadow-md whitespace-nowrap"
-              staggerFrom={"last"}
-              initial={{ y: "100%", opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: "-120%", opacity: 0 }}
-              staggerDuration={0.025}
-              splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1"
-              transition={{ type: "spring", damping: 30, stiffness: 400 }}
-              rotationInterval={2500}
-            />
+            {portfolioData.titles && portfolioData.titles.length > 0 && (
+              <RotatingText
+                texts={portfolioData.titles}
+                mainClassName="px-3 sm:px-4 py-1 sm:py-1.5 bg-neutral-900 dark:bg-white text-white dark:text-zinc-950 font-bold rounded-xl inline-flex justify-center border border-neutral-850 dark:border-neutral-200 shadow-md whitespace-nowrap"
+                staggerFrom={"last"}
+                initial={{ y: "100%", opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: "-120%", opacity: 0 }}
+                staggerDuration={0.025}
+                splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1"
+                transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                rotationInterval={2500}
+              />
+            )}
           </motion.div>
 
           {/* CTA Buttons */}
@@ -109,7 +132,15 @@ export default function Home() {
         </div>
       </section>
 
-      <About />
+      <About
+        heading={portfolioData.aboutHeading}
+        paragraph={portfolioData.aboutParagraph}
+        image={portfolioData.aboutImage}
+      />
+
+      <Experience
+        experiences={portfolioData.experiences}
+      />
     </main>
   );
 }
