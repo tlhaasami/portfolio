@@ -3,22 +3,22 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { 
-  Sliders, 
-  RefreshCw, 
-  Save, 
-  ArrowLeft, 
-  Plus, 
-  Trash2, 
-  Check, 
-  Sparkles, 
-  AlertCircle, 
-  ArrowUp, 
-  ArrowDown, 
-  User, 
-  Info, 
-  Briefcase, 
-  Settings, 
+import {
+  Sliders,
+  RefreshCw,
+  Save,
+  ArrowLeft,
+  Plus,
+  Trash2,
+  Check,
+  Sparkles,
+  AlertCircle,
+  ArrowUp,
+  ArrowDown,
+  User,
+  Info,
+  Briefcase,
+  Settings,
   Palette,
   Eye,
   EyeOff,
@@ -30,7 +30,7 @@ import {
 const Ballpit = dynamic(() => import("@/components/Ballpit"), {
   ssr: false,
 });
-import { getPrefix, prefixAsset } from "@/utils/prefixAsset";
+import { getPrefix } from "@/utils/prefixAsset";
 
 const PALETTES = [
   { name: "Monochrome Black & White", colors: ["#ffffff", "#71717a", "#000000"] },
@@ -204,11 +204,11 @@ export default function AdminSettings() {
       const copy = [...(prev.featuredProjects || [])];
       const targetIndex = direction === "up" ? index - 1 : index + 1;
       if (targetIndex < 0 || targetIndex >= copy.length) return prev;
-      
+
       const temp = copy[index];
       copy[index] = copy[targetIndex];
       copy[targetIndex] = temp;
-      
+
       return {
         ...prev,
         featuredProjects: copy
@@ -262,11 +262,11 @@ export default function AdminSettings() {
       const copy = [...(prev.secondaryProjects || [])];
       const targetIndex = direction === "up" ? index - 1 : index + 1;
       if (targetIndex < 0 || targetIndex >= copy.length) return prev;
-      
+
       const temp = copy[index];
       copy[index] = copy[targetIndex];
       copy[targetIndex] = temp;
-      
+
       return {
         ...prev,
         secondaryProjects: copy
@@ -385,7 +385,7 @@ export default function AdminSettings() {
     setPortfolioData((prev: any) => {
       const copy = [...prev.experiences];
       const targetIndex = direction === "up" ? index - 1 : index + 1;
-      
+
       if (targetIndex < 0 || targetIndex >= copy.length) return prev;
 
       // Swap elements
@@ -445,11 +445,11 @@ export default function AdminSettings() {
       const copy = [...(prev.certificates || [])];
       const targetIndex = direction === "up" ? index - 1 : index + 1;
       if (targetIndex < 0 || targetIndex >= copy.length) return prev;
-      
+
       const temp = copy[index];
       copy[index] = copy[targetIndex];
       copy[targetIndex] = temp;
-      
+
       return {
         ...prev,
         certificates: copy
@@ -502,11 +502,11 @@ export default function AdminSettings() {
       const copy = [...(prev.achievements || [])];
       const targetIndex = direction === "up" ? index - 1 : index + 1;
       if (targetIndex < 0 || targetIndex >= copy.length) return prev;
-      
+
       const temp = copy[index];
       copy[index] = copy[targetIndex];
       copy[targetIndex] = temp;
-      
+
       return {
         ...prev,
         achievements: copy
@@ -582,28 +582,26 @@ export default function AdminSettings() {
 
       {/* Settings Layout */}
       <div className="max-w-6xl mx-auto w-full flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-8">
-        
+
         {/* Navigation Sidebar (3 columns) */}
         <div className="lg:col-span-3 lg:sticky lg:top-8 flex flex-row lg:flex-col gap-2 overflow-x-auto pb-2 lg:pb-0 font-mono text-xs z-30">
           <button
             onClick={() => setActiveTab("general")}
-            className={`w-full text-left px-4 py-3.5 rounded-xl border transition-all flex items-center gap-2.5 cursor-pointer shrink-0 lg:shrink ${
-              activeTab === "general"
+            className={`w-full text-left px-4 py-3.5 rounded-xl border transition-all flex items-center gap-2.5 cursor-pointer shrink-0 lg:shrink ${activeTab === "general"
                 ? "bg-white border-zinc-700 text-black font-bold"
                 : "bg-zinc-900/40 border-zinc-900 hover:bg-zinc-900 text-zinc-400 hover:text-zinc-200"
-            }`}
+              }`}
           >
             <User className="w-4 h-4" />
             <span>Hero & Identity</span>
           </button>
-          
+
           <button
             onClick={() => setActiveTab("about")}
-            className={`w-full text-left px-4 py-3.5 rounded-xl border transition-all flex items-center gap-2.5 cursor-pointer shrink-0 lg:shrink ${
-              activeTab === "about"
+            className={`w-full text-left px-4 py-3.5 rounded-xl border transition-all flex items-center gap-2.5 cursor-pointer shrink-0 lg:shrink ${activeTab === "about"
                 ? "bg-white border-zinc-700 text-black font-bold"
                 : "bg-zinc-900/40 border-zinc-900 hover:bg-zinc-900 text-zinc-400 hover:text-zinc-200"
-            }`}
+              }`}
           >
             <Info className="w-4 h-4" />
             <span>About Content</span>
@@ -611,11 +609,10 @@ export default function AdminSettings() {
 
           <button
             onClick={() => setActiveTab("experience")}
-            className={`w-full text-left px-4 py-3.5 rounded-xl border transition-all flex items-center gap-2.5 cursor-pointer shrink-0 lg:shrink ${
-              activeTab === "experience"
+            className={`w-full text-left px-4 py-3.5 rounded-xl border transition-all flex items-center gap-2.5 cursor-pointer shrink-0 lg:shrink ${activeTab === "experience"
                 ? "bg-white border-zinc-700 text-black font-bold"
                 : "bg-zinc-900/40 border-zinc-900 hover:bg-zinc-900 text-zinc-400 hover:text-zinc-200"
-            }`}
+              }`}
           >
             <Briefcase className="w-4 h-4" />
             <span>Experiences ({portfolioData.experiences.length})</span>
@@ -623,11 +620,10 @@ export default function AdminSettings() {
 
           <button
             onClick={() => setActiveTab("contact")}
-            className={`w-full text-left px-4 py-3.5 rounded-xl border transition-all flex items-center gap-2.5 cursor-pointer shrink-0 lg:shrink ${
-              activeTab === "contact"
+            className={`w-full text-left px-4 py-3.5 rounded-xl border transition-all flex items-center gap-2.5 cursor-pointer shrink-0 lg:shrink ${activeTab === "contact"
                 ? "bg-white border-zinc-700 text-black font-bold"
                 : "bg-zinc-900/40 border-zinc-900 hover:bg-zinc-900 text-zinc-400 hover:text-zinc-200"
-            }`}
+              }`}
           >
             <Mail className="w-4 h-4" />
             <span>Contact & Socials</span>
@@ -635,11 +631,10 @@ export default function AdminSettings() {
 
           <button
             onClick={() => setActiveTab("certificates")}
-            className={`w-full text-left px-4 py-3.5 rounded-xl border transition-all flex items-center gap-2.5 cursor-pointer shrink-0 lg:shrink ${
-              activeTab === "certificates"
+            className={`w-full text-left px-4 py-3.5 rounded-xl border transition-all flex items-center gap-2.5 cursor-pointer shrink-0 lg:shrink ${activeTab === "certificates"
                 ? "bg-white border-zinc-700 text-black font-bold"
                 : "bg-zinc-900/40 border-zinc-900 hover:bg-zinc-900 text-zinc-400 hover:text-zinc-200"
-            }`}
+              }`}
           >
             <Award className="w-4 h-4" />
             <span>Certifications ({(portfolioData.certificates || []).length})</span>
@@ -647,11 +642,10 @@ export default function AdminSettings() {
 
           <button
             onClick={() => setActiveTab("projects")}
-            className={`w-full text-left px-4 py-3.5 rounded-xl border transition-all flex items-center gap-2.5 cursor-pointer shrink-0 lg:shrink ${
-              activeTab === "projects"
+            className={`w-full text-left px-4 py-3.5 rounded-xl border transition-all flex items-center gap-2.5 cursor-pointer shrink-0 lg:shrink ${activeTab === "projects"
                 ? "bg-white border-zinc-700 text-black font-bold"
                 : "bg-zinc-900/40 border-zinc-900 hover:bg-zinc-900 text-zinc-400 hover:text-zinc-200"
-            }`}
+              }`}
           >
             <FolderGit className="w-4 h-4" />
             <span>Projects ({(portfolioData.featuredProjects || []).length + (portfolioData.secondaryProjects || []).length})</span>
@@ -659,11 +653,10 @@ export default function AdminSettings() {
 
           <button
             onClick={() => setActiveTab("physics")}
-            className={`w-full text-left px-4 py-3.5 rounded-xl border transition-all flex items-center gap-2.5 cursor-pointer shrink-0 lg:shrink ${
-              activeTab === "physics"
+            className={`w-full text-left px-4 py-3.5 rounded-xl border transition-all flex items-center gap-2.5 cursor-pointer shrink-0 lg:shrink ${activeTab === "physics"
                 ? "bg-white border-zinc-700 text-black font-bold"
                 : "bg-zinc-900/40 border-zinc-900 hover:bg-zinc-900 text-zinc-400 hover:text-zinc-200"
-            }`}
+              }`}
           >
             <Settings className="w-4 h-4" />
             <span>Hero Physics</span>
@@ -672,7 +665,7 @@ export default function AdminSettings() {
 
         {/* Dynamic Panel Forms Content (9 columns) */}
         <div className="lg:col-span-9 bg-zinc-900/40 border border-zinc-800/80 backdrop-blur-md rounded-3xl p-6 md:p-8 shadow-xl min-h-[500px]">
-          
+
           {/* TAB 1: HERO & IDENTITY */}
           {activeTab === "general" && (
             <div className="space-y-6">
@@ -802,7 +795,7 @@ export default function AdminSettings() {
               ) : (
                 <div className="space-y-8">
                   {portfolioData.experiences.map((exp: any, index: number) => (
-                    <div 
+                    <div
                       key={index}
                       className="border border-zinc-800 bg-zinc-950/40 rounded-2xl p-6 relative space-y-4 hover:border-zinc-700 transition-colors shadow-sm"
                     >
@@ -814,7 +807,7 @@ export default function AdminSettings() {
                           </span>
                           <span>EXPERIENCE RECORD ENTRY</span>
                         </div>
-                        
+
                         <div className="flex items-center gap-1.5">
                           <button
                             onClick={() => handleMoveExperience(index, "up")}
@@ -947,7 +940,7 @@ export default function AdminSettings() {
               {/* General Contact Info fields */}
               <div className="space-y-4 bg-zinc-950/45 p-6 rounded-2xl border border-zinc-800/80">
                 <h3 className="text-xs font-mono text-zinc-400 uppercase tracking-wider mb-2">Contact General Info</h3>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
                     <label className="text-[10px] font-mono text-zinc-400 uppercase">Subheading</label>
@@ -1006,10 +999,10 @@ export default function AdminSettings() {
               {/* Social Networks Manager */}
               <div className="space-y-4">
                 <h3 className="text-xs font-mono text-zinc-400 uppercase tracking-wider">Configure Social Links</h3>
-                
+
                 <div className="space-y-3">
                   {(portfolioData.socials || []).map((social: any, index: number) => (
-                    <div 
+                    <div
                       key={social.name}
                       className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 rounded-xl border border-zinc-850 bg-zinc-950/40 hover:bg-zinc-950/80 transition-colors duration-200"
                     >
@@ -1018,7 +1011,7 @@ export default function AdminSettings() {
                         {social.logo && (
                           <div className="w-8 h-8 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center shrink-0">
                             {social.logo ? (
-                              <img src={prefixAsset(social.logo)} alt={social.name} className="w-4.5 h-4.5 object-contain" />
+                              <img src={social.logo} alt={social.name} className="w-4.5 h-4.5 object-contain" />
                             ) : (
                               <span className="text-[10px] font-mono font-bold text-zinc-500">
                                 {social.name.substring(0, 2).toUpperCase()}
@@ -1297,7 +1290,7 @@ export default function AdminSettings() {
                 ) : (
                   <div className="space-y-8">
                     {portfolioData.certificates.map((cert: any, index: number) => (
-                      <div 
+                      <div
                         key={index}
                         className="border border-zinc-800 bg-zinc-950/40 rounded-2xl p-6 relative space-y-4 hover:border-zinc-700 transition-colors shadow-sm"
                       >
@@ -1309,7 +1302,7 @@ export default function AdminSettings() {
                             </span>
                             <span>CERTIFICATE RECORD</span>
                           </div>
-                          
+
                           <div className="flex items-center gap-1.5">
                             <button
                               type="button"
@@ -1393,11 +1386,10 @@ export default function AdminSettings() {
                           <button
                             type="button"
                             onClick={() => handleUpdateCertificate(index, "visible", !cert.visible)}
-                            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-[10px] font-mono font-bold transition-all cursor-pointer ${
-                              cert.visible
+                            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-[10px] font-mono font-bold transition-all cursor-pointer ${cert.visible
                                 ? "bg-zinc-900 border-zinc-700 text-white"
                                 : "bg-zinc-950/20 border-zinc-900 text-zinc-500"
-                            }`}
+                              }`}
                           >
                             {cert.visible ? <Eye className="w-3.5 h-3.5 text-white" /> : <EyeOff className="w-3.5 h-3.5 text-zinc-500" />}
                             <span>{cert.visible ? "VISIBLE IN LIST" : "HIDDEN"}</span>
@@ -1434,7 +1426,7 @@ export default function AdminSettings() {
                 ) : (
                   <div className="space-y-8">
                     {portfolioData.achievements.map((ach: any, index: number) => (
-                      <div 
+                      <div
                         key={index}
                         className="border border-zinc-800 bg-zinc-950/40 rounded-2xl p-6 relative space-y-4 hover:border-zinc-700 transition-colors shadow-sm"
                       >
@@ -1446,7 +1438,7 @@ export default function AdminSettings() {
                             </span>
                             <span>ACHIEVEMENT RECORD</span>
                           </div>
-                          
+
                           <div className="flex items-center gap-1.5">
                             <button
                               type="button"
@@ -1530,11 +1522,10 @@ export default function AdminSettings() {
                           <button
                             type="button"
                             onClick={() => handleUpdateAchievement(index, "visible", !ach.visible)}
-                            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-[10px] font-mono font-bold transition-all cursor-pointer ${
-                              ach.visible
+                            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-[10px] font-mono font-bold transition-all cursor-pointer ${ach.visible
                                 ? "bg-zinc-900 border-zinc-700 text-white"
                                 : "bg-zinc-950/20 border-zinc-900 text-zinc-500"
-                            }`}
+                              }`}
                           >
                             {ach.visible ? <Eye className="w-3.5 h-3.5 text-white" /> : <EyeOff className="w-3.5 h-3.5 text-zinc-500" />}
                             <span>{ach.visible ? "VISIBLE IN LIST" : "HIDDEN"}</span>
@@ -1552,7 +1543,7 @@ export default function AdminSettings() {
           {/* TAB 7: PROJECTS CONFIG */}
           {activeTab === "projects" && (
             <div className="space-y-8 animate-fade-in">
-              
+
               {/* Section 1: Featured Projects */}
               <div className="space-y-6">
                 <div className="flex justify-between items-center border-b border-zinc-800/80 pb-4">
@@ -1572,7 +1563,7 @@ export default function AdminSettings() {
 
                 <div className="space-y-8">
                   {(portfolioData.featuredProjects || []).map((project: any, index: number) => (
-                    <div 
+                    <div
                       key={index}
                       className="border border-zinc-800 bg-zinc-950/40 rounded-2xl p-6 relative space-y-4 hover:border-zinc-700 transition-colors shadow-sm"
                     >
@@ -1584,7 +1575,7 @@ export default function AdminSettings() {
                           </span>
                           <span>FEATURED SHOWCASE ITEM</span>
                         </div>
-                        
+
                         <div className="flex items-center gap-1.5">
                           <button
                             type="button"
@@ -1723,7 +1714,7 @@ export default function AdminSettings() {
                 ) : (
                   <div className="space-y-8">
                     {portfolioData.secondaryProjects.map((proj: any, index: number) => (
-                      <div 
+                      <div
                         key={index}
                         className="border border-zinc-800 bg-zinc-950/40 rounded-2xl p-6 relative space-y-4 hover:border-zinc-700 transition-colors shadow-sm"
                       >
@@ -1735,7 +1726,7 @@ export default function AdminSettings() {
                             </span>
                             <span>SECONDARY REPOSITORY ITEM</span>
                           </div>
-                          
+
                           <div className="flex items-center gap-1.5">
                             <button
                               type="button"
