@@ -8,6 +8,7 @@ interface BallpitProps {
   wallBounce?: number;
   followCursor?: boolean;
   colors?: string[];
+  size?: string;
 }
 
 declare const Ballpit: React.ComponentType<BallpitProps>;
