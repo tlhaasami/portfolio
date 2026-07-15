@@ -30,7 +30,7 @@ import {
 const Ballpit = dynamic(() => import("@/components/Ballpit"), {
   ssr: false,
 });
-import { getPrefix } from "@/utils/prefixAsset";
+import { getPrefix, prefixAsset } from "@/utils/prefixAsset";
 
 const PALETTES = [
   { name: "Monochrome Black & White", colors: ["#ffffff", "#71717a", "#000000"] },
@@ -1018,7 +1018,7 @@ export default function AdminSettings() {
                         {social.logo && (
                           <div className="w-8 h-8 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center shrink-0">
                             {social.logo ? (
-                              <img src={social.logo} alt={social.name} className="w-4.5 h-4.5 object-contain" />
+                              <img src={prefixAsset(social.logo)} alt={social.name} className="w-4.5 h-4.5 object-contain" />
                             ) : (
                               <span className="text-[10px] font-mono font-bold text-zinc-500">
                                 {social.name.substring(0, 2).toUpperCase()}
