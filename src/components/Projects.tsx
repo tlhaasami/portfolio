@@ -13,6 +13,8 @@ interface FeaturedProject {
   liveLink: string;
   techStack: string[];
   details: string;
+
+
 }
 
 interface SecondaryProject {
