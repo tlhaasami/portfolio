@@ -4,6 +4,8 @@ import React, { useState, useEffect, useMemo } from "react";
 import LogoLoop, { LogoItem } from "@/components/ui/LogoLoop";
 import MobileCarousel from "@/components/ui/MobileCarousel";
 import { prefixAsset, getPrefix } from "@/utils/prefixAsset";
+import SafeImage from "@/components/ui/SafeImage";
+import portfolioDataStatic from "@/data/portfolioData.json";
 
 interface Certificate {
   name: string;
@@ -22,33 +24,20 @@ interface Achievement {
 }
 
 export default function Certificates() {
-  const [certs, setCerts] = useState<Certificate[]>([]);
-  const [achievements, setAchievements] = useState<Achievement[]>([]);
+  const [certs, setCerts] = useState<Certificate[]>(portfolioDataStatic.certificates);
+  const [achievements, setAchievements] = useState<Achievement[]>(portfolioDataStatic.achievements || []);
 
   useEffect(() => {
-    const prefix = getPrefix();
-
-    const loadCertificates = async () => {
-      try {
-        const stored = localStorage.getItem("portfolio-settings");
-        if (stored) {
-          const parsed = JSON.parse(stored);
-          if (parsed.certificates) setCerts(parsed.certificates);
-          if (parsed.achievements) setAchievements(parsed.achievements);
-        } else {
-          const res = await fetch(`${prefix}/data/profileData/portfolio-defaults.json`);
-          if (res.ok) {
-            const defaults = await res.json();
-            if (defaults.certificates) setCerts(defaults.certificates);
-            if (defaults.achievements) setAchievements(defaults.achievements);
-          }
-        }
-      } catch (err) {
-        console.error("Error loading certificates:", err);
+    try {
+      const stored = localStorage.getItem("portfolio-settings");
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed.certificates) setCerts(parsed.certificates);
+        if (parsed.achievements) setAchievements(parsed.achievements);
       }
-    };
-
-    loadCertificates();
+    } catch (err) {
+      console.error("Error loading certificates:", err);
+    }
   }, []);
 
   const visibleCerts = certs.filter((c) => c.visible);
@@ -64,12 +53,10 @@ export default function Certificates() {
         >
           {/* Background cover image - clean, bright and full color by default */}
           {cert.image ? (
-            <img
+            <SafeImage
               src={prefixAsset(cert.image)}
               alt={`${cert.name} certificate`}
               className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
-              loading="lazy"
-              decoding="async"
               draggable={false}
             />
           ) : null}
@@ -124,12 +111,10 @@ export default function Certificates() {
         >
           {/* Background cover image - clean, bright and full color by default */}
           {ach.image ? (
-            <img
+            <SafeImage
               src={prefixAsset(ach.image)}
               alt={`${ach.name} achievement`}
               className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
-              loading="lazy"
-              decoding="async"
               draggable={false}
             />
           ) : null}
@@ -183,12 +168,10 @@ export default function Certificates() {
         className="group relative overflow-hidden rounded-[24px] border border-neutral-200/50 dark:border-zinc-800/60 bg-neutral-100 dark:bg-zinc-950 shadow-sm w-full aspect-[4/3]"
       >
         {cert.image ? (
-          <img
+          <SafeImage
             src={prefixAsset(cert.image)}
             alt={`${cert.name} certificate`}
             className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
-            loading="lazy"
-            decoding="async"
             draggable={false}
           />
         ) : null}
@@ -239,12 +222,10 @@ export default function Certificates() {
         className="group relative overflow-hidden rounded-[24px] border border-neutral-200/50 dark:border-zinc-800/60 bg-neutral-100 dark:bg-zinc-955 shadow-sm w-full aspect-[4/3]"
       >
         {ach.image ? (
-          <img
+          <SafeImage
             src={prefixAsset(ach.image)}
             alt={`${ach.name} achievement`}
             className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
-            loading="lazy"
-            decoding="async"
             draggable={false}
           />
         ) : null}

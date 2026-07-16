@@ -12,6 +12,7 @@ import Projects from "@/components/Projects";
 import Certificates from "@/components/Certificates";
 import Contact from "@/components/Contact";
 import { getPrefix } from "@/utils/prefixAsset";
+import portfolioDataStatic from "@/data/portfolioData.json";
 
 const Ballpit = dynamic(() => import("@/components/Ballpit"), {
   ssr: false,
@@ -19,91 +20,39 @@ const Ballpit = dynamic(() => import("@/components/Ballpit"), {
 
 export default function Home() {
   const [settings, setSettings] = useState<any>({
-    count: 24,
-    countMobile: 8,
-    gravity: 0.1,
-    friction: 0.99,
-    wallBounce: 0.8,
-    followCursor: true,
-    colors: ["#ffffff", "#71717a", "#000000"]
+    count: portfolioDataStatic.ballpitDefault.count,
+    countMobile: (portfolioDataStatic.ballpitDefault as any).countMobile || 8,
+    gravity: portfolioDataStatic.ballpitDefault.gravity,
+    friction: portfolioDataStatic.ballpitDefault.friction,
+    wallBounce: portfolioDataStatic.ballpitDefault.wallBounce,
+    followCursor: portfolioDataStatic.ballpitDefault.followCursor,
+    colors: portfolioDataStatic.ballpitDefault.colors
   });
-  const [portfolioData, setPortfolioData] = useState<any>({
-    name: "TALHA SAMI",
-    titles: ["Full Stack Engineer", "Automation Expert", "Mobile Developer"],
-    aboutHeading: "Bridging the gap between complex engineering and clear strategy.",
-    aboutParagraph: "I am a software engineer specializing in building robust, scalable applications from the ground up, with a technical foundation spanning full-stack web architectures, cross-platform mobile development, and workflow automation. Writing clean, high-performance code is only half the equation; my true strength lies in communication strategy—translating intricate technical requirements into clear, actionable roadmaps that bridge the divide between development teams and stakeholders to deliver a seamless user experience aligned with the business vision.",
-    aboutImage: "/data/images/profile.png"
-  });
+  const [portfolioData, setPortfolioData] = useState<any>(portfolioDataStatic);
   const heroRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const prefix = getPrefix();
-
-    const loadData = async () => {
-      let defaultsPhysics = {
-        count: 24,
-        countMobile: 8,
-        gravity: 0.1,
-        friction: 0.99,
-        wallBounce: 0.8,
-        followCursor: true,
-        colors: ["#ffffff", "#71717a", "#000000"]
-      };
-
-      let defaultsPortfolio = {
-        name: "TALHA SAMI",
-        titles: ["Full Stack Engineer", "Automation Expert", "Mobile Developer"],
-        aboutHeading: "Bridging the gap between complex engineering and clear strategy.",
-        aboutParagraph: "I am a software engineer specializing in building robust, scalable applications from the ground up, with a technical foundation spanning full-stack web architectures, cross-platform mobile development, and workflow automation. Writing clean, high-performance code is only half the equation; my true strength lies in communication strategy—translating intricate technical requirements into clear, actionable roadmaps that bridge the divide between development teams and stakeholders to deliver a seamless user experience aligned with the business vision.",
-        aboutImage: "/data/images/profile.png"
-      };
-
-      try {
-        const res = await fetch(`${prefix}/data/profileData/ballpit.json`);
-        if (res.ok) {
-          defaultsPhysics = await res.json();
-        }
-      } catch (err) {
-        console.error("Error loading ballpit default configuration:", err);
+    try {
+      const stored = localStorage.getItem("ballpit-settings");
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        setSettings({
+          ...portfolioDataStatic.ballpitDefault,
+          ...parsed,
+        });
       }
 
-      try {
-        const res = await fetch(`${prefix}/data/profileData/portfolio-defaults.json`);
-        if (res.ok) {
-          defaultsPortfolio = await res.json();
-        }
-      } catch (err) {
-        console.error("Error loading portfolio defaults:", err);
+      const storedPortfolio = localStorage.getItem("portfolio-settings");
+      if (storedPortfolio) {
+        const parsedPortfolio = JSON.parse(storedPortfolio);
+        setPortfolioData({
+          ...portfolioDataStatic,
+          ...parsedPortfolio,
+        });
       }
-
-      try {
-        const stored = localStorage.getItem("ballpit-settings");
-        if (stored) {
-          const parsed = JSON.parse(stored);
-          setSettings({
-            ...defaultsPhysics,
-            ...parsed,
-          });
-        } else {
-          setSettings(defaultsPhysics);
-        }
-
-        const storedPortfolio = localStorage.getItem("portfolio-settings");
-        if (storedPortfolio) {
-          const parsedPortfolio = JSON.parse(storedPortfolio);
-          setPortfolioData({
-            ...defaultsPortfolio,
-            ...parsedPortfolio,
-          });
-        } else {
-          setPortfolioData(defaultsPortfolio);
-        }
-      } catch (e) {
-        console.error("Error loading settings:", e);
-      }
-    };
-
-    loadData();
+    } catch (e) {
+      console.error("Error loading settings:", e);
+    }
   }, []);
 
   return (

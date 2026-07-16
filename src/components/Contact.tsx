@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { prefixAsset, getPrefix } from "@/utils/prefixAsset";
+import SafeImage from "@/components/ui/SafeImage";
+import portfolioDataStatic from "@/data/portfolioData.json";
 
 const DEFAULT_PORTFOLIO_FALLBACK = {
   contactSubheading: "WE'RE HERE TO HELP YOU",
@@ -21,7 +23,10 @@ const DEFAULT_PORTFOLIO_FALLBACK = {
 };
 
 export default function Contact() {
-  const [data, setData] = useState<any>(DEFAULT_PORTFOLIO_FALLBACK);
+  const [data, setData] = useState<any>({
+    ...DEFAULT_PORTFOLIO_FALLBACK,
+    ...portfolioDataStatic
+  });
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -43,51 +48,35 @@ export default function Contact() {
   }, []);
 
   useEffect(() => {
-    const prefix = getPrefix();
+    try {
+      const stored = localStorage.getItem("portfolio-settings");
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        setData({
+          ...DEFAULT_PORTFOLIO_FALLBACK,
+          ...portfolioDataStatic,
+          ...parsed
+        });
 
-    const loadContactData = async () => {
-      let defaults = DEFAULT_PORTFOLIO_FALLBACK;
-      try {
-        const res = await fetch(`${prefix}/data/profileData/portfolio-defaults.json`);
-        if (res.ok) {
-          defaults = await res.json();
+        const interests = parsed.contactInterests || portfolioDataStatic.contactInterests || DEFAULT_PORTFOLIO_FALLBACK.contactInterests;
+        if (interests && interests.length > 0) {
+          setFormData((prev) => ({
+            ...prev,
+            interest: interests[0]
+          }));
         }
-      } catch (err) {
-        console.error("Error fetching defaults in Contact:", err);
-      }
-
-      try {
-        const stored = localStorage.getItem("portfolio-settings");
-        if (stored) {
-          const parsed = JSON.parse(stored);
-          setData({
-            ...defaults,
-            ...parsed
-          });
-
-          const interests = parsed.contactInterests || defaults.contactInterests;
-          if (interests && interests.length > 0) {
-            setFormData((prev) => ({
-              ...prev,
-              interest: interests[0]
-            }));
-          }
-        } else {
-          setData(defaults);
-          const interests = defaults.contactInterests;
-          if (interests && interests.length > 0) {
-            setFormData((prev) => ({
-              ...prev,
-              interest: interests[0]
-            }));
-          }
+      } else {
+        const interests = portfolioDataStatic.contactInterests || DEFAULT_PORTFOLIO_FALLBACK.contactInterests;
+        if (interests && interests.length > 0) {
+          setFormData((prev) => ({
+            ...prev,
+            interest: interests[0]
+          }));
         }
-      } catch (e) {
-        console.error("Error parsing contact settings:", e);
       }
-    };
-
-    loadContactData();
+    } catch (e) {
+      console.error("Error parsing contact settings:", e);
+    }
   }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -202,21 +191,21 @@ export default function Contact() {
                       title={social.name}
                     >
                       {social.logo && social.logo !== "null" && social.logo !== "" ? (
-                        /* eslint-disable-next-line @next/next/no-img-element */
-                        <img
+                        <SafeImage
                           src={prefixAsset(social.logo)}
                           alt={social.name}
-                          className="w-5 h-5 object-contain transition-transform duration-300 group-hover:scale-125"
-                          onError={(e) => {
-                            e.currentTarget.style.display = "none";
-                            const fallbackSpan = e.currentTarget.nextSibling as HTMLSpanElement;
-                            if (fallbackSpan) fallbackSpan.style.display = "inline";
-                          }}
+                          fallback={
+                            <span className="text-[10px] font-mono font-bold text-neutral-500 dark:text-neutral-450">
+                              {social.name.substring(0, 2).toUpperCase()}
+                            </span>
+                          }
+                          className="w-5 h-5 object-contain transition-transform duration-300 group-hover:scale-125 flex items-center justify-center"
                         />
-                      ) : null}
-                      <span className={`${social.logo && social.logo !== "null" && social.logo !== "" ? "hidden" : "inline"} text-[10px] font-mono font-bold text-neutral-500 dark:text-neutral-450`}>
-                        {social.name.substring(0, 2).toUpperCase()}
-                      </span>
+                      ) : (
+                        <span className="text-[10px] font-mono font-bold text-neutral-500 dark:text-neutral-455">
+                          {social.name.substring(0, 2).toUpperCase()}
+                        </span>
+                      )}
                     </a>
                   ))}
                 </div>

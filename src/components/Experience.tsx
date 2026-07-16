@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import LineSidebar from "@/components/ui/LineSidebar";
 import BorderGlow from "@/components/ui/BorderGlow";
 import { prefixAsset } from "@/utils/prefixAsset";
+import SafeImage from "@/components/ui/SafeImage";
 
 interface ExperienceItem {
   company: string;
@@ -190,10 +191,15 @@ export default function Experience({ experiences = [] }: ExperienceProps) {
                             <div className="w-14 h-14 shrink-0 flex items-center justify-center">
                               {/* eslint-disable-next-line @next/next/no-img-element */}
                               {activeExp.logo && activeExp.logo !== "null" && activeExp.logo !== "" ? (
-                                <img
+                                <SafeImage
                                   src={prefixAsset(activeExp.logo)}
                                   alt={`${activeExp.company} logo`}
                                   className="w-full h-full object-contain rounded-xl"
+                                  fallback={
+                                    <div className="w-full h-full bg-neutral-100 dark:bg-zinc-900 rounded-xl flex items-center justify-center font-bold text-lg text-neutral-400 dark:text-neutral-500 font-mono">
+                                      {activeExp.company.charAt(0).toUpperCase()}
+                                    </div>
+                                  }
                                 />
                               ) : (
                                 <div className="w-full h-full bg-neutral-100 dark:bg-zinc-900 rounded-xl flex items-center justify-center font-bold text-lg text-neutral-400 dark:text-neutral-500 font-mono">

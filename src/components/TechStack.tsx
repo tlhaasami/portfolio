@@ -3,6 +3,8 @@
 import React, { useState, useEffect, useMemo } from "react";
 import LogoLoop, { LogoItem } from "@/components/ui/LogoLoop";
 import { prefixAsset, getPrefix } from "@/utils/prefixAsset";
+import SafeImage from "@/components/ui/SafeImage";
+import portfolioDataStatic from "@/data/portfolioData.json";
 
 interface TechItem {
   name: string;
@@ -13,26 +15,17 @@ interface TechItem {
 
 export default function TechStack() {
   const [brokenLogos, setBrokenLogos] = useState<Record<string, boolean>>({});
-  const [techList, setTechList] = useState<TechItem[]>([]);
+  const [techList, setTechList] = useState<TechItem[]>(portfolioDataStatic.technologies);
   const [settings, setSettings] = useState({
-    cardSize: 96,
-    logoSize: 48,
-    speed: 25,
-    gap: 16,
-    pauseOnHover: true,
-    scaleOnHover: true
+    cardSize: portfolioDataStatic.techSettings.cardSize || 96,
+    logoSize: portfolioDataStatic.techSettings.logoSize || 48,
+    speed: portfolioDataStatic.techSettings.speed || 25,
+    gap: portfolioDataStatic.techSettings.gap || 16,
+    pauseOnHover: portfolioDataStatic.techSettings.pauseOnHover !== undefined ? portfolioDataStatic.techSettings.pauseOnHover : true,
+    scaleOnHover: portfolioDataStatic.techSettings.scaleOnHover !== undefined ? portfolioDataStatic.techSettings.scaleOnHover : true
   });
 
   useEffect(() => {
-    const prefix = getPrefix();
-
-    // 1. Fetch technologies list
-    fetch(`${prefix}/data/profileData/technologies.json`)
-      .then((res) => res.json())
-      .then((data) => setTechList(data))
-      .catch((err) => console.error("Error loading technologies:", err));
-
-    // 2. Fetch/Load custom settings
     try {
       const stored = localStorage.getItem("portfolio-settings");
       if (stored) {
@@ -43,18 +36,6 @@ export default function TechStack() {
             ...parsed.techSettings
           }));
         }
-      } else {
-        fetch(`${prefix}/data/profileData/portfolio-defaults.json`)
-          .then((res) => res.json())
-          .then((defaults) => {
-            if (defaults.techSettings) {
-              setSettings((prev) => ({
-                ...prev,
-                ...defaults.techSettings
-              }));
-            }
-          })
-          .catch((err) => console.error("Error loading defaults:", err));
       }
     } catch (e) {
       console.error("Error loading settings:", e);
@@ -106,20 +87,26 @@ export default function TechStack() {
                   </svg>
                 </div>
               ) : (
-                /* eslint-disable-next-line @next/next/no-img-element */
-                <img
+                <SafeImage
                   src={prefixAsset(t.logo)}
                   alt={`${t.name} logo`}
-                  onError={() => {
-                    setBrokenLogos((prev) => ({
-                      ...prev,
-                      [t.name]: true
-                    }));
-                  }}
-                  className="object-contain opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-350"
+                  fallback={
+                    <div 
+                      className="w-full h-full flex items-center justify-center rounded-[24px]"
+                      style={{ 
+                        color: t.color || '#9ca3af', 
+                        backgroundColor: `${t.color || '#9ca3af'}15` 
+                      }}
+                    >
+                      <svg className="w-6 h-6 stroke-current fill-none animate-pulse" strokeWidth="2.5" viewBox="0 0 24 24">
+                        <polyline points="16 18 22 12 16 6"></polyline>
+                        <polyline points="8 6 2 12 8 18"></polyline>
+                      </svg>
+                    </div>
+                  }
+                  className="object-contain opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-350 flex items-center justify-center"
                   style={{ width: `${settings.logoSize}px`, height: `${settings.logoSize}px` }}
                   draggable={false}
-                  loading="lazy"
                 />
               )}
             </div>

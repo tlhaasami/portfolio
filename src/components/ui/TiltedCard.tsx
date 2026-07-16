@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import './TiltedCard.css';
 
@@ -44,6 +44,42 @@ export default function TiltedCard({
   className = ''
 }: TiltedCardProps) {
   const ref = useRef<HTMLElement>(null);
+  const imgRef = useRef<HTMLImageElement>(null);
+  const [imageStatus, setImageStatus] = useState<"loading" | "loaded" | "error">("loading");
+
+  useEffect(() => {
+    if (!imageSrc) {
+      setImageStatus("error");
+      return;
+    }
+    console.log(`[TiltedCard] Reading profile image from json: ${imageSrc}`);
+
+    const img = imgRef.current;
+    if (!img) return;
+
+    const onLoad = () => {
+      console.log(`[TiltedCard] Successfully loaded image: ${imageSrc}`);
+      setImageStatus("loaded");
+    };
+
+    const onError = () => {
+      console.error(`[TiltedCard] Failed to load image: ${imageSrc}`);
+      setImageStatus("error");
+    };
+
+    if (img.complete) {
+      onLoad();
+    } else {
+      setImageStatus("loading");
+      img.addEventListener("load", onLoad);
+      img.addEventListener("error", onError);
+    }
+
+    return () => {
+      img.removeEventListener("load", onLoad);
+      img.removeEventListener("error", onError);
+    };
+  }, [imageSrc]);
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -119,14 +155,24 @@ export default function TiltedCard({
           scale
         }}
       >
-        {imageSrc ? (
+        {imageStatus === "loading" && (
+          <div className="absolute inset-0 bg-neutral-200/50 dark:bg-zinc-800/50 animate-pulse rounded-inherit w-full h-full z-10" />
+        )}
+        {imageStatus === "error" && (
+          <div className="absolute inset-0 bg-neutral-100 dark:bg-zinc-900 border border-dashed border-neutral-300 dark:border-zinc-800 rounded-inherit flex items-center justify-center text-xs text-neutral-400 font-mono z-10">
+            Profile Pic N/A
+          </div>
+        )}
+         {imageSrc ? (
           <motion.img
+            ref={imgRef}
             src={imageSrc}
             alt={altText}
             className="tilted-card-img"
             style={{
               width: imageWidth,
-              height: imageHeight
+              height: imageHeight,
+              opacity: imageStatus === "loaded" ? 1 : 0
             }}
           />
         ) : null}

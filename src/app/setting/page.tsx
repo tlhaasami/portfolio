@@ -31,6 +31,7 @@ const Ballpit = dynamic(() => import("@/components/Ballpit"), {
   ssr: false,
 });
 import { getPrefix } from "@/utils/prefixAsset";
+import portfolioDataStatic from "@/data/portfolioData.json";
 
 const PALETTES = [
   { name: "Monochrome Black & White", colors: ["#ffffff", "#71717a", "#000000"] },
@@ -58,15 +59,17 @@ export default function AdminSettings() {
 
   // Dynamic Portfolio Content Configuration State
   const [portfolioData, setPortfolioData] = useState<any>({
-    name: "TALHA SAMI",
-    titles: ["Full Stack Engineer", "Automation Expert", "Mobile Developer"],
-    aboutHeading: "Bridging the gap between complex engineering and clear strategy.",
-    aboutParagraph: "I am a software engineer specializing in building robust, scalable applications from the ground up, with a technical foundation spanning full-stack web architectures, cross-platform mobile development, and workflow automation. Writing clean, high-performance code is only half the equation; my true strength lies in communication strategy—translating intricate technical requirements into clear, actionable roadmaps that bridge the divide between development teams and stakeholders to deliver a seamless user experience aligned with the business vision.",
-    aboutImage: "/data/images/profile.png",
-    experiences: [],
-    certificates: [],
-    featuredProjects: [],
-    secondaryProjects: []
+    name: portfolioDataStatic.name,
+    titles: portfolioDataStatic.titles,
+    aboutHeading: portfolioDataStatic.aboutHeading,
+    aboutParagraph: portfolioDataStatic.aboutParagraph,
+    aboutImage: portfolioDataStatic.aboutImage,
+    experiences: portfolioDataStatic.experiences,
+    certificates: portfolioDataStatic.certificates,
+    featuredProjects: portfolioDataStatic.featuredProjects,
+    secondaryProjects: portfolioDataStatic.secondaryProjects,
+    achievements: portfolioDataStatic.achievements || [],
+    techSettings: portfolioDataStatic.techSettings
   });
 
   const [newTitle, setNewTitle] = useState("");
@@ -74,87 +77,52 @@ export default function AdminSettings() {
 
   // Load configuration from local storage on mount
   useEffect(() => {
-    const prefix = getPrefix();
-
-    const loadSettingsData = async () => {
-      let defaultsPhysics = {
-        count: 24,
-        countMobile: 8,
-        gravity: 0.1,
-        friction: 0.99,
-        wallBounce: 0.8,
-        followCursor: true,
-        colors: ["#ffffff", "#71717a", "#000000"]
-      };
-
-      let defaultsPortfolio = {
-        name: "TALHA SAMI",
-        titles: ["Full Stack Engineer", "Automation Expert", "Mobile Developer"],
-        aboutHeading: "Bridging the gap between complex engineering and clear strategy.",
-        aboutParagraph: "I am a software engineer specializing in building robust, scalable applications from the ground up, with a technical foundation spanning full-stack web architectures, cross-platform mobile development, and workflow automation. Writing clean, high-performance code is only half the equation; my true strength lies in communication strategy—translating intricate technical requirements into clear, actionable roadmaps that bridge the divide between development teams and stakeholders to deliver a seamless user experience aligned with the business vision.",
-        aboutImage: "/data/images/profile.png",
-        experiences: [],
-        certificates: [],
-        featuredProjects: [],
-        secondaryProjects: []
-      };
-
-      try {
-        const res = await fetch(`${prefix}/data/profileData/ballpit.json`);
-        if (res.ok) {
-          defaultsPhysics = await res.json();
-        }
-      } catch (err) {
-        console.error("Error loading ballpit default configuration:", err);
-      }
-
-      try {
-        const res = await fetch(`${prefix}/data/profileData/portfolio-defaults.json`);
-        if (res.ok) {
-          defaultsPortfolio = await res.json();
-        }
-      } catch (err) {
-        console.error("Error loading portfolio defaults:", err);
-      }
-
-      // Initialize state with defaults or localStorage
-      try {
-        const storedPhysics = localStorage.getItem("ballpit-settings");
-        if (storedPhysics) {
-          const parsed = JSON.parse(storedPhysics);
-          setCount(parsed.count !== undefined ? parsed.count : defaultsPhysics.count);
-          setCountMobile(parsed.countMobile !== undefined ? parsed.countMobile : defaultsPhysics.countMobile);
-          setGravity(parsed.gravity !== undefined ? parsed.gravity : defaultsPhysics.gravity);
-          setFriction(parsed.friction !== undefined ? parsed.friction : defaultsPhysics.friction);
-          setWallBounce(parsed.wallBounce !== undefined ? parsed.wallBounce : defaultsPhysics.wallBounce);
-          setFollowCursor(parsed.followCursor !== undefined ? parsed.followCursor : defaultsPhysics.followCursor);
-          setColors(parsed.colors !== undefined ? parsed.colors : defaultsPhysics.colors);
-        } else {
-          setCount(defaultsPhysics.count);
-          setCountMobile(defaultsPhysics.countMobile);
-          setGravity(defaultsPhysics.gravity);
-          setFriction(defaultsPhysics.friction);
-          setWallBounce(defaultsPhysics.wallBounce);
-          setFollowCursor(defaultsPhysics.followCursor);
-          setColors(defaultsPhysics.colors);
-        }
-
-        const storedPortfolio = localStorage.getItem("portfolio-settings");
-        if (storedPortfolio) {
-          const parsed = JSON.parse(storedPortfolio);
-          setPortfolioData({
-            ...defaultsPortfolio,
-            ...parsed
-          });
-        } else {
-          setPortfolioData(defaultsPortfolio);
-        }
-      } catch (e) {
-        console.error("Error loading config inside settings page:", e);
-      }
+    const defaultsPhysics = {
+      count: portfolioDataStatic.ballpitDefault.count,
+      countMobile: (portfolioDataStatic.ballpitDefault as any).countMobile || 8,
+      gravity: portfolioDataStatic.ballpitDefault.gravity,
+      friction: portfolioDataStatic.ballpitDefault.friction,
+      wallBounce: portfolioDataStatic.ballpitDefault.wallBounce,
+      followCursor: portfolioDataStatic.ballpitDefault.followCursor,
+      colors: portfolioDataStatic.ballpitDefault.colors
     };
 
-    loadSettingsData();
+    const defaultsPortfolio = portfolioDataStatic;
+
+    try {
+      const storedPhysics = localStorage.getItem("ballpit-settings");
+      if (storedPhysics) {
+        const parsed = JSON.parse(storedPhysics);
+        setCount(parsed.count !== undefined ? parsed.count : defaultsPhysics.count);
+        setCountMobile(parsed.countMobile !== undefined ? parsed.countMobile : defaultsPhysics.countMobile);
+        setGravity(parsed.gravity !== undefined ? parsed.gravity : defaultsPhysics.gravity);
+        setFriction(parsed.friction !== undefined ? parsed.friction : defaultsPhysics.friction);
+        setWallBounce(parsed.wallBounce !== undefined ? parsed.wallBounce : defaultsPhysics.wallBounce);
+        setFollowCursor(parsed.followCursor !== undefined ? parsed.followCursor : defaultsPhysics.followCursor);
+        setColors(parsed.colors !== undefined ? parsed.colors : defaultsPhysics.colors);
+      } else {
+        setCount(defaultsPhysics.count);
+        setCountMobile(defaultsPhysics.countMobile);
+        setGravity(defaultsPhysics.gravity);
+        setFriction(defaultsPhysics.friction);
+        setWallBounce(defaultsPhysics.wallBounce);
+        setFollowCursor(defaultsPhysics.followCursor);
+        setColors(defaultsPhysics.colors);
+      }
+
+      const storedPortfolio = localStorage.getItem("portfolio-settings");
+      if (storedPortfolio) {
+        const parsed = JSON.parse(storedPortfolio);
+        setPortfolioData({
+          ...defaultsPortfolio,
+          ...parsed
+        });
+      } else {
+        setPortfolioData(defaultsPortfolio);
+      }
+    } catch (e) {
+      console.error("Error loading config inside settings page:", e);
+    }
   }, []);
 
   // Featured Projects Management

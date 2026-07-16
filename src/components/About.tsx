@@ -4,6 +4,7 @@ import TiltedCard from "@/components/ui/TiltedCard";
 import BorderGlow from "@/components/ui/BorderGlow";
 import { motion } from "framer-motion";
 import { prefixAsset } from "@/utils/prefixAsset";
+import portfolioDataStatic from "@/data/portfolioData.json";
 
 interface AboutProps {
   heading?: string;
@@ -12,9 +13,9 @@ interface AboutProps {
 }
 
 export default function About({
-  heading = "Bridging the gap between complex engineering and clear strategy.",
-  paragraph = "I am a software engineer specializing in building robust, scalable applications from the ground up, with a technical foundation spanning full-stack web architectures, cross-platform mobile development, and workflow automation. Writing clean, high-performance code is only half the equation; my true strength lies in communication strategy—translating intricate technical requirements into clear, actionable roadmaps that bridge the divide between development teams and stakeholders to deliver a seamless user experience aligned with the business vision.",
-  image = "/data/images/profile.png"
+  heading = portfolioDataStatic.aboutHeading,
+  paragraph = portfolioDataStatic.aboutParagraph,
+  image = portfolioDataStatic.aboutImage
 }: AboutProps) {
   return (
     <section id="about" className="relative bg-transparent text-neutral-900 dark:text-white py-24 overflow-hidden">

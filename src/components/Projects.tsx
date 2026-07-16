@@ -3,6 +3,8 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import MobileCarousel from "@/components/ui/MobileCarousel";
 import { prefixAsset, getPrefix } from "@/utils/prefixAsset";
+import SafeImage from "@/components/ui/SafeImage";
+import portfolioDataStatic from "@/data/portfolioData.json";
 
 interface FeaturedProject {
   name: string;
@@ -24,8 +26,8 @@ interface SecondaryProject {
 }
 
 export default function Projects() {
-  const [featured, setFeatured] = useState<FeaturedProject[]>([]);
-  const [secondary, setSecondary] = useState<SecondaryProject[]>([]);
+  const [featured, setFeatured] = useState<FeaturedProject[]>(portfolioDataStatic.featuredProjects);
+  const [secondary, setSecondary] = useState<SecondaryProject[]>(portfolioDataStatic.secondaryProjects as SecondaryProject[]);
   const [selectedProject, setSelectedProject] = useState<FeaturedProject | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -40,29 +42,16 @@ export default function Projects() {
   };
 
   useEffect(() => {
-    const prefix = getPrefix();
-
-    const loadProjects = async () => {
-      try {
-        const stored = localStorage.getItem("portfolio-settings");
-        if (stored) {
-          const parsed = JSON.parse(stored);
-          if (parsed.featuredProjects) setFeatured(parsed.featuredProjects);
-          if (parsed.secondaryProjects) setSecondary(parsed.secondaryProjects);
-        } else {
-          const res = await fetch(`${prefix}/data/profileData/portfolio-defaults.json`);
-          if (res.ok) {
-            const defaults = await res.json();
-            if (defaults.featuredProjects) setFeatured(defaults.featuredProjects);
-            if (defaults.secondaryProjects) setSecondary(defaults.secondaryProjects);
-          }
-        }
-      } catch (err) {
-        console.error("Error loading projects:", err);
+    try {
+      const stored = localStorage.getItem("portfolio-settings");
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed.featuredProjects) setFeatured(parsed.featuredProjects);
+        if (parsed.secondaryProjects) setSecondary(parsed.secondaryProjects);
       }
-    };
-
-    loadProjects();
+    } catch (err) {
+      console.error("Error loading projects:", err);
+    }
   }, []);
 
   // Close modal when pressing escape key
@@ -96,12 +85,10 @@ export default function Projects() {
         {/* Image panel */}
         <div className="aspect-[16/9] w-full overflow-hidden relative bg-neutral-100 dark:bg-zinc-900 border-b border-neutral-200 dark:border-zinc-900">
           {project.image ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
+            <SafeImage
               src={prefixAsset(project.image)}
               alt={`${project.name} preview`}
               className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.025] transition-transform duration-500"
-              loading="lazy"
             />
           ) : null}
           {/* Gloss reflection sweep */}
@@ -152,12 +139,10 @@ export default function Projects() {
         {/* Image header container */}
         <div className="aspect-[16/10] w-full overflow-hidden relative bg-neutral-50 dark:bg-zinc-900 border-b border-neutral-200 dark:border-zinc-900">
           {proj.image ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
+            <SafeImage
               src={prefixAsset(proj.image)}
               alt={`${proj.name} preview`}
               className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.025] transition-transform duration-500"
-              loading="lazy"
             />
           ) : null}
           {/* Gloss reflection sweep */}
@@ -253,12 +238,10 @@ export default function Projects() {
                 {/* Image panel */}
                 <div className="aspect-[16/9] w-full overflow-hidden relative bg-neutral-100 dark:bg-zinc-900 border-b border-neutral-200 dark:border-zinc-900">
                   {project.image ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
+                    <SafeImage
                       src={prefixAsset(project.image)}
                       alt={`${project.name} preview`}
                       className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.025] transition-transform duration-500"
-                      loading="lazy"
                     />
                   ) : null}
 
@@ -352,12 +335,10 @@ export default function Projects() {
                 {/* Image header container */}
                 <div className="aspect-[16/10] w-full overflow-hidden relative bg-neutral-50 dark:bg-zinc-900 border-b border-neutral-200 dark:border-zinc-900">
                   {proj.image ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
+                    <SafeImage
                       src={prefixAsset(proj.image)}
                       alt={`${proj.name} preview`}
                       className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.025] transition-transform duration-500"
-                      loading="lazy"
                     />
                   ) : null}
 
@@ -446,8 +427,7 @@ export default function Projects() {
               {/* Feature image */}
               {selectedProject.image ? (
                 <div className="w-full aspect-[16/10] rounded-2xl overflow-hidden bg-neutral-100 dark:bg-zinc-900 border border-neutral-200 dark:border-zinc-900 relative">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <SafeImage
                     src={prefixAsset(selectedProject.image)}
                     alt={`${selectedProject.name} layout`}
                     className="absolute inset-0 w-full h-full object-cover"

@@ -18,17 +18,6 @@ export function prefixAsset(path: string): string {
     return path;
   }
 
-  // Prepend content base URL for content assets (starting with /data/ or /logos/)
-  if (
-    path.startsWith("/data/") ||
-    path.startsWith("data/") ||
-    path.startsWith("/logos/") ||
-    path.startsWith("logos/")
-  ) {
-    const cleanPath = path.startsWith("/") ? path : `/${path}`;
-    return `${PORTFOLIO_CONTENT_CDN}${cleanPath}`;
-  }
-
   // Fallback to local next base prefix if there are any other local assets
   const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
   // Avoid double prefixing
