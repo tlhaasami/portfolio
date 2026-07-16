@@ -26,6 +26,7 @@ interface TiltedCardProps {
   displayOverlayContent?: boolean;
   className?: string;
   priority?: boolean;
+  onLoaded?: () => void;
 }
 
 export default function TiltedCard({
@@ -43,7 +44,8 @@ export default function TiltedCard({
   overlayContent = null,
   displayOverlayContent = false,
   className = '',
-  priority = false
+  priority = false,
+  onLoaded
 }: TiltedCardProps) {
   const ref = useRef<HTMLElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
@@ -51,7 +53,10 @@ export default function TiltedCard({
 
   useEffect(() => {
     if (!imageSrc) {
-      setImageStatus("error");
+      setTimeout(() => {
+        setImageStatus("error");
+        if (onLoaded) onLoaded();
+      }, 0);
       return;
     }
     console.log(`[TiltedCard] Reading profile image from json: ${imageSrc}`);
@@ -62,17 +67,19 @@ export default function TiltedCard({
     const onLoad = () => {
       console.log(`[TiltedCard] Successfully loaded image: ${imageSrc}`);
       setImageStatus("loaded");
+      if (onLoaded) onLoaded();
     };
 
     const onError = () => {
       console.error(`[TiltedCard] Failed to load image: ${imageSrc}`);
       setImageStatus("error");
+      if (onLoaded) onLoaded();
     };
 
     if (img.complete) {
-      onLoad();
+      setTimeout(() => onLoad(), 0);
     } else {
-      setImageStatus("loading");
+      setTimeout(() => setImageStatus("loading"), 0);
       img.addEventListener("load", onLoad);
       img.addEventListener("error", onError);
     }
@@ -81,7 +88,7 @@ export default function TiltedCard({
       img.removeEventListener("load", onLoad);
       img.removeEventListener("error", onError);
     };
-  }, [imageSrc]);
+  }, [imageSrc, onLoaded]);
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);

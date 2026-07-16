@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import LogoLoop, { LogoItem } from "@/components/ui/LogoLoop";
-import { prefixAsset, getPrefix } from "@/utils/prefixAsset";
+import { prefixAsset } from "@/utils/prefixAsset";
 import SafeImage from "@/components/ui/SafeImage";
 import portfolioDataStatic from "@/data/portfolioData.json";
 
@@ -13,9 +13,24 @@ interface TechItem {
   logo: string;
 }
 
+// Group tech items by category
+const categories = ["Frontend & UI", "Backend & Frameworks", "Databases & Caching", "DevOps & Cloud", "Tools & Others"];
+
+const categoryMapping: { [key: string]: string } = {
+  "Frontend": "Frontend & UI",
+  "Mobile": "Frontend & UI",
+  "Backend": "Backend & Frameworks",
+  "Databases": "Databases & Caching",
+  "DevOps": "DevOps & Cloud",
+  "Automation": "Tools & Others",
+  "AI": "Tools & Others",
+  "Tools": "Tools & Others"
+};
+
+const brokenLogos: Record<string, boolean> = {};
+const techList: TechItem[] = portfolioDataStatic.technologies as TechItem[];
+
 export default function TechStack() {
-  const [brokenLogos, setBrokenLogos] = useState<Record<string, boolean>>({});
-  const [techList, setTechList] = useState<TechItem[]>(portfolioDataStatic.technologies);
   const [settings, setSettings] = useState({
     cardSize: portfolioDataStatic.techSettings.cardSize || 96,
     logoSize: portfolioDataStatic.techSettings.logoSize || 48,
@@ -31,30 +46,18 @@ export default function TechStack() {
       if (stored) {
         const parsed = JSON.parse(stored);
         if (parsed.techSettings) {
-          setSettings((prev) => ({
-            ...prev,
-            ...parsed.techSettings
-          }));
+          setTimeout(() => {
+            setSettings((prev) => ({
+              ...prev,
+              ...parsed.techSettings
+            }));
+          }, 0);
         }
       }
     } catch (e) {
       console.error("Error loading settings:", e);
     }
   }, []);
-
-  // Group tech items by category
-  const categories = ["Frontend & UI", "Backend & Frameworks", "Databases & Caching", "DevOps & Cloud", "Tools & Others"];
-
-  const categoryMapping: { [key: string]: string } = {
-    "Frontend": "Frontend & UI",
-    "Mobile": "Frontend & UI",
-    "Backend": "Backend & Frameworks",
-    "Databases": "Databases & Caching",
-    "DevOps": "DevOps & Cloud",
-    "Automation": "Tools & Others",
-    "AI": "Tools & Others",
-    "Tools": "Tools & Others"
-  };
 
   const categoryGroups = useMemo(() => {
     return categories.map((cat) => {
@@ -120,7 +123,7 @@ export default function TechStack() {
         logos
       };
     });
-  }, [settings.cardSize, settings.logoSize, settings.gap, settings.pauseOnHover, settings.scaleOnHover, brokenLogos]);
+  }, [settings.cardSize, settings.logoSize]);
 
   return (
     <section
@@ -143,7 +146,7 @@ export default function TechStack() {
             <polyline points="16 18 22 12 16 6"></polyline>
             <polyline points="8 6 2 12 8 18"></polyline>
           </svg>
-          <span>// MY TECH STACK</span>
+          <span>{"// MY TECH STACK"}</span>
         </span>
         <h2 className="text-4xl md:text-5xl font-black tracking-tight text-neutral-900 dark:text-white">
           Ecosystem & Tools

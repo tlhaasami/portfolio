@@ -1,11 +1,29 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { prefixAsset, getPrefix } from "@/utils/prefixAsset";
+import { prefixAsset } from "@/utils/prefixAsset";
 import SafeImage from "@/components/ui/SafeImage";
 import portfolioDataStatic from "@/data/portfolioData.json";
 
-const DEFAULT_PORTFOLIO_FALLBACK = {
+interface SocialItem {
+  name: string;
+  platform: string;
+  url: string;
+  logo: string;
+  visible: boolean;
+}
+
+interface ContactData {
+  contactSubheading: string;
+  contactHeading: string;
+  contactParagraph: string;
+  contactEmail: string;
+  contactPhone: string;
+  contactInterests: string[];
+  socials: SocialItem[];
+}
+
+const DEFAULT_PORTFOLIO_FALLBACK: ContactData = {
   contactSubheading: "WE'RE HERE TO HELP YOU",
   contactHeading: "Discuss Your Project & Engineering Needs",
   contactParagraph: "Are you looking for high-performance systems, robust automation workflows, or backend integrations tailored to your requirements? Reach out to start a conversation.",
@@ -19,14 +37,14 @@ const DEFAULT_PORTFOLIO_FALLBACK = {
     "Full-Stack Project",
     "Consulting / General Inquiry"
   ],
-  socials: [] as any[]
+  socials: []
 };
 
 export default function Contact() {
-  const [data, setData] = useState<any>({
+  const [data, setData] = useState<ContactData>({
     ...DEFAULT_PORTFOLIO_FALLBACK,
     ...portfolioDataStatic
-  });
+  } as unknown as ContactData);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -52,26 +70,30 @@ export default function Contact() {
       const stored = localStorage.getItem("portfolio-settings");
       if (stored) {
         const parsed = JSON.parse(stored);
-        setData({
-          ...DEFAULT_PORTFOLIO_FALLBACK,
-          ...portfolioDataStatic,
-          ...parsed
-        });
+        setTimeout(() => {
+          setData({
+            ...DEFAULT_PORTFOLIO_FALLBACK,
+            ...portfolioDataStatic,
+            ...parsed
+          } as unknown as ContactData);
 
-        const interests = parsed.contactInterests || portfolioDataStatic.contactInterests || DEFAULT_PORTFOLIO_FALLBACK.contactInterests;
-        if (interests && interests.length > 0) {
-          setFormData((prev) => ({
-            ...prev,
-            interest: interests[0]
-          }));
-        }
+          const interests = parsed.contactInterests || portfolioDataStatic.contactInterests || DEFAULT_PORTFOLIO_FALLBACK.contactInterests;
+          if (interests && interests.length > 0) {
+            setFormData((prev) => ({
+              ...prev,
+              interest: interests[0]
+            }));
+          }
+        }, 0);
       } else {
         const interests = portfolioDataStatic.contactInterests || DEFAULT_PORTFOLIO_FALLBACK.contactInterests;
         if (interests && interests.length > 0) {
-          setFormData((prev) => ({
-            ...prev,
-            interest: interests[0]
-          }));
+          setTimeout(() => {
+            setFormData((prev) => ({
+              ...prev,
+              interest: interests[0]
+            }));
+          }, 0);
         }
       }
     } catch (e) {
@@ -108,7 +130,7 @@ export default function Contact() {
     }, 4500);
   };
 
-  const visibleSocials = (data.socials || []).filter((s: any) => s.visible);
+  const visibleSocials = (data.socials || []).filter((s: SocialItem) => s.visible);
   const interestOptions = data.contactInterests || DEFAULT_PORTFOLIO_FALLBACK.contactInterests;
 
   return (
@@ -181,7 +203,7 @@ export default function Contact() {
                   Find me on tech platforms:
                 </span>
                 <div className="flex flex-wrap gap-3">
-                  {visibleSocials.map((social: any) => (
+                  {visibleSocials.map((social: SocialItem) => (
                     <a
                       key={social.name}
                       href={social.url}

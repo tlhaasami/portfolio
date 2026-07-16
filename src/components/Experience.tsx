@@ -27,7 +27,7 @@ export default function Experience({ experiences = [] }: ExperienceProps) {
   const [isMounted, setIsMounted] = useState<boolean>(false);
 
   useEffect(() => {
-    setIsMounted(true);
+    setTimeout(() => setIsMounted(true), 0);
   }, []);
 
   if (experiences.length === 0) return null;
@@ -87,10 +87,10 @@ export default function Experience({ experiences = [] }: ExperienceProps) {
               <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
               <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
             </svg>
-            <span>// WORK EXPERIENCE</span>
+            <span>{"// WORK EXPERIENCE"}</span>
           </span>
           <h2 className="text-4xl md:text-5xl font-black tracking-tight text-neutral-900 dark:text-white">
-            Where I've Worked
+            Where I&apos;ve Worked
           </h2>
         </div>
 
@@ -189,7 +189,6 @@ export default function Experience({ experiences = [] }: ExperienceProps) {
                           <div className="flex items-center gap-4.5">
                             {/* Company Logo Box - No background/borders */}
                             <div className="w-14 h-14 shrink-0 flex items-center justify-center">
-                              {/* eslint-disable-next-line @next/next/no-img-element */}
                               {activeExp.logo && activeExp.logo !== "null" && activeExp.logo !== "" ? (
                                 <SafeImage
                                   src={prefixAsset(activeExp.logo)}

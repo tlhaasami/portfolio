@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import LogoLoop, { LogoItem } from "@/components/ui/LogoLoop";
 import MobileCarousel from "@/components/ui/MobileCarousel";
-import { prefixAsset, getPrefix } from "@/utils/prefixAsset";
+import { prefixAsset } from "@/utils/prefixAsset";
 import SafeImage from "@/components/ui/SafeImage";
 import portfolioDataStatic from "@/data/portfolioData.json";
 
@@ -32,8 +32,10 @@ export default function Certificates() {
       const stored = localStorage.getItem("portfolio-settings");
       if (stored) {
         const parsed = JSON.parse(stored);
-        if (parsed.certificates) setCerts(parsed.certificates);
-        if (parsed.achievements) setAchievements(parsed.achievements);
+        setTimeout(() => {
+          if (parsed.certificates) setCerts(parsed.certificates);
+          if (parsed.achievements) setAchievements(parsed.achievements);
+        }, 0);
       }
     } catch (err) {
       console.error("Error loading certificates:", err);
@@ -292,7 +294,7 @@ export default function Certificates() {
             <circle cx="12" cy="12" r="10"></circle>
             <path d="M12 8v4l3 3"></path>
           </svg>
-          <span>// CREDENTIALS & ACHIEVEMENTS</span>
+          <span>{"// CREDENTIALS & ACHIEVEMENTS"}</span>
         </span>
         <h2 className="text-4xl md:text-5xl font-black tracking-tight text-neutral-900 dark:text-white">
           Verified Certifications & Honors

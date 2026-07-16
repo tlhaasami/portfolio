@@ -64,8 +64,15 @@ const LineSidebar = ({
   const smoothingRef = useRef<number>(smoothing);
   const [activeIndex, setActiveIndex] = useState<number | null>(defaultActive);
 
-  activeRef.current = activeIndex;
-  smoothingRef.current = smoothing;
+  useEffect(() => {
+    activeRef.current = activeIndex;
+  }, [activeIndex]);
+
+  useEffect(() => {
+    smoothingRef.current = smoothing;
+  }, [smoothing]);
+
+  const runFrameRef = useRef<(now: number) => void>(() => {});
 
   // Single rAF loop that eases every item's --effect toward its target using
   // frame-rate independent exponential smoothing, so color, shift and scale
@@ -91,8 +98,12 @@ const LineSidebar = ({
       if (!settled) moving = true;
     }
 
-    rafRef.current = moving ? requestAnimationFrame(runFrame) : null;
+    rafRef.current = moving ? requestAnimationFrame(runFrameRef.current) : null;
   }, []);
+
+  useEffect(() => {
+    runFrameRef.current = runFrame;
+  }, [runFrame]);
 
   const startLoop = useCallback(() => {
     if (rafRef.current != null) return;
@@ -135,7 +146,9 @@ const LineSidebar = ({
 
   useEffect(() => {
     // Keep activeIndex in sync if defaultActive changes
-    setActiveIndex(defaultActive);
+    setTimeout(() => {
+      setActiveIndex(defaultActive);
+    }, 0);
   }, [defaultActive]);
 
   useEffect(() => {

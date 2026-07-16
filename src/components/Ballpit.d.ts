@@ -10,6 +10,7 @@ interface BallpitProps {
   followCursor?: boolean;
   colors?: string[];
   size?: string;
+  onLoaded?: () => void;
 }
 
 declare const Ballpit: React.ComponentType<BallpitProps>;

@@ -11,26 +11,26 @@ export default function MobileCarousel({ items, autoPlayInterval = 4000 }: Mobil
   const [activeIndex, setActiveIndex] = useState(0);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const startTimer = () => {
-    stopTimer();
-    timerRef.current = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % items.length);
-    }, autoPlayInterval);
-  };
-
-  const stopTimer = () => {
+  const stopTimer = React.useCallback(() => {
     if (timerRef.current) {
       clearInterval(timerRef.current);
       timerRef.current = null;
     }
-  };
+  }, []);
+
+  const startTimer = React.useCallback(() => {
+    stopTimer();
+    timerRef.current = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % items.length);
+    }, autoPlayInterval);
+  }, [items.length, autoPlayInterval, stopTimer]);
 
   useEffect(() => {
     if (items.length > 1) {
       startTimer();
     }
     return () => stopTimer();
-  }, [items.length, autoPlayInterval]);
+  }, [items.length, startTimer, stopTimer]);
 
   const handleDotClick = (index: number) => {
     setActiveIndex(index);

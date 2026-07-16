@@ -10,12 +10,14 @@ interface AboutProps {
   heading?: string;
   paragraph?: string;
   image?: string;
+  onImageLoad?: () => void;
 }
 
 export default function About({
   heading = portfolioDataStatic.aboutHeading,
   paragraph = portfolioDataStatic.aboutParagraph,
-  image = portfolioDataStatic.aboutImage
+  image = portfolioDataStatic.aboutImage,
+  onImageLoad
 }: AboutProps) {
   return (
     <section id="about" className="relative bg-transparent text-neutral-900 dark:text-white py-24 overflow-hidden">
@@ -47,6 +49,7 @@ export default function About({
               showTooltip={true}
               displayOverlayContent={true}
               priority={true}
+              onLoaded={onImageLoad}
               className="absolute inset-0 w-full h-full"
               overlayContent={
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent pointer-events-none" />

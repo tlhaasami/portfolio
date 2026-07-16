@@ -85,7 +85,7 @@ const ScrollFloat: React.FC<ScrollFloatProps> = ({
           stagger: stagger,
           scrollTrigger: {
             trigger: el,
-            scroller: scroller as any,
+            scroller: scroller as string | Element | Window,
             start: scrollStart,
             end: scrollEnd,
             scrub: true

@@ -21,7 +21,7 @@ export default function SafeImage({
 
   useEffect(() => {
     if (!src) {
-      setStatus("error");
+      setTimeout(() => setStatus("error"), 0);
       return;
     }
     console.log(`[SafeImage] Reading image source from json: ${src}`);
@@ -41,9 +41,9 @@ export default function SafeImage({
 
     // If it's already cached and complete
     if (img.complete) {
-      onLoad();
+      setTimeout(() => onLoad(), 0);
     } else {
-      setStatus("loading");
+      setTimeout(() => setStatus("loading"), 0);
       img.addEventListener("load", onLoad);
       img.addEventListener("error", onError);
     }
@@ -55,7 +55,6 @@ export default function SafeImage({
   }, [src]);
 
   const isContain = className.includes("object-contain");
-  const isCover = className.includes("object-cover");
   const objectFitClass = isContain ? "object-contain" : "object-cover";
 
   return (

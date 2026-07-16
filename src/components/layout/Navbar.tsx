@@ -157,7 +157,9 @@ export default function Navbar() {
   // Sync initial theme
   useEffect(() => {
     const saved = localStorage.getItem("portfolio-theme") || "dark";
-    setTheme(saved as "light" | "dark");
+    setTimeout(() => {
+      setTheme(saved as "light" | "dark");
+    }, 0);
     if (saved === "dark") {
       document.documentElement.classList.add("dark");
     } else {

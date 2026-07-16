@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import MobileCarousel from "@/components/ui/MobileCarousel";
-import { prefixAsset, getPrefix } from "@/utils/prefixAsset";
+import { prefixAsset } from "@/utils/prefixAsset";
 import SafeImage from "@/components/ui/SafeImage";
 import portfolioDataStatic from "@/data/portfolioData.json";
 
@@ -46,8 +46,10 @@ export default function Projects() {
       const stored = localStorage.getItem("portfolio-settings");
       if (stored) {
         const parsed = JSON.parse(stored);
-        if (parsed.featuredProjects) setFeatured(parsed.featuredProjects);
-        if (parsed.secondaryProjects) setSecondary(parsed.secondaryProjects);
+        setTimeout(() => {
+          if (parsed.featuredProjects) setFeatured(parsed.featuredProjects);
+          if (parsed.secondaryProjects) setSecondary(parsed.secondaryProjects);
+        }, 0);
       }
     } catch (err) {
       console.error("Error loading projects:", err);
@@ -126,63 +128,7 @@ export default function Projects() {
     ));
   }, [featured]);
 
-  // Secondary Projects Slides for Mobile Carousel
-  const secondaryProjectsSlides = useMemo(() => {
-    return secondary.map((proj) => (
-      <a
-        key={proj.name}
-        href={proj.repoLink}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group relative overflow-hidden rounded-[24px] border border-neutral-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 hover:border-neutral-400 dark:hover:border-white/30 hover:-translate-y-1.5 transition-all duration-300 select-none cursor-pointer flex flex-col justify-between shadow-sm hover:shadow-lg"
-      >
-        {/* Image header container */}
-        <div className="aspect-[16/10] w-full overflow-hidden relative bg-neutral-50 dark:bg-zinc-900 border-b border-neutral-200 dark:border-zinc-900">
-          {proj.image ? (
-            <SafeImage
-              src={prefixAsset(proj.image)}
-              alt={`${proj.name} preview`}
-              className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.025] transition-transform duration-500"
-            />
-          ) : null}
-          {/* Gloss reflection sweep */}
-          <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-white/10 to-transparent z-15 pointer-events-none" />
-        </div>
 
-        {/* Copy content and tags */}
-        <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
-          <div className="space-y-2">
-            {/* Header line */}
-            <div className="flex justify-between items-start gap-4">
-              <h4 className="text-sm font-extrabold text-neutral-900 dark:text-white group-hover:text-neutral-700 dark:group-hover:text-zinc-300 transition-colors">
-                {proj.name}
-              </h4>
-              {/* GitHub vector icon */}
-              <svg className="w-4 h-4 text-neutral-450 dark:text-neutral-400 group-hover:text-neutral-950 dark:group-hover:text-white transition-colors shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z"></path>
-              </svg>
-            </div>
-
-            <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed font-sans line-clamp-3">
-              {proj.description}
-            </p>
-          </div>
-
-          {/* Tech stack lists */}
-          <div className="flex flex-wrap gap-1">
-            {proj.techStack.map((tech) => (
-              <span
-                key={tech}
-                className="px-1.5 py-0.5 bg-neutral-50 dark:bg-zinc-900 border border-neutral-200/60 dark:border-zinc-800/60 rounded font-mono text-[8px] text-neutral-600 dark:text-neutral-300 font-semibold"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-        </div>
-      </a>
-    ));
-  }, [secondary]);
 
   return (
     <section
@@ -207,7 +153,7 @@ export default function Projects() {
             <line x1="8" y1="21" x2="16" y2="21"></line>
             <line x1="12" y1="17" x2="12" y2="21"></line>
           </svg>
-          <span>// PORTFOLIO PROJECTS</span>
+          <span>{"// PORTFOLIO PROJECTS"}</span>
         </span>
         <h2 className="text-4xl md:text-5xl font-black tracking-tight text-neutral-900 dark:text-white">
           Featured Work & R&D

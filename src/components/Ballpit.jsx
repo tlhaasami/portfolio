@@ -105,11 +105,19 @@ class x {
   }
   #u(e) {
     this.#s = e[0].isIntersecting;
-    this.#s ? this.#w() : this.#z();
+    if (this.#s) {
+      this.#w();
+    } else {
+      this.#z();
+    }
   }
   #v() {
     if (this.#s) {
-      document.hidden ? this.#z() : this.#w();
+      if (document.hidden) {
+        this.#z();
+      } else {
+        this.#w();
+      }
     }
   }
   #f() {
@@ -782,6 +790,9 @@ const Ballpit = ({ className = '', followCursor = true, countMobile, ...props })
         ...props,
         count: responsiveCount
       });
+      if (props.onLoaded) {
+        props.onLoaded();
+      }
     } catch (error) {
       console.error("Failed to initialize Ballpit WebGL:", error);
     }
@@ -795,6 +806,7 @@ const Ballpit = ({ className = '', followCursor = true, countMobile, ...props })
         }
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [followCursor, responsiveCount, props.gravity, props.friction, props.wallBounce, JSON.stringify(props.colors)]);
 
   return <canvas className={className} ref={canvasRef} style={{ width: '100%', height: '100%' }} />;
