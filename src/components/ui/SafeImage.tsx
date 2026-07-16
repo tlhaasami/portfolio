@@ -35,7 +35,7 @@ export default function SafeImage({
     };
 
     const onError = () => {
-      console.error(`[SafeImage] Failed to load image: ${src}`);
+      console.warn(`[SafeImage] Failed to load image: ${src}`);
       setStatus("error");
     };
 

@@ -28,6 +28,7 @@ interface LineSidebarProps {
   smoothing?: number;
   defaultActive?: number | null;
   onItemClick?: (index: number, label: string) => void;
+  onItemHover?: (index: number, label: string) => void;
   className?: string;
   indexOffset?: number;
 }
@@ -51,6 +52,7 @@ const LineSidebar = ({
   smoothing = 100,
   defaultActive = null,
   onItemClick,
+  onItemHover,
   className = '',
   indexOffset = 0
 }: LineSidebarProps) => {
@@ -144,6 +146,14 @@ const LineSidebar = ({
     [onItemClick]
   );
 
+  const handlePointerEnter = useCallback(
+    (index: number, label: string) => {
+      setActiveIndex(index);
+      onItemHover?.(index, label);
+    },
+    [onItemHover]
+  );
+
   useEffect(() => {
     // Keep activeIndex in sync if defaultActive changes
     setTimeout(() => {
@@ -206,6 +216,7 @@ const LineSidebar = ({
             className="line-sidebar__item"
             aria-current={activeIndex === index ? 'true' : undefined}
             onClick={() => handleClick(index, label)}
+            onPointerEnter={() => handlePointerEnter(index, label)}
           >
             {showMarker && <span className="line-sidebar__marker" aria-hidden="true" />}
             <span className="line-sidebar__label">

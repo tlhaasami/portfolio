@@ -136,6 +136,7 @@ export default function Experience({ experiences = [] }: ExperienceProps) {
               defaultActive={activeIndex - startIndex} // Sync active index relative to the visible window
               indexOffset={startIndex} // Sync list count numbering with offset position
               onItemClick={handleItemClick}
+              onItemHover={handleItemClick}
               accentColor="var(--foreground)" // Neutral foreground
               textColor="var(--foreground)"
               markerColor="#71717a"
@@ -195,14 +196,20 @@ export default function Experience({ experiences = [] }: ExperienceProps) {
                                   alt={`${activeExp.company} logo`}
                                   className="w-full h-full object-contain rounded-xl"
                                   fallback={
-                                    <div className="w-full h-full bg-neutral-100 dark:bg-zinc-900 rounded-xl flex items-center justify-center font-bold text-lg text-neutral-400 dark:text-neutral-500 font-mono">
-                                      {activeExp.company.charAt(0).toUpperCase()}
+                                    <div className="w-full h-full bg-neutral-100 dark:bg-zinc-900 rounded-xl flex items-center justify-center border border-neutral-200/40 dark:border-zinc-800/40">
+                                      <svg className="w-5 h-5 stroke-neutral-450 dark:stroke-neutral-500 fill-none" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                                        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                      </svg>
                                     </div>
                                   }
                                 />
                               ) : (
-                                <div className="w-full h-full bg-neutral-100 dark:bg-zinc-900 rounded-xl flex items-center justify-center font-bold text-lg text-neutral-400 dark:text-neutral-500 font-mono">
-                                  {activeExp.company.charAt(0).toUpperCase()}
+                                <div className="w-full h-full bg-neutral-100 dark:bg-zinc-900 rounded-xl flex items-center justify-center border border-neutral-200/40 dark:border-zinc-800/40">
+                                  <svg className="w-5 h-5 stroke-neutral-450 dark:stroke-neutral-500 fill-none" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                  </svg>
                                 </div>
                               )}
                             </div>
