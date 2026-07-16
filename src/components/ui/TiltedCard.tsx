@@ -25,6 +25,7 @@ interface TiltedCardProps {
   overlayContent?: React.ReactNode;
   displayOverlayContent?: boolean;
   className?: string;
+  priority?: boolean;
 }
 
 export default function TiltedCard({
@@ -41,7 +42,8 @@ export default function TiltedCard({
   showTooltip = true,
   overlayContent = null,
   displayOverlayContent = false,
-  className = ''
+  className = '',
+  priority = false
 }: TiltedCardProps) {
   const ref = useRef<HTMLElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
@@ -163,19 +165,24 @@ export default function TiltedCard({
             Profile Pic N/A
           </div>
         )}
-         {imageSrc ? (
-          <motion.img
-            ref={imgRef}
-            src={imageSrc}
-            alt={altText}
-            className="tilted-card-img"
-            style={{
-              width: imageWidth,
-              height: imageHeight,
-              opacity: imageStatus === "loaded" ? 1 : 0
-            }}
-          />
-        ) : null}
+          <>
+            {priority && (
+              <link rel="preload" href={imageSrc} as="image" fetchPriority="high" />
+            )}
+            <motion.img
+              ref={imgRef}
+              src={imageSrc}
+              alt={altText}
+              className="tilted-card-img"
+              fetchPriority={priority ? "high" : undefined}
+              loading={priority ? "eager" : "lazy"}
+              style={{
+                width: imageWidth,
+                height: imageHeight,
+                opacity: imageStatus === "loaded" ? 1 : 0
+              }}
+            />
+          </>
 
         {displayOverlayContent && overlayContent && (
           <motion.div className="tilted-card-overlay">{overlayContent}</motion.div>

@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 
 interface SafeImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   fallback?: React.ReactNode;
+  priority?: boolean;
 }
 
 export default function SafeImage({
@@ -12,6 +13,7 @@ export default function SafeImage({
   className = "",
   style,
   fallback,
+  priority = false,
   ...props
 }: SafeImageProps) {
   const [status, setStatus] = useState<"loading" | "loaded" | "error">("loading");
@@ -76,16 +78,23 @@ export default function SafeImage({
 
       {/* Actual Image */}
       {src && (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          ref={imgRef}
-          src={src}
-          alt={alt}
-          className={`w-full h-full ${objectFitClass} transition-opacity duration-300 ${
-            status === "loaded" ? "opacity-100" : "opacity-0 absolute pointer-events-none"
-          }`}
-          {...props}
-        />
+        <>
+          {priority && (
+            <link rel="preload" href={src as string} as="image" fetchPriority="high" />
+          )}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            ref={imgRef}
+            src={src}
+            alt={alt}
+            fetchPriority={priority ? "high" : undefined}
+            loading={priority ? "eager" : "lazy"}
+            className={`w-full h-full ${objectFitClass} transition-opacity duration-300 ${
+              status === "loaded" ? "opacity-100" : "opacity-0 absolute pointer-events-none"
+            }`}
+            {...props}
+          />
+        </>
       )}
     </div>
   );
