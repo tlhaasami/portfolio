@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import React, { useState, useEffect, useMemo } from "react";
+import { motion } from "framer-motion";
 import MobileCarousel from "@/components/ui/MobileCarousel";
 import { prefixAsset } from "@/utils/prefixAsset";
 import SafeImage from "@/components/ui/SafeImage";
@@ -16,30 +17,18 @@ interface FeaturedProject {
   details: string;
 }
 
-interface SecondaryProject {
-  name: string;
-  description: string;
-  category: "professional" | "university";
-  image: string;
-  repoLink: string;
-  techStack: string[];
-}
-
 export default function Projects() {
   const [featured, setFeatured] = useState<FeaturedProject[]>(portfolioDataStatic.featuredProjects);
-  const [secondary, setSecondary] = useState<SecondaryProject[]>(portfolioDataStatic.secondaryProjects as SecondaryProject[]);
   const [selectedProject, setSelectedProject] = useState<FeaturedProject | null>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
 
-  const scroll = (direction: "left" | "right") => {
-    if (scrollRef.current) {
-      const { scrollLeft, clientWidth } = scrollRef.current;
-      const scrollTo = direction === "left"
-        ? scrollLeft - clientWidth * 0.75
-        : scrollLeft + clientWidth * 0.75;
-      scrollRef.current.scrollTo({ left: scrollTo, behavior: "smooth" });
-    }
-  };
+  const githubLink = useMemo(() => {
+    const data = portfolioDataStatic as Record<string, unknown>;
+    const socials = data.socials as Array<{ name: string; url: string }> | undefined;
+    const githubSocial = socials?.find(
+      (s) => s.name.toLowerCase() === "github"
+    );
+    return githubSocial?.url || "https://github.com";
+  }, []);
 
   useEffect(() => {
     try {
@@ -48,7 +37,6 @@ export default function Projects() {
         const parsed = JSON.parse(stored);
         setTimeout(() => {
           if (parsed.featuredProjects) setFeatured(parsed.featuredProjects);
-          if (parsed.secondaryProjects) setSecondary(parsed.secondaryProjects);
         }, 0);
       }
     } catch (err) {
@@ -231,100 +219,39 @@ export default function Projects() {
           </div>
         </div>
 
-        {/* SECTION 2: SECONDARY PROJECTS */}
-        <div>
-          <div className="flex items-center justify-between gap-6 mb-8 pb-4 border-b border-neutral-200/10 dark:border-neutral-900/50">
-            <div>
-              <h3 className="font-mono text-xs uppercase tracking-wider font-extrabold text-neutral-400 dark:text-neutral-550 pl-1">
-                Other Projects & Repositories
+        {/* SECTION 2: GITHUB CTA CALLOUT */}
+        <div className="mt-16 w-full flex justify-center">
+          <div className="relative w-full max-w-4xl p-8 md:p-12 rounded-[28px] border border-neutral-200/50 dark:border-zinc-800/80 bg-gradient-to-br from-neutral-50 to-neutral-100/30 dark:from-zinc-950 dark:to-zinc-900/30 backdrop-blur-md text-center flex flex-col items-center justify-center gap-6 overflow-hidden shadow-sm">
+            {/* Ambient subtle glow blob */}
+            <div className="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-neutral-200/10 dark:bg-zinc-800/10 blur-3xl pointer-events-none" />
+            <div className="absolute -left-20 -bottom-20 w-80 h-80 rounded-full bg-neutral-200/10 dark:bg-zinc-800/10 blur-3xl pointer-events-none" />
+
+            <div className="space-y-3 z-10 max-w-2xl">
+              <h3 className="text-xl md:text-2xl font-black text-neutral-900 dark:text-white tracking-tight leading-snug">
+                Looking for more of my work?
               </h3>
+              <p className="text-xs md:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed font-sans font-medium">
+                Interested in exploring my complete codebase? I build and maintain a wide range of open-source projects, system architectures, and workflow utilities. Head over to my GitHub profile to explore my active repositories, public releases, and research labs.
+              </p>
             </div>
 
-            {/* Scroll Navigation Arrows */}
-            {secondary.length > 0 && (
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => scroll("left")}
-                  className="p-2 rounded-full border border-neutral-200 dark:border-zinc-800 hover:border-neutral-300 dark:hover:border-zinc-700 bg-white dark:bg-zinc-900 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-all cursor-pointer flex items-center justify-center w-8 h-8 shadow-sm"
-                  aria-label="Scroll left"
-                >
-                  <svg className="w-4 h-4 stroke-current fill-none" strokeWidth="2.5" viewBox="0 0 24 24">
-                    <polyline points="15 18 9 12 15 6"></polyline>
-                  </svg>
-                </button>
-                <button
-                  onClick={() => scroll("right")}
-                  className="p-2 rounded-full border border-neutral-200 dark:border-zinc-800 hover:border-neutral-300 dark:hover:border-zinc-700 bg-white dark:bg-zinc-900 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-all cursor-pointer flex items-center justify-center w-8 h-8 shadow-sm"
-                  aria-label="Scroll right"
-                >
-                  <svg className="w-4 h-4 stroke-current fill-none" strokeWidth="2.5" viewBox="0 0 24 24">
-                    <polyline points="9 18 15 12 9 6"></polyline>
-                  </svg>
-                </button>
-              </div>
-            )}
-          </div>
-
-          {/* Horizontal Scrolling Track (One Line Layout for all screens!) */}
-          <div
-            ref={scrollRef}
-            className="flex flex-row overflow-x-auto gap-6 sm:gap-8 pb-6 pt-2 scrollbar-none snap-x snap-mandatory scroll-smooth no-scrollbar"
-          >
-            {secondary.map((proj) => (
-              <a
-                key={proj.name}
-                href={proj.repoLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative overflow-hidden rounded-[24px] border border-neutral-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-900/40 hover:border-neutral-400 dark:hover:border-white/30 hover:-translate-y-1.5 transition-all duration-300 select-none cursor-pointer flex flex-col justify-between shadow-sm hover:shadow-lg w-[290px] sm:w-[350px] shrink-0 snap-start"
-              >
-                {/* Image header container */}
-                <div className="aspect-[16/10] w-full overflow-hidden relative bg-neutral-50 dark:bg-zinc-900 border-b border-neutral-200 dark:border-zinc-900">
-                  {proj.image ? (
-                    <SafeImage
-                      src={prefixAsset(proj.image)}
-                      alt={`${proj.name} preview`}
-                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.025] transition-transform duration-500"
-                    />
-                  ) : null}
-
-                  {/* Gloss reflection sweep */}
-                  <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-white/10 to-transparent z-15 pointer-events-none" />
-                </div>
-
-                {/* Copy content and tags */}
-                <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
-                  <div className="space-y-2 text-left">
-                    {/* Header line */}
-                    <div className="flex justify-between items-start gap-4">
-                      <h4 className="text-sm font-extrabold text-neutral-900 dark:text-white group-hover:text-neutral-700 dark:group-hover:text-zinc-300 transition-colors">
-                        {proj.name}
-                      </h4>
-                      {/* GitHub vector icon */}
-                      <svg className="w-4 h-4 text-neutral-455 dark:text-neutral-400 group-hover:text-neutral-950 dark:group-hover:text-white transition-colors shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                        <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z"></path>
-                      </svg>
-                    </div>
-
-                    <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed font-sans line-clamp-3">
-                      {proj.description}
-                    </p>
-                  </div>
-
-                  {/* Tech stack lists */}
-                  <div className="flex flex-wrap gap-1 text-left">
-                    {proj.techStack.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-1.5 py-0.5 bg-neutral-50 dark:bg-zinc-900 border border-neutral-200/60 dark:border-zinc-800/60 rounded font-mono text-[8px] text-zinc-600 dark:text-zinc-300 font-semibold"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </a>
-            ))}
+            <motion.a
+              href={githubLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.03, boxShadow: "0 15px 30px rgba(0,0,0,0.15)" }}
+              whileTap={{ scale: 0.98 }}
+              className="z-10 inline-flex items-center gap-3 bg-neutral-900 hover:bg-neutral-800 dark:bg-white dark:hover:bg-zinc-100 text-white dark:text-neutral-950 px-7 py-3.5 rounded-xl text-xs font-mono font-bold tracking-wider transition-all duration-300 shadow-sm border border-neutral-800 dark:border-white/50 cursor-pointer group"
+            >
+              <svg className="w-4.5 h-4.5 fill-current transition-transform duration-300 group-hover:rotate-12" viewBox="0 0 24 24">
+                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z"></path>
+              </svg>
+              <span>Explore My GitHub</span>
+              <svg className="w-3.5 h-3.5 stroke-current fill-none transition-transform duration-300 group-hover:translate-x-1" strokeWidth="2.5" viewBox="0 0 24 24">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </motion.a>
           </div>
         </div>
 
