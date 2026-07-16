@@ -752,6 +752,12 @@ function createBallpit(e, t = {}) {
     togglePause() {
       c = !c;
     },
+    get paused() {
+      return c;
+    },
+    setPaused(val) {
+      c = val;
+    },
     dispose() {
       h.dispose();
       i.dispose();
@@ -759,7 +765,7 @@ function createBallpit(e, t = {}) {
   };
 }
 
-const Ballpit = ({ className = '', followCursor = true, countMobile, ...props }) => {
+const Ballpit = ({ className = '', followCursor = true, countMobile, paused = false, ...props }) => {
   const canvasRef = useRef(null);
   const spheresInstanceRef = useRef(null);
   const baseCount = props.count ?? 200;
@@ -790,6 +796,9 @@ const Ballpit = ({ className = '', followCursor = true, countMobile, ...props })
         ...props,
         count: responsiveCount
       });
+      if (paused) {
+        spheresInstanceRef.current.setPaused(true);
+      }
       if (props.onLoaded) {
         props.onLoaded();
       }
@@ -808,6 +817,12 @@ const Ballpit = ({ className = '', followCursor = true, countMobile, ...props })
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [followCursor, responsiveCount, props.gravity, props.friction, props.wallBounce, JSON.stringify(props.colors)]);
+
+  useEffect(() => {
+    if (spheresInstanceRef.current) {
+      spheresInstanceRef.current.setPaused(paused);
+    }
+  }, [paused]);
 
   return <canvas className={className} ref={canvasRef} style={{ width: '100%', height: '100%' }} />;
 };

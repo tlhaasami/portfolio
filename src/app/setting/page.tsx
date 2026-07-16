@@ -31,7 +31,7 @@ import {
 const Ballpit = dynamic(() => import("@/components/Ballpit"), {
   ssr: false,
 });
-import { getPrefix } from "@/utils/prefixAsset";
+import { prefixAsset } from "@/utils/prefixAsset";
 import portfolioDataStatic from "@/data/portfolioData.json";
 
 const PALETTES = [
@@ -78,52 +78,69 @@ export default function AdminSettings() {
 
   // Load configuration from local storage on mount
   useEffect(() => {
-    const defaultsPhysics = {
-      count: portfolioDataStatic.ballpitDefault.count,
-      countMobile: (portfolioDataStatic.ballpitDefault as any).countMobile || 8,
-      gravity: portfolioDataStatic.ballpitDefault.gravity,
-      friction: portfolioDataStatic.ballpitDefault.friction,
-      wallBounce: portfolioDataStatic.ballpitDefault.wallBounce,
-      followCursor: portfolioDataStatic.ballpitDefault.followCursor,
-      colors: portfolioDataStatic.ballpitDefault.colors
-    };
+    async function loadPhysicsDefaults() {
+      let defaultsPhysics = {
+        count: portfolioDataStatic.ballpitDefault.count,
+        countMobile: (portfolioDataStatic.ballpitDefault as any).countMobile || 8,
+        gravity: portfolioDataStatic.ballpitDefault.gravity,
+        friction: portfolioDataStatic.ballpitDefault.friction,
+        wallBounce: portfolioDataStatic.ballpitDefault.wallBounce,
+        followCursor: portfolioDataStatic.ballpitDefault.followCursor,
+        colors: portfolioDataStatic.ballpitDefault.colors
+      };
 
-    const defaultsPortfolio = portfolioDataStatic;
+      const defaultsPortfolio = portfolioDataStatic;
 
-    try {
-      const storedPhysics = localStorage.getItem("ballpit-settings");
-      if (storedPhysics) {
-        const parsed = JSON.parse(storedPhysics);
-        setCount(parsed.count !== undefined ? parsed.count : defaultsPhysics.count);
-        setCountMobile(parsed.countMobile !== undefined ? parsed.countMobile : defaultsPhysics.countMobile);
-        setGravity(parsed.gravity !== undefined ? parsed.gravity : defaultsPhysics.gravity);
-        setFriction(parsed.friction !== undefined ? parsed.friction : defaultsPhysics.friction);
-        setWallBounce(parsed.wallBounce !== undefined ? parsed.wallBounce : defaultsPhysics.wallBounce);
-        setFollowCursor(parsed.followCursor !== undefined ? parsed.followCursor : defaultsPhysics.followCursor);
-        setColors(parsed.colors !== undefined ? parsed.colors : defaultsPhysics.colors);
-      } else {
-        setCount(defaultsPhysics.count);
-        setCountMobile(defaultsPhysics.countMobile);
-        setGravity(defaultsPhysics.gravity);
-        setFriction(defaultsPhysics.friction);
-        setWallBounce(defaultsPhysics.wallBounce);
-        setFollowCursor(defaultsPhysics.followCursor);
-        setColors(defaultsPhysics.colors);
+      try {
+        const ballpitRes = await fetch(prefixAsset("/data/profileData/ballpit.json"));
+        if (ballpitRes.ok) {
+          const ballpitData = await ballpitRes.json();
+          defaultsPhysics = {
+            ...defaultsPhysics,
+            ...ballpitData
+          };
+        }
+      } catch (e) {
+        console.warn("Could not load ballpit.json defaults in settings page:", e);
       }
 
-      const storedPortfolio = localStorage.getItem("portfolio-settings");
-      if (storedPortfolio) {
-        const parsed = JSON.parse(storedPortfolio);
-        setPortfolioData({
-          ...defaultsPortfolio,
-          ...parsed
-        });
-      } else {
-        setPortfolioData(defaultsPortfolio);
+      try {
+        const storedPhysics = localStorage.getItem("ballpit-settings");
+        if (storedPhysics) {
+          const parsed = JSON.parse(storedPhysics);
+          setCount(parsed.count !== undefined ? parsed.count : defaultsPhysics.count);
+          setCountMobile(parsed.countMobile !== undefined ? parsed.countMobile : defaultsPhysics.countMobile);
+          setGravity(parsed.gravity !== undefined ? parsed.gravity : defaultsPhysics.gravity);
+          setFriction(parsed.friction !== undefined ? parsed.friction : defaultsPhysics.friction);
+          setWallBounce(parsed.wallBounce !== undefined ? parsed.wallBounce : defaultsPhysics.wallBounce);
+          setFollowCursor(parsed.followCursor !== undefined ? parsed.followCursor : defaultsPhysics.followCursor);
+          setColors(parsed.colors !== undefined ? parsed.colors : defaultsPhysics.colors);
+        } else {
+          setCount(defaultsPhysics.count);
+          setCountMobile(defaultsPhysics.countMobile);
+          setGravity(defaultsPhysics.gravity);
+          setFriction(defaultsPhysics.friction);
+          setWallBounce(defaultsPhysics.wallBounce);
+          setFollowCursor(defaultsPhysics.followCursor);
+          setColors(defaultsPhysics.colors);
+        }
+
+        const storedPortfolio = localStorage.getItem("portfolio-settings");
+        if (storedPortfolio) {
+          const parsed = JSON.parse(storedPortfolio);
+          setPortfolioData({
+            ...defaultsPortfolio,
+            ...parsed
+          });
+        } else {
+          setPortfolioData(defaultsPortfolio);
+        }
+      } catch (e) {
+        console.error("Error loading config inside settings page:", e);
       }
-    } catch (e) {
-      console.error("Error loading config inside settings page:", e);
     }
+
+    loadPhysicsDefaults();
   }, []);
 
   // Featured Projects Management

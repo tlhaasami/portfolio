@@ -142,47 +142,65 @@ export default function Home() {
     async function loadConfig() {
       try {
         const res = await fetch(prefixAsset("/data/portfolioData.json"));
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        let fetchedData: any = {};
         if (res.ok) {
-          const fetchedData = await res.json();
-          
-          // Apply local storage overrides if available
-          const storedPortfolio = localStorage.getItem("portfolio-settings");
-          if (storedPortfolio) {
-            try {
-              const parsedPortfolio = JSON.parse(storedPortfolio);
-              setPortfolioData({
-                ...fetchedData,
-                ...parsedPortfolio,
-              });
-            } catch {
-              setPortfolioData(fetchedData);
-            }
-          } else {
+          fetchedData = await res.json();
+        } else {
+          fetchedData = JSON.parse(JSON.stringify(portfolioDataStatic));
+        }
+
+        // Fetch custom ballpit defaults from ballpit.json overrides if present
+        try {
+          const ballpitRes = await fetch(prefixAsset("/data/profileData/ballpit.json"));
+          if (ballpitRes.ok) {
+            const ballpitData = await ballpitRes.json();
+            fetchedData.ballpitDefault = {
+              ...fetchedData.ballpitDefault,
+              ...ballpitData
+            };
+          }
+        } catch (e) {
+          console.warn("Could not load ballpit.json overrides:", e);
+        }
+
+        // Apply local storage overrides if available for portfolio content
+        const storedPortfolio = localStorage.getItem("portfolio-settings");
+        if (storedPortfolio) {
+          try {
+            const parsedPortfolio = JSON.parse(storedPortfolio);
+            setPortfolioData({
+              ...fetchedData,
+              ...parsedPortfolio,
+            });
+          } catch {
             setPortfolioData(fetchedData);
           }
+        } else {
+          setPortfolioData(fetchedData);
+        }
 
-          const storedPhysics = localStorage.getItem("ballpit-settings");
-          if (storedPhysics) {
-            try {
-              const parsedPhysics = JSON.parse(storedPhysics);
-              setSettings(parseBallpitSettings({
-                ...fetchedData.ballpitDefault,
-                ...parsedPhysics,
-              }));
-            } catch {
-              setSettings(parseBallpitSettings(fetchedData.ballpitDefault));
-            }
-          } else {
+        // Apply local storage overrides if available for physics parameters
+        const storedPhysics = localStorage.getItem("ballpit-settings");
+        if (storedPhysics) {
+          try {
+            const parsedPhysics = JSON.parse(storedPhysics);
+            setSettings(parseBallpitSettings({
+              ...fetchedData.ballpitDefault,
+              ...parsedPhysics,
+            }));
+          } catch {
             setSettings(parseBallpitSettings(fetchedData.ballpitDefault));
           }
         } else {
-          setPortfolioData(portfolioDataStatic as unknown as PortfolioData);
-          setSettings(parseBallpitSettings(portfolioDataStatic.ballpitDefault));
+          setSettings(parseBallpitSettings(fetchedData.ballpitDefault));
         }
       } catch (err) {
-        console.error("Error fetching dynamic portfolio JSON:", err);
-        setPortfolioData(portfolioDataStatic as unknown as PortfolioData);
-        setSettings(parseBallpitSettings(portfolioDataStatic.ballpitDefault));
+        console.error("Error fetching dynamic configurations:", err);
+        // Fallback directly
+        const fallbackData = JSON.parse(JSON.stringify(portfolioDataStatic));
+        setPortfolioData(fallbackData);
+        setSettings(parseBallpitSettings(fallbackData.ballpitDefault));
       }
 
       // Transition to next loading phase after data setup
@@ -309,6 +327,7 @@ export default function Home() {
               followCursor={settings.followCursor}
               colors={settings.colors}
               size="parent"
+              paused={loadingStep !== 'ready' || !isTypingCompleted}
               onLoaded={() => {
                 setLoadingStep('about');
               }}

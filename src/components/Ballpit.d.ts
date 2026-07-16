@@ -10,6 +10,7 @@ interface BallpitProps {
   followCursor?: boolean;
   colors?: string[];
   size?: string;
+  paused?: boolean;
   onLoaded?: () => void;
 }
 

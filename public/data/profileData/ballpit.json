@@ -1,5 +1,6 @@
 {
   "count": 100,
+  "countMobile": 75,
   "gravity": 0.6,
   "friction": 0.99,
   "wallBounce": 0.85,
