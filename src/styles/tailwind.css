@@ -56,3 +56,18 @@ body {
   background-size: 200% 200%;
   animation: moving-gradient 15s ease infinite;
 }
+
+/* Mobile adjustments for Tech Stack logos and gaps */
+@media (max-width: 767px) {
+  #tech-stack {
+    --tech-card-size: 64px;
+    --tech-logo-size: 32px;
+    --tech-card-radius: 16px;
+  }
+  
+  #tech-stack .logoloop {
+    --logoloop-gap: 12px !important;
+    --logoloop-logoHeight: 64px !important;
+  }
+}
+

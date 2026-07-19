@@ -74,15 +74,20 @@ export default function TechStack() {
           node: (
             <div
               className="relative flex items-center justify-center bg-neutral-50 dark:bg-zinc-950 border border-neutral-200/60 dark:border-zinc-900 rounded-[24px] shadow-sm transition-all duration-300 hover:shadow-md hover:border-neutral-400 dark:hover:border-zinc-700 select-none group overflow-hidden"
-              style={{ width: `${settings.cardSize}px`, height: `${settings.cardSize}px` }}
+              style={{
+                width: `var(--tech-card-size, ${settings.cardSize}px)`,
+                height: `var(--tech-card-size, ${settings.cardSize}px)`,
+                borderRadius: 'var(--tech-card-radius, 24px)'
+              }}
             >
               {isBroken ? (
                 // Alternate elegant code/terminal fallback icon colored matching the brand color
                 <div 
-                  className="w-full h-full flex items-center justify-center rounded-[24px] transition-all duration-300"
+                  className="w-full h-full flex items-center justify-center transition-all duration-300"
                   style={{ 
                     color: t.color || '#9ca3af', 
-                    backgroundColor: `${t.color || '#9ca3af'}15` 
+                    backgroundColor: `${t.color || '#9ca3af'}15`,
+                    borderRadius: 'inherit'
                   }}
                 >
                   <svg className="w-6 h-6 stroke-current fill-none animate-pulse transition-transform duration-300 group-hover:-translate-y-2.5" strokeWidth="2.5" viewBox="0 0 24 24">
@@ -96,10 +101,11 @@ export default function TechStack() {
                   alt={`${t.name} logo`}
                   fallback={
                     <div 
-                      className="w-full h-full flex items-center justify-center rounded-[24px]"
+                      className="w-full h-full flex items-center justify-center"
                       style={{ 
                         color: t.color || '#9ca3af', 
-                        backgroundColor: `${t.color || '#9ca3af'}15` 
+                        backgroundColor: `${t.color || '#9ca3af'}15`,
+                        borderRadius: 'inherit'
                       }}
                     >
                       <svg className="w-6 h-6 stroke-current fill-none animate-pulse transition-transform duration-300 group-hover:-translate-y-2.5" strokeWidth="2.5" viewBox="0 0 24 24">
@@ -109,7 +115,10 @@ export default function TechStack() {
                     </div>
                   }
                   className="object-contain opacity-90 group-hover:opacity-100 group-hover:-translate-y-2.5 group-hover:scale-95 transition-all duration-300 flex items-center justify-center"
-                  style={{ width: `${settings.logoSize}px`, height: `${settings.logoSize}px` }}
+                  style={{
+                    width: `var(--tech-logo-size, ${settings.logoSize}px)`,
+                    height: `var(--tech-logo-size, ${settings.logoSize}px)`
+                  }}
                   draggable={false}
                 />
               )}
