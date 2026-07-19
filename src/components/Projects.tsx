@@ -128,7 +128,13 @@ export default function Projects() {
       <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[500px] h-[500px] bg-neutral-200/20 dark:bg-neutral-900/10 rounded-full blur-[130px] -z-10 pointer-events-none" />
 
       {/* Title container (standard width) */}
-      <div className="max-w-7xl lg:max-w-[1300px] xl:max-w-[1400px] mx-auto px-6 md:px-10 relative z-10 mb-16">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="max-w-7xl lg:max-w-[1300px] xl:max-w-[1400px] mx-auto px-6 md:px-10 relative z-10 mb-16"
+      >
         <span className="text-xs font-mono tracking-widest text-zinc-555 dark:text-zinc-400 uppercase mb-3 block flex items-center gap-2 font-bold">
           <svg
             className="w-3.5 h-3.5 fill-none stroke-neutral-950 dark:stroke-white"
@@ -149,7 +155,7 @@ export default function Projects() {
         <p className="mt-4 text-neutral-500 dark:text-neutral-450 font-sans max-w-2xl leading-relaxed">
           Explore production platform architectures, automation suites, developer integrations, and academic systems.
         </p>
-      </div>
+      </motion.div>
 
       {/* Outer grid container (matches the wide layout edges) */}
       <div className="max-w-[1600px] xl:max-w-[1820px] mx-auto px-6 md:px-12 relative z-10 space-y-20">

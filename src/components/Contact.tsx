@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import { prefixAsset } from "@/utils/prefixAsset";
 import SafeImage from "@/components/ui/SafeImage";
 import portfolioDataStatic from "@/data/portfolioData.json";
@@ -178,7 +179,12 @@ export default function Contact() {
           
           {/* Left Column: Info Text & Social Links (5 cols) */}
           <div className="lg:col-span-5 space-y-8">
-            <div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            >
               <span className="text-xs font-mono tracking-widest text-zinc-550 dark:text-zinc-400 uppercase mb-3 block font-bold">
                 {data.contactSubheading || "WE'RE HERE TO HELP YOU"}
               </span>
@@ -188,7 +194,7 @@ export default function Contact() {
               <p className="mt-4 text-neutral-500 dark:text-neutral-450 font-sans leading-relaxed text-sm md:text-base">
                 {data.contactParagraph || "Are you looking for high-performance software engineering, cloud architecture, or API automation? Reach out to start a conversation."}
               </p>
-            </div>
+            </motion.div>
 
             {/* Email & Phone Contact Rows */}
             <div className="space-y-3 font-sans text-sm -mx-3">

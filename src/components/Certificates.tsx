@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useMemo } from "react";
+import { motion } from "framer-motion";
 import LogoLoop, { LogoItem } from "@/components/ui/LogoLoop";
 import MobileCarousel from "@/components/ui/MobileCarousel";
 import { prefixAsset } from "@/utils/prefixAsset";
@@ -282,7 +283,13 @@ export default function Certificates() {
       <div className="absolute top-1/2 left-3/4 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-neutral-200/20 dark:bg-neutral-900/10 rounded-full blur-[140px] -z-10 pointer-events-none" />
 
       {/* Title container (standard width) */}
-      <div className="max-w-7xl lg:max-w-[1300px] xl:max-w-[1400px] mx-auto px-6 md:px-10 relative z-10 mb-16">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="max-w-7xl lg:max-w-[1300px] xl:max-w-[1400px] mx-auto px-6 md:px-10 relative z-10 mb-16"
+      >
         <span className="text-xs font-mono tracking-widest text-zinc-550 dark:text-zinc-400 uppercase mb-3 block flex items-center gap-2 font-bold">
           <svg
             className="w-3.5 h-3.5 stroke-neutral-950 dark:stroke-white fill-none"
@@ -302,7 +309,7 @@ export default function Certificates() {
         <p className="mt-4 text-neutral-500 dark:text-neutral-450 font-sans max-w-2xl leading-relaxed">
           A comprehensive track record of software engineering completions, competitive coding victories, and technical placements.
         </p>
-      </div>
+      </motion.div>
 
       {/* Loop content (expanded width container for larger side coverage) */}
       <div className="max-w-[1600px] xl:max-w-[1820px] mx-auto px-6 md:px-12 relative z-10 space-y-12">

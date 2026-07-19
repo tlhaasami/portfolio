@@ -71,7 +71,13 @@ export default function Experience({ experiences = [] }: ExperienceProps) {
       <div className="max-w-7xl lg:max-w-[1250px] mx-auto px-6 md:px-10 relative z-10">
         
         {/* Section Title */}
-        <div className="mb-16 text-center md:text-left">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-16 text-center md:text-left"
+        >
           <span className="text-xs font-mono tracking-[0.2em] text-neutral-500 dark:text-neutral-400 uppercase mb-3 flex items-center justify-center md:justify-start gap-2">
             <Briefcase className="w-3.5 h-3.5" />
             <span>{"// WORK EXPERIENCE"}</span>
@@ -80,7 +86,7 @@ export default function Experience({ experiences = [] }: ExperienceProps) {
             Where I&apos;ve Worked
             <span className="absolute -bottom-2 left-0 w-20 h-1.5 bg-neutral-900 dark:bg-white rounded-full hidden md:block" />
           </h2>
-        </div>
+        </motion.div>
 
         {/* Experience Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
