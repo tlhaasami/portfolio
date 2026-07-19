@@ -72,7 +72,7 @@ export default function TechStack() {
         return {
           node: (
             <div
-              className="flex items-center justify-center bg-neutral-50 dark:bg-zinc-950 border border-neutral-200/60 dark:border-zinc-900 rounded-[24px] shadow-sm transition-all duration-300 hover:shadow-md hover:border-neutral-400 dark:hover:border-zinc-700 select-none group"
+              className="relative flex items-center justify-center bg-neutral-50 dark:bg-zinc-950 border border-neutral-200/60 dark:border-zinc-900 rounded-[24px] shadow-sm transition-all duration-300 hover:shadow-md hover:border-neutral-400 dark:hover:border-zinc-700 select-none group overflow-hidden"
               style={{ width: `${settings.cardSize}px`, height: `${settings.cardSize}px` }}
             >
               {isBroken ? (
@@ -84,7 +84,7 @@ export default function TechStack() {
                     backgroundColor: `${t.color || '#9ca3af'}15` 
                   }}
                 >
-                  <svg className="w-6 h-6 stroke-current fill-none animate-pulse" strokeWidth="2.5" viewBox="0 0 24 24">
+                  <svg className="w-6 h-6 stroke-current fill-none animate-pulse transition-transform duration-300 group-hover:-translate-y-2.5" strokeWidth="2.5" viewBox="0 0 24 24">
                     <polyline points="16 18 22 12 16 6"></polyline>
                     <polyline points="8 6 2 12 8 18"></polyline>
                   </svg>
@@ -101,17 +101,21 @@ export default function TechStack() {
                         backgroundColor: `${t.color || '#9ca3af'}15` 
                       }}
                     >
-                      <svg className="w-6 h-6 stroke-current fill-none animate-pulse" strokeWidth="2.5" viewBox="0 0 24 24">
+                      <svg className="w-6 h-6 stroke-current fill-none animate-pulse transition-transform duration-300 group-hover:-translate-y-2.5" strokeWidth="2.5" viewBox="0 0 24 24">
                         <polyline points="16 18 22 12 16 6"></polyline>
                         <polyline points="8 6 2 12 8 18"></polyline>
                       </svg>
                     </div>
                   }
-                  className="object-contain opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-350 flex items-center justify-center"
+                  className="object-contain opacity-90 group-hover:opacity-100 group-hover:-translate-y-2.5 group-hover:scale-95 transition-all duration-300 flex items-center justify-center"
                   style={{ width: `${settings.logoSize}px`, height: `${settings.logoSize}px` }}
                   draggable={false}
                 />
               )}
+
+              <span className="absolute bottom-2.5 left-0 right-0 text-center text-[10px] md:text-[11px] font-semibold tracking-wide opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 pointer-events-none px-2 truncate text-neutral-800 dark:text-neutral-200">
+                {t.name}
+              </span>
             </div>
           ),
           title: t.name

@@ -574,8 +574,8 @@ export default function AdminSettings() {
           <button
             onClick={() => setActiveTab("general")}
             className={`w-full text-left px-4 py-3.5 rounded-xl border transition-all flex items-center gap-2.5 cursor-pointer shrink-0 lg:shrink ${activeTab === "general"
-                ? "bg-white border-zinc-700 text-black font-bold"
-                : "bg-zinc-900/40 border-zinc-900 hover:bg-zinc-900 text-zinc-400 hover:text-zinc-200"
+              ? "bg-white border-zinc-700 text-black font-bold"
+              : "bg-zinc-900/40 border-zinc-900 hover:bg-zinc-900 text-zinc-400 hover:text-zinc-200"
               }`}
           >
             <User className="w-4 h-4" />
@@ -585,8 +585,8 @@ export default function AdminSettings() {
           <button
             onClick={() => setActiveTab("about")}
             className={`w-full text-left px-4 py-3.5 rounded-xl border transition-all flex items-center gap-2.5 cursor-pointer shrink-0 lg:shrink ${activeTab === "about"
-                ? "bg-white border-zinc-700 text-black font-bold"
-                : "bg-zinc-900/40 border-zinc-900 hover:bg-zinc-900 text-zinc-400 hover:text-zinc-200"
+              ? "bg-white border-zinc-700 text-black font-bold"
+              : "bg-zinc-900/40 border-zinc-900 hover:bg-zinc-900 text-zinc-400 hover:text-zinc-200"
               }`}
           >
             <Info className="w-4 h-4" />
@@ -596,8 +596,8 @@ export default function AdminSettings() {
           <button
             onClick={() => setActiveTab("experience")}
             className={`w-full text-left px-4 py-3.5 rounded-xl border transition-all flex items-center gap-2.5 cursor-pointer shrink-0 lg:shrink ${activeTab === "experience"
-                ? "bg-white border-zinc-700 text-black font-bold"
-                : "bg-zinc-900/40 border-zinc-900 hover:bg-zinc-900 text-zinc-400 hover:text-zinc-200"
+              ? "bg-white border-zinc-700 text-black font-bold"
+              : "bg-zinc-900/40 border-zinc-900 hover:bg-zinc-900 text-zinc-400 hover:text-zinc-200"
               }`}
           >
             <Briefcase className="w-4 h-4" />
@@ -607,8 +607,8 @@ export default function AdminSettings() {
           <button
             onClick={() => setActiveTab("contact")}
             className={`w-full text-left px-4 py-3.5 rounded-xl border transition-all flex items-center gap-2.5 cursor-pointer shrink-0 lg:shrink ${activeTab === "contact"
-                ? "bg-white border-zinc-700 text-black font-bold"
-                : "bg-zinc-900/40 border-zinc-900 hover:bg-zinc-900 text-zinc-400 hover:text-zinc-200"
+              ? "bg-white border-zinc-700 text-black font-bold"
+              : "bg-zinc-900/40 border-zinc-900 hover:bg-zinc-900 text-zinc-400 hover:text-zinc-200"
               }`}
           >
             <Mail className="w-4 h-4" />
@@ -618,8 +618,8 @@ export default function AdminSettings() {
           <button
             onClick={() => setActiveTab("certificates")}
             className={`w-full text-left px-4 py-3.5 rounded-xl border transition-all flex items-center gap-2.5 cursor-pointer shrink-0 lg:shrink ${activeTab === "certificates"
-                ? "bg-white border-zinc-700 text-black font-bold"
-                : "bg-zinc-900/40 border-zinc-900 hover:bg-zinc-900 text-zinc-400 hover:text-zinc-200"
+              ? "bg-white border-zinc-700 text-black font-bold"
+              : "bg-zinc-900/40 border-zinc-900 hover:bg-zinc-900 text-zinc-400 hover:text-zinc-200"
               }`}
           >
             <Award className="w-4 h-4" />
@@ -629,8 +629,8 @@ export default function AdminSettings() {
           <button
             onClick={() => setActiveTab("projects")}
             className={`w-full text-left px-4 py-3.5 rounded-xl border transition-all flex items-center gap-2.5 cursor-pointer shrink-0 lg:shrink ${activeTab === "projects"
-                ? "bg-white border-zinc-700 text-black font-bold"
-                : "bg-zinc-900/40 border-zinc-900 hover:bg-zinc-900 text-zinc-400 hover:text-zinc-200"
+              ? "bg-white border-zinc-700 text-black font-bold"
+              : "bg-zinc-900/40 border-zinc-900 hover:bg-zinc-900 text-zinc-400 hover:text-zinc-200"
               }`}
           >
             <FolderGit className="w-4 h-4" />
@@ -640,8 +640,8 @@ export default function AdminSettings() {
           <button
             onClick={() => setActiveTab("physics")}
             className={`w-full text-left px-4 py-3.5 rounded-xl border transition-all flex items-center gap-2.5 cursor-pointer shrink-0 lg:shrink ${activeTab === "physics"
-                ? "bg-white border-zinc-700 text-black font-bold"
-                : "bg-zinc-900/40 border-zinc-900 hover:bg-zinc-900 text-zinc-400 hover:text-zinc-200"
+              ? "bg-white border-zinc-700 text-black font-bold"
+              : "bg-zinc-900/40 border-zinc-900 hover:bg-zinc-900 text-zinc-400 hover:text-zinc-200"
               }`}
           >
             <Settings className="w-4 h-4" />
@@ -1373,8 +1373,8 @@ export default function AdminSettings() {
                             type="button"
                             onClick={() => handleUpdateCertificate(index, "visible", !cert.visible)}
                             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-[10px] font-mono font-bold transition-all cursor-pointer ${cert.visible
-                                ? "bg-zinc-900 border-zinc-700 text-white"
-                                : "bg-zinc-950/20 border-zinc-900 text-zinc-500"
+                              ? "bg-zinc-900 border-zinc-700 text-white"
+                              : "bg-zinc-950/20 border-zinc-900 text-zinc-500"
                               }`}
                           >
                             {cert.visible ? <Eye className="w-3.5 h-3.5 text-white" /> : <EyeOff className="w-3.5 h-3.5 text-zinc-500" />}
@@ -1509,8 +1509,8 @@ export default function AdminSettings() {
                             type="button"
                             onClick={() => handleUpdateAchievement(index, "visible", !ach.visible)}
                             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-[10px] font-mono font-bold transition-all cursor-pointer ${ach.visible
-                                ? "bg-zinc-900 border-zinc-700 text-white"
-                                : "bg-zinc-950/20 border-zinc-900 text-zinc-500"
+                              ? "bg-zinc-900 border-zinc-700 text-white"
+                              : "bg-zinc-950/20 border-zinc-900 text-zinc-500"
                               }`}
                           >
                             {ach.visible ? <Eye className="w-3.5 h-3.5 text-white" /> : <EyeOff className="w-3.5 h-3.5 text-zinc-500" />}

@@ -10,40 +10,67 @@
   "aboutImage": "/data/images/profilePic.png",
   "experiences": [
     {
-      "company": "Google",
-      "role": "Senior Software Engineer",
-      "duration": "Jan 2025 - Present",
-      "logo": "https://img.icons8.com/color/144/google-logo.png",
-      "description": "Architected next-generation cloud infrastructure that handles millions of requests daily with extremely low latency.\nSpearheaded a distributed pipeline engine that automated complex continuous deployment across 4 global server clusters.\nCollaborated key product iterations alongside business analysts to deliver clean APIs and actionable engineering roadmaps.\nMentored junior developers on software engineering principles and streamlined team workflow systems.",
-      "linkedin": "https://linkedin.com/company/google",
-      "website": "https://google.com"
+      "company": "SEAL LAB",
+      "role": "AI/ML intern",
+      "duration": "Jul 2026 - Present",
+      "logo": "/experience-logos/seal-lab.png",
+      "description": "Designed and developed AI-powered software solutions using modern Machine Learning and LLM technologies.\nContributed to software architecture, API integrations, and model optimization to address critical business challenges.\nImplemented workflow automation systems to streamline internal research and development processes.\nCollaborated with engineering teams to deploy ML models into highly scalable production environments.",
+      "linkedin": "https://www.linkedin.com/company/software-engineering-and-automation-lab-seal/posts/?feedView=all",
+      "website": "https://www.linkedin.com/company/software-engineering-and-automation-lab-seal/posts/?feedView=all"
     },
     {
-      "company": "Meta",
-      "role": "Software Engineer II",
-      "duration": "Mar 2023 - Dec 2024",
-      "logo": "https://img.icons8.com/color/144/meta-logo.png",
-      "description": "Developed robust cross-platform features using React Native, cutting startup load delays by 25% on mid-range phones.\nLed key frontend modernization processes that improved overall user interactions and system performance metric counts.\nResolved high-severity memory leak events and optimized client-side state caching mechanisms on core dashboards.\nCoordinated interface standards with graphic designers to publish accessible component sets.",
-      "linkedin": "https://linkedin.com/company/meta",
-      "website": "https://meta.com"
+      "company": "Quick Escapes",
+      "role": "Full Stack Developer",
+      "duration": "Jul 2026 - Present",
+      "logo": "/experience-logos/quick-escapes.png",
+      "description": "Developing and maintaining responsive full-stack web applications to enhance customer engagement and user experience.\nIntegrating modern frontend UI components with scalable backend systems and databases.\nDesigning robust API endpoints to streamline third-party service connections and travel booking processes.\nOptimizing website performance and search engine visibility across dynamic client platforms.",
+      "linkedin": "https://www.linkedin.com/company/quickescapes/",
+      "website": "https://quickescapesglobal.com/"
     },
     {
-      "company": "Netflix",
-      "role": "Backend Engineer",
-      "duration": "Jun 2022 - Feb 2023",
-      "logo": "https://img.icons8.com/color/144/netflix.png",
-      "description": "Engineered event-driven microservices processing high-frequency messaging queues using Node.js and Redis setups.\nBuilt visual preference screens that improved user content recommendations and navigation click rates.\nRefined service logging protocols and automated testing runs, boosting overall deployment reliability metrics.\nReduced service bottlenecks through index adjustments on central document store environments.",
-      "linkedin": "https://linkedin.com/company/netflix",
-      "website": "https://netflix.com"
+      "company": "Quick Holidays",
+      "role": "Senior Automation Engineer",
+      "duration": "Jan 2026 - Present",
+      "logo": "/experience-logos/quick-holidays-logo.webp",
+      "description": "Managed CRM automation systems using GoHighLevel, n8n, and Make.com.\nBuilt lead management pipelines and automated follow-up sequences to maximize customer acquisition.\nDesigned automated appointment booking workflows and real-time client tracking dashboards.\nOptimized system efficiency, reducing manual administration times and workflow friction.",
+      "linkedin": "",
+      "website": "https://www.quickholidays.co.uk/"
     },
     {
-      "company": "Netflix",
-      "role": "Backend Engineer",
-      "duration": "Jun 2022 - Feb 2023",
-      "logo": "https://img.icons8.com/color/144/netflix.png",
-      "description": "Engineered event-driven microservices processing high-frequency messaging queues using Node.js and Redis setups.\nBuilt visual preference screens that improved user content recommendations and navigation click rates.\nRefined service logging protocols and automated testing runs, boosting overall deployment reliability metrics.\nReduced service bottlenecks through index adjustments on central document store environments.",
-      "linkedin": "https://linkedin.com/company/netflix",
-      "website": "https://netflix.com"
+      "company": "GPS Renting",
+      "role": "Automation Expert",
+      "duration": "Jan 2026 - Jun 2026",
+      "logo": "/experience-logos/GPS-Logo.png",
+      "description": "Specialized as a GoHighLevel expert managing CRM pipelines and cold-to-warm lead conversion.\nDeveloped automated lead nurturing workflows to dramatically reduce manual workloads.\nIntegrated cross-channel notification triggers and engagement tracking tools for the sales team.\nMonitored pipeline analytics to refine communication strategies and boost rental lease conversions.",
+      "linkedin": "https://www.linkedin.com/company/gpsrenting/posts/?feedView=all",
+      "website": "https://gpsrenting.com/"
+    },
+    {
+      "company": "KWJA",
+      "role": "Automation Specialist",
+      "duration": "Mar 2026 - Jun 2026",
+      "logo": "/experience-logos/KWJA-logo.jpg",
+      "description": "Built custom automation systems for CRM and business workflows using GoHighLevel, n8n, and Make.com.\nConnected multiple cloud applications to synchronize database records and lead information.\nOptimized automated follow-up sequences and lead management architectures for client accounts.",
+      "linkedin": "https://www.linkedin.com/company/kwja-holdings/",
+      "website": ""
+    },
+    {
+      "company": "Verxeon",
+      "role": "GHL(GoHighLevel) Expert",
+      "duration": "Feb 2026 - Jun 2026",
+      "logo": "/experience-logos/verxeon.jpg",
+      "description": "Designed custom workflow automations and integrated external APIs within the GoHighLevel ecosystem.\nDeveloped AI-assisted processes using n8n to elevate business efficiency and customer response speed.\nConducted performance testing on automated CRM triggers to ensure reliable, high-uptime delivery.",
+      "linkedin": "https://www.linkedin.com/company/verxeon/posts/?feedView=all",
+      "website": "https://www.verxeon.com/"
+    },
+    {
+      "company": "FAST-NUCES",
+      "role": "Programming, Teaching & Research",
+      "duration": "Aug 2025 - Jun 2026",
+      "logo": "/experience-logos/fastnuislamabadofficial_logo.jpg",
+      "description": "Assisted students with coding, debugging, and resolving programming tasks in lab environments.\nClarified core programming, object-oriented concepts, structural logic, and data structures.\nSupported faculty in preparing coursework files, grading lab assignments, and conducting evaluations.\nGuided students on initial programming foundations, teaching and research best practices.",
+      "linkedin": "https://www.linkedin.com/school/fast-nuces/",
+      "website": "https://nu.edu.pk/"
     }
   ],
   "techSettings": {
@@ -243,64 +270,79 @@
   ],
   "featuredProjects": [
     {
-      "name": "Orbit Orchestrator",
-      "tagline": "Cloud CI/CD & Deployments Pipeline Dashboard",
-      "description": "A high-performance visual release orchestrator handling continuous delivery pipelines, real-time node logs streaming, and automated canary container clusters testing. Engineered with Next.js, Go microservices, and Kubernetes API integrations.",
-      "image": "/data/projects/orbit_ci.png",
-      "liveLink": "https://orbit-ci.dev",
+      "name": "Quick Escapes",
+      "tagline": "Premium Full-Stack Travel & Escape Booking Platform",
+      "description": "A responsive web application built with the MERN stack to streamline holiday rentals and client booking management.",
+      "image": "/project-hero-sections/quick-escapes.png",
+      "liveLink": "https://quickescapesglobal.com/",
       "techStack": [
-        "Next.js",
-        "Go",
-        "Docker",
-        "Kubernetes",
-        "gRPC"
+        "MongoDB",
+        "Express",
+        "React",
+        "Node.js",
+        "Tailwind CSS"
       ],
-      "details": "Orbit CI/CD visualizes container deployment life-cycles in real-time. Features include automated canary test pipelines, multi-region cluster status reports, low-latency live build log streams over WebSockets, and one-click rollback operations. Reduced deployment drift rates by 38%."
+      "details": "Quick Escapes handles real-time accommodation lookups, booking confirmations, client billing receipts, and responsive trip schedules. Built to handle secure booking gateways and user profile data securely."
     },
     {
-      "name": "Synapse Studio",
-      "tagline": "Agentic AI Workflow & Node Automation Workspace",
-      "description": "An interactive drag-and-drop workspace to model, schedule, and execute complex LLM multi-agent workflows, data scraping runs, and cron jobs. Built using React, Python FastAPI, and LangChain orchestration.",
-      "image": "/data/projects/synapse_ai.png",
-      "liveLink": "https://synapse-studio.ai",
+      "name": "GPS Renting CRM",
+      "tagline": "Automation Pipeline & Real Estate Lead Orchestrator",
+      "description": "An enterprise CRM pipeline and lead nurture engine automated within the GoHighLevel (GHL) ecosystem.",
+      "image": "/project-hero-sections/gps-renting.png",
+      "liveLink": "https://gpsrenting.com/",
+      "techStack": [
+        "GoHighLevel",
+        "n8n",
+        "Make.com",
+        "Zapier"
+      ],
+      "details": "Automates cold-to-warm tenant acquisition pipelines, card notifications, calendar synchronization, and follow-up sequences. Substantially lowered operational overhead by reducing manual staff outreach tasks."
+    },
+    {
+      "name": "Orafile",
+      "tagline": "Interactive 3D File Sharing & Collaboration Hub",
+      "description": "A collaborative file sharing portal built on the MERN stack featuring immersive 3D scene visualizer elements.",
+      "image": "/project-hero-sections/orafile.png",
+      "liveLink": "https://www.orafile.com/",
       "techStack": [
         "React",
-        "FastAPI",
-        "Python",
-        "LangChain",
+        "Node.js",
+        "Three.js",
+        "MongoDB",
+        "Express",
+        "WebGL"
+      ],
+      "details": "Orafile integrates high-speed file transfers, secure database management, user authorization, and a state-of-the-art interactive 3D WebGL scene where users can interact with model structures and files in real-time."
+    },
+    {
+      "name": "Quick Holidays",
+      "tagline": "Dynamic Vacation Package Booking & CRM Portal",
+      "description": "A robust holiday and itinerary booking platform built with the MERN stack and integrated with automated backoffice CRM logic.",
+      "image": "/project-hero-sections/quick-holidays.png",
+      "liveLink": "https://www.quickholidays.co.uk/",
+      "techStack": [
+        "MongoDB",
+        "Express",
+        "React",
+        "Node.js",
         "n8n"
       ],
-      "details": "Synapse Studio enables engineers to construct stateful multi-agent workflows. It provides custom n8n-style node components, sandbox code execution environments, memory-persistent agents, and API webhook triggers. Automated over 120 client business operations with 99.8% reliability."
+      "details": "Enables travelers to browse packages, build custom holiday itineraries, track active bookings, and contact support representatives. Automated confirmation emails and payment workflows upon booking completion."
     },
     {
-      "name": "Helix Stream Engine",
-      "tagline": "Real-time Telemetry & Data Stream Aggregator",
-      "description": "A low-latency event broker UI rendering live data charts, stream metrics, memory bottlenecks, and active worker node configurations. Powering high-frequency messaging workloads.",
-      "image": "/data/projects/helix_streaming.png",
-      "liveLink": "https://helix-stream.io",
+      "name": "Personal Portfolio",
+      "tagline": "Sleek Interactive Developer Portfolio & Admin Engine",
+      "description": "A premium Next.js developer portfolio incorporating 3D elements, Framer Motion, and local storage overrides.",
+      "image": "/project-hero-sections/personal-portfolio.png",
+      "liveLink": "https://tlhaasami.netlify.app/",
       "techStack": [
-        "TypeScript",
-        "Node.js",
-        "Redis",
-        "Kafka",
-        "Elasticsearch"
-      ],
-      "details": "Helix is a telemetry frontend visualizing high-frequency Kafka cluster feeds. It provides automatic partition balancing alerts, sub-millisecond chart rendering using WebGL canvas graphs, Redis caching indicators, and visual system diagnostics panels."
-    },
-    {
-      "name": "Quantum Pay Analytics",
-      "tagline": "Sleek Mobile Fintech Payment & Transfer Dashboard",
-      "description": "A mobile-responsive finance application illustrating monthly revenue analytics, international card transactions, ledger transfers, and crypto token wallet balances.",
-      "image": "/data/projects/quantum_pay.png",
-      "liveLink": "https://quantum-pay.finance",
-      "techStack": [
-        "React Native",
+        "Next.js",
+        "React",
+        "Framer Motion",
         "Tailwind CSS",
-        "Express",
-        "PostgreSQL",
-        "Stripe"
+        "Three.js"
       ],
-      "details": "Quantum Pay connects secure banking APIs through a smooth, responsive UI wrapper. It integrates Stripe connect APIs, automated ledger tracking calculations, monthly balance projections, and real-time transaction push notifications."
+      "details": "Features a fully interactive typewriter loader, fullscreen auto-play video section with dark/light mode blend gradients, and an advanced custom admin settings panel to modify page contents and save to local storage."
     }
   ],
   "secondaryProjects": [
