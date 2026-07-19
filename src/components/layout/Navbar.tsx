@@ -278,7 +278,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: "-100%" }}
             transition={{ type: "spring", damping: 30, stiffness: 200 }}
-            className="fixed inset-0 z-40 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-2xl flex flex-col items-center justify-center gap-8 text-black dark:text-white"
+            className="fixed inset-0 z-40 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-2xl flex flex-col items-center justify-start pt-28 pb-8 gap-8 text-black dark:text-white overflow-y-auto"
           >
             {/* Stacked Navigation Links with Staggered Roll Effect */}
             <div className="flex flex-col items-center gap-6 w-full max-w-xs">

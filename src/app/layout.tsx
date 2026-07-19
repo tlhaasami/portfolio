@@ -6,16 +6,19 @@ import Navbar from "@/components/layout/Navbar";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  preload: false,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  preload: false,
 });
 
 export const metadata: Metadata = {
   title: "TALHA SAMI | Portfolio",
-  description: "A premium interactive developer portfolio built with Next.js, Tailwind CSS, and Framer Motion.",
+  description:
+    "Talha Sami is a Full Stack Engineer, Automation Expert, and Mobile Developer specializing in building robust, scalable applications and bridging the gap between complex engineering and clear strategy.",
 };
 
 export default function RootLayout({
