@@ -13,7 +13,7 @@
       "company": "SEAL LAB",
       "role": "AI/ML intern",
       "duration": "Jul 2026 - Present",
-      "logo": "/experience-logos/seal-lab.png",
+      "logo": "/experience-logos/seal-lab.webp",
       "description": "Designed and developed AI-powered software solutions using modern Machine Learning and LLM technologies.\nContributed to software architecture, API integrations, and model optimization to address critical business challenges.\nImplemented workflow automation systems to streamline internal research and development processes.\nCollaborated with engineering teams to deploy ML models into highly scalable production environments.",
       "linkedin": "https://www.linkedin.com/company/software-engineering-and-automation-lab-seal/posts/?feedView=all",
       "website": "https://www.linkedin.com/company/software-engineering-and-automation-lab-seal/posts/?feedView=all"
@@ -22,7 +22,7 @@
       "company": "Quick Escapes",
       "role": "Full Stack Developer",
       "duration": "Jul 2026 - Present",
-      "logo": "/experience-logos/quick-escapes.png",
+      "logo": "/experience-logos/quick-escapes.webp",
       "description": "Developing and maintaining responsive full-stack web applications to enhance customer engagement and user experience.\nIntegrating modern frontend UI components with scalable backend systems and databases.\nDesigning robust API endpoints to streamline third-party service connections and travel booking processes.\nOptimizing website performance and search engine visibility across dynamic client platforms.",
       "linkedin": "https://www.linkedin.com/company/quickescapes/",
       "website": "https://quickescapesglobal.com/"
@@ -40,7 +40,7 @@
       "company": "GPS Renting",
       "role": "Automation Expert",
       "duration": "Jan 2026 - Jun 2026",
-      "logo": "/experience-logos/GPS-Logo.png",
+      "logo": "/experience-logos/GPS-Logo.webp",
       "description": "Specialized as a GoHighLevel expert managing CRM pipelines and cold-to-warm lead conversion.\nDeveloped automated lead nurturing workflows to dramatically reduce manual workloads.\nIntegrated cross-channel notification triggers and engagement tracking tools for the sales team.\nMonitored pipeline analytics to refine communication strategies and boost rental lease conversions.",
       "linkedin": "https://www.linkedin.com/company/gpsrenting/posts/?feedView=all",
       "website": "https://gpsrenting.com/"
@@ -49,7 +49,7 @@
       "company": "KWJA",
       "role": "Automation Specialist",
       "duration": "Mar 2026 - Jun 2026",
-      "logo": "/experience-logos/KWJA-logo.jpg",
+      "logo": "/experience-logos/KWJA-logo.webp",
       "description": "Built custom automation systems for CRM and business workflows using GoHighLevel, n8n, and Make.com.\nConnected multiple cloud applications to synchronize database records and lead information.\nOptimized automated follow-up sequences and lead management architectures for client accounts.",
       "linkedin": "https://www.linkedin.com/company/kwja-holdings/",
       "website": ""
@@ -58,7 +58,7 @@
       "company": "Verxeon",
       "role": "GHL(GoHighLevel) Expert",
       "duration": "Feb 2026 - Jun 2026",
-      "logo": "/experience-logos/verxeon.jpg",
+      "logo": "/experience-logos/verxeon.webp",
       "description": "Designed custom workflow automations and integrated external APIs within the GoHighLevel ecosystem.\nDeveloped AI-assisted processes using n8n to elevate business efficiency and customer response speed.\nConducted performance testing on automated CRM triggers to ensure reliable, high-uptime delivery.",
       "linkedin": "https://www.linkedin.com/company/verxeon/posts/?feedView=all",
       "website": "https://www.verxeon.com/"
@@ -67,7 +67,7 @@
       "company": "FAST-NUCES",
       "role": "Programming, Teaching & Research",
       "duration": "Aug 2025 - Jun 2026",
-      "logo": "/experience-logos/fastnuislamabadofficial_logo.jpg",
+      "logo": "/experience-logos/fastnuislamabadofficial_logo.webp",
       "description": "Assisted students with coding, debugging, and resolving programming tasks in lab environments.\nClarified core programming, object-oriented concepts, structural logic, and data structures.\nSupported faculty in preparing coursework files, grading lab assignments, and conducting evaluations.\nGuided students on initial programming foundations, teaching and research best practices.",
       "linkedin": "https://www.linkedin.com/school/fast-nuces/",
       "website": "https://nu.edu.pk/"
@@ -84,30 +84,30 @@
   "contactSubheading": "WE'RE HERE TO HELP YOU",
   "contactHeading": "Discuss Your Project & Engineering Needs",
   "contactParagraph": "Are you looking for high-performance systems, robust automation workflows, or backend integrations tailored to your requirements? Reach out to start a conversation.",
-  "contactEmail": "talha.sami.dev@gmail.com",
-  "contactPhone": "+92 300 1234567",
+  "contactEmail": "tlhaasami@gmail.com",
+  "contactPhone": "+923139549737",
   "socials": [
     {
       "name": "LinkedIn",
-      "url": "https://linkedin.com",
+      "url": "https://www.linkedin.com/in/tlhaasami/",
       "logo": "/logos/socials/linkedin.svg",
       "visible": true
     },
     {
       "name": "GitHub",
-      "url": "https://github.com",
+      "url": "https://github.com/tlhaasami",
       "logo": "/logos/socials/github.svg",
       "visible": true
     },
     {
       "name": "WhatsApp",
-      "url": "https://whatsapp.com",
+      "url": "https://wa.me/923139549737",
       "logo": "/logos/socials/whatsapp.svg",
       "visible": true
     },
     {
       "name": "LeetCode",
-      "url": "https://leetcode.com",
+      "url": "https://leetcode.com/u/tlhasami/",
       "logo": "/logos/socials/leetcode.svg",
       "visible": true
     },
@@ -115,13 +115,13 @@
       "name": "Codeforces",
       "url": "https://codeforces.com",
       "logo": "/logos/socials/codeforces.svg",
-      "visible": true
+      "visible": false
     },
     {
       "name": "Kaggle",
-      "url": "https://kaggle.com",
+      "url": "https://kaggle.com/tlhaasami",
       "logo": "/logos/socials/kaggle.svg",
-      "visible": true
+      "visible": false
     },
     {
       "name": "Twitter / X",
@@ -161,21 +161,21 @@
     },
     {
       "name": "Gmail",
-      "url": "mailto:talha.sami.dev@gmail.com",
+      "url": "mailto:tlhaasami@gmail.com",
       "logo": "/logos/socials/gmail.svg",
-      "visible": true
+      "visible": false
     },
     {
       "name": "Upwork",
       "url": "https://upwork.com",
       "logo": "/logos/socials/upwork.svg",
-      "visible": true
+      "visible": false
     },
     {
       "name": "Fiverr",
       "url": "https://fiverr.com",
       "logo": "/logos/socials/fiverr.svg",
-      "visible": true
+      "visible": false
     }
   ],
   "accentColor": "#0066FF",
@@ -236,6 +236,20 @@
       "image": "/data/certificates/Talha Sami - Intro to Programming.png",
       "link": "https://www.kaggle.com/learn/certification/tlhaasami/intro-to-programming",
       "visible": true
+    },
+    {
+      "name": "Intro to Deep Learning",
+      "issuer": "Kaggle",
+      "image": "/data/certificates/Talha Sami - Intro to Deep Learning.png",
+      "link": "https://www.kaggle.com/learn/certification/tlhaasami/intro-to-deep-learning",
+      "visible": true
+    },
+    {
+      "name": "Intermediate Machine Learning",
+      "issuer": "Kaggle",
+      "image": "/data/certificates/Talha Sami - Intermediate Machine Learning.png",
+      "link": "https://www.kaggle.com/learn/certification/tlhaasami/intermediate-machine-learning",
+      "visible": true
     }
   ],
   "achievements": [
@@ -273,7 +287,7 @@
       "name": "Quick Escapes",
       "tagline": "Premium Full-Stack Travel & Escape Booking Platform",
       "description": "A responsive web application built with the MERN stack to streamline holiday rentals and client booking management.",
-      "image": "/project-hero-sections/quick-escapes.png",
+      "image": "/project-hero-sections/quick-escapes.webp",
       "liveLink": "https://quickescapesglobal.com/",
       "techStack": [
         "MongoDB",
@@ -288,7 +302,7 @@
       "name": "GPS Renting CRM",
       "tagline": "Automation Pipeline & Real Estate Lead Orchestrator",
       "description": "An enterprise CRM pipeline and lead nurture engine automated within the GoHighLevel (GHL) ecosystem.",
-      "image": "/project-hero-sections/gps-renting.png",
+      "image": "/project-hero-sections/gps-renting.webp",
       "liveLink": "https://gpsrenting.com/",
       "techStack": [
         "GoHighLevel",
@@ -302,7 +316,7 @@
       "name": "Orafile",
       "tagline": "Interactive 3D File Sharing & Collaboration Hub",
       "description": "A collaborative file sharing portal built on the MERN stack featuring immersive 3D scene visualizer elements.",
-      "image": "/project-hero-sections/orafile.png",
+      "image": "/project-hero-sections/orafile.webp",
       "liveLink": "https://www.orafile.com/",
       "techStack": [
         "React",
@@ -318,7 +332,7 @@
       "name": "Quick Holidays",
       "tagline": "Dynamic Vacation Package Booking & CRM Portal",
       "description": "A robust holiday and itinerary booking platform built with the MERN stack and integrated with automated backoffice CRM logic.",
-      "image": "/project-hero-sections/quick-holidays.png",
+      "image": "/project-hero-sections/quick-holidays.webp",
       "liveLink": "https://www.quickholidays.co.uk/",
       "techStack": [
         "MongoDB",
@@ -333,7 +347,7 @@
       "name": "Personal Portfolio",
       "tagline": "Sleek Interactive Developer Portfolio & Admin Engine",
       "description": "A premium Next.js developer portfolio incorporating 3D elements, Framer Motion, and local storage overrides.",
-      "image": "/project-hero-sections/personal-portfolio.png",
+      "image": "/project-hero-sections/personal-portfolio.webp",
       "liveLink": "https://tlhaasami.netlify.app/",
       "techStack": [
         "Next.js",
@@ -976,5 +990,6 @@
       "#ca8a04",
       "#0f172a"
     ]
-  }
+  },
+  "web3formsKey": "9bf58e9b-8a52-49aa-b7f8-5c0c1c03efc5"
 }

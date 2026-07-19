@@ -97,7 +97,7 @@ export default function Experience({ experiences = [] }: ExperienceProps) {
                   <button
                     key={index}
                     onClick={() => setActiveIndex(index)}
-                    className="relative flex items-center gap-4 text-left px-5 py-4 lg:py-5 rounded-2xl transition-all cursor-pointer shrink-0 snap-center min-w-[260px] lg:min-w-0 w-auto lg:w-full group select-none overflow-hidden"
+                    className="relative flex items-center gap-4 text-left px-5 py-4 lg:py-5 rounded-2xl transition-all cursor-pointer shrink-0 snap-center min-w-[140px] md:min-w-[160px] lg:min-w-0 w-auto lg:w-full group select-none overflow-hidden"
                   >
                     {/* Active Sliding Background Capsule */}
                     {isActive && (

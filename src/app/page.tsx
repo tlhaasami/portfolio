@@ -89,12 +89,12 @@ function parseBallpitSettings(raw: any): BallpitSettings {
   };
 }
 
-const fullText = "Hello, Welcome to Talha Sami's Portfolio.";
+const fullText = "Initializing portfolio workspace...";
 
 export default function Home() {
   const [settings, setSettings] = useState<BallpitSettings>(parseBallpitSettings(portfolioDataStatic.ballpitDefault));
   const [portfolioData, setPortfolioData] = useState<PortfolioData>(portfolioDataStatic as unknown as PortfolioData);
-  const [loadingStep, setLoadingStep] = useState<'json' | 'balls' | 'about' | 'ready'>('json');
+  const [loadingStep, setLoadingStep] = useState<'json' | 'about' | 'experiences' | 'projects' | 'ready'>('json');
   const heroRef = useRef<HTMLElement>(null);
 
   const [typedText, setTypedText] = useState('');
@@ -188,6 +188,8 @@ export default function Home() {
             setSettings(parseBallpitSettings({
               ...fetchedData.ballpitDefault,
               ...parsedPhysics,
+              count: parsedPhysics.count,
+              countMobile: parsedPhysics.countMobile
             }));
           } catch {
             setSettings(parseBallpitSettings(fetchedData.ballpitDefault));
@@ -205,7 +207,7 @@ export default function Home() {
 
       // Transition to next loading phase after data setup
       setTimeout(() => {
-        setLoadingStep('balls');
+        setLoadingStep('about');
       }, 500);
     }
 
@@ -218,7 +220,7 @@ export default function Home() {
 
     const profileImgPath = portfolioData.aboutImage;
     if (!profileImgPath) {
-      setTimeout(() => setLoadingStep('ready'), 0);
+      setTimeout(() => setLoadingStep('experiences'), 0);
       return;
     }
 
@@ -226,19 +228,98 @@ export default function Home() {
     img.src = prefixAsset(profileImgPath);
     img.onload = () => {
       setTimeout(() => {
-        setLoadingStep('ready');
+        setLoadingStep('experiences');
       }, 500);
     };
     img.onerror = () => {
       console.error("Failed to preload about section image:", profileImgPath);
-      setLoadingStep('ready');
+      setLoadingStep('experiences');
     };
   }, [loadingStep, portfolioData.aboutImage]);
 
+  // Preload experiences logos sequentially
+  useEffect(() => {
+    if (loadingStep !== 'experiences') return;
+
+    const logos = (portfolioData.experiences || [])
+      .map((exp) => exp.logo)
+      .filter((logo) => logo && logo.startsWith('/'));
+
+    if (logos.length === 0) {
+      setTimeout(() => setLoadingStep('projects'), 0);
+      return;
+    }
+
+    let loadedCount = 0;
+    let failedCount = 0;
+
+    logos.forEach((logoPath) => {
+      const img = new Image();
+      img.src = prefixAsset(logoPath);
+      img.onload = () => {
+        loadedCount++;
+        if (loadedCount + failedCount === logos.length) {
+          setTimeout(() => {
+            setLoadingStep('projects');
+          }, 500);
+        }
+      };
+      img.onerror = () => {
+        failedCount++;
+        console.error("Failed to preload experience logo:", logoPath);
+        if (loadedCount + failedCount === logos.length) {
+          setTimeout(() => {
+            setLoadingStep('projects');
+          }, 500);
+        }
+      };
+    });
+  }, [loadingStep, portfolioData.experiences]);
+
+  // Preload featured project screenshots sequentially
+  useEffect(() => {
+    if (loadingStep !== 'projects') return;
+
+    const projectImages = (portfolioData.featuredProjects || [])
+      .map((proj: any) => proj.image)
+      .filter((img) => img && img.startsWith('/'));
+
+    if (projectImages.length === 0) {
+      setTimeout(() => setLoadingStep('ready'), 0);
+      return;
+    }
+
+    let loadedCount = 0;
+    let failedCount = 0;
+
+    projectImages.forEach((imgPath) => {
+      const img = new Image();
+      img.src = prefixAsset(imgPath);
+      img.onload = () => {
+        loadedCount++;
+        if (loadedCount + failedCount === projectImages.length) {
+          setTimeout(() => {
+            setLoadingStep('ready');
+          }, 500);
+        }
+      };
+      img.onerror = () => {
+        failedCount++;
+        console.error("Failed to preload project screenshot:", imgPath);
+        if (loadedCount + failedCount === projectImages.length) {
+          setTimeout(() => {
+            setLoadingStep('ready');
+          }, 500);
+        }
+      };
+    });
+  }, [loadingStep, portfolioData.featuredProjects]);
+
   let targetProgress = 0;
-  if (loadingStep === 'json') targetProgress = 30;
-  else if (loadingStep === 'balls') targetProgress = 70;
-  else if (loadingStep === 'about') targetProgress = 95;
+  if (loadingStep === 'json') targetProgress = 20;
+  else if (loadingStep === 'about') targetProgress = 50;
+  else if (loadingStep === 'experiences') targetProgress = 75;
+  else if (loadingStep === 'projects') targetProgress = 95;
   else if (loadingStep === 'ready') targetProgress = 100;
 
   return (
@@ -278,9 +359,10 @@ export default function Home() {
                 <div className="space-y-3 mt-2">
                   <div className="flex items-center justify-between text-[9px] tracking-widest text-zinc-550 font-bold uppercase font-mono">
                     <span>
-                      {loadingStep === "json" && "Fetching configurations..."}
-                      {loadingStep === "balls" && "Initializing physics sandbox..."}
+                      {loadingStep === "json" && "Fetching configuration..."}
                       {loadingStep === "about" && "Caching media assets..."}
+                      {loadingStep === "experiences" && "Buffering work experience records..."}
+                      {loadingStep === "projects" && "Preloading case studies screenshots..."}
                     </span>
                     <span className="text-zinc-400">{targetProgress}%</span>
                   </div>
@@ -316,7 +398,7 @@ export default function Home() {
         className="relative w-full min-h-screen overflow-hidden flex flex-col items-center justify-start pt-[20vh] md:pt-[25vh] text-center px-4"
       >
         {/* Ballpit Background - Restricted to the Hero Section */}
-        {(loadingStep === 'balls' || loadingStep === 'about' || loadingStep === 'ready') && (
+        {(loadingStep === 'about' || loadingStep === 'experiences' || loadingStep === 'projects' || loadingStep === 'ready') && (
           <div className="absolute inset-0 w-full h-full pointer-events-auto">
             <Ballpit
               count={settings.count}
@@ -328,9 +410,7 @@ export default function Home() {
               colors={settings.colors}
               size="parent"
               paused={loadingStep !== 'ready' || !isTypingCompleted}
-              onLoaded={() => {
-                setLoadingStep('about');
-              }}
+              onLoaded={() => {}}
             />
           </div>
         )}

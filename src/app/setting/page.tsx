@@ -45,6 +45,44 @@ const PALETTES = [
 type TabType = "general" | "about" | "experience" | "contact" | "physics" | "certificates" | "projects";
 
 export default function AdminSettings() {
+  // Login Gate State
+  const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
+  const [password, setPassword] = useState<string>("");
+  const [errorMsg, setErrorMsg] = useState<string>("");
+
+  useEffect(() => {
+    if (sessionStorage.getItem("admin-authorized") === "true") {
+      setIsAuthorized(true);
+    }
+  }, []);
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const msgBuffer = new TextEncoder().encode(password);
+      const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      const hashHex = hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+
+      if (hashHex === "c3c27363a49eba25762c599ecf8846060ea53401afd5bcf21e9f4e352bb9c6e4") {
+        setIsAuthorized(true);
+        sessionStorage.setItem("admin-authorized", "true");
+        setErrorMsg("");
+      } else {
+        setErrorMsg("Access Denied: Invalid Passcode.");
+      }
+    } catch (err) {
+      // Fallback for older browsers without subtle crypto
+      if (password === "talha123") {
+        setIsAuthorized(true);
+        sessionStorage.setItem("admin-authorized", "true");
+        setErrorMsg("");
+      } else {
+        setErrorMsg("Access Denied: Invalid Passcode.");
+      }
+    }
+  };
+
   // Active Tab
   const [activeTab, setActiveTab] = useState<TabType>("general");
 
@@ -524,6 +562,65 @@ export default function AdminSettings() {
     showToast("Palette loaded successfully!");
   };
 
+  if (!isAuthorized) {
+    return (
+      <main className="min-h-screen bg-zinc-950 text-zinc-100 font-sans flex items-center justify-center p-6 relative overflow-hidden">
+        {/* Background Decorative Grid */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:4rem_4rem] -z-10 pointer-events-none" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-zinc-900/10 rounded-full blur-[120px] -z-20 pointer-events-none" />
+
+        <div className="max-w-md w-full z-10">
+          <Link href="/" className="inline-flex items-center gap-2 text-zinc-550 hover:text-white transition-colors text-xs font-mono uppercase tracking-widest mb-6">
+            <ArrowLeft className="w-3.5 h-3.5" /> Back To Site
+          </Link>
+
+          <form
+            onSubmit={handleLogin}
+            className="bg-zinc-900/40 border border-zinc-900 backdrop-blur-xl rounded-3xl p-8 md:p-10 shadow-2xl flex flex-col gap-6"
+          >
+            <div className="text-center">
+              <div className="w-12 h-12 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <Sliders className="w-6 h-6 text-white" />
+              </div>
+              <h1 className="text-lg font-bold tracking-wider font-mono text-zinc-100 uppercase">
+                ADMIN SECURE ACCESS
+              </h1>
+              <p className="text-[10px] font-mono text-zinc-500 mt-1 uppercase tracking-wider">
+                Enter passcode to configure site data
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-[10px] font-mono text-zinc-450 uppercase tracking-widest block">
+                Passcode
+              </label>
+              <input
+                type="password"
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full bg-zinc-950 border border-zinc-850 px-4 py-3 rounded-2xl focus:border-white/40 outline-none text-sm transition-all font-mono text-center tracking-widest text-white placeholder-zinc-750"
+              />
+            </div>
+
+            {errorMsg && (
+              <p className="text-[10px] font-mono text-rose-500 text-center font-bold uppercase tracking-wider">
+                {errorMsg}
+              </p>
+            )}
+
+            <button
+              type="submit"
+              className="w-full py-3.5 rounded-2xl bg-white hover:bg-zinc-200 text-zinc-950 font-mono text-xs font-bold transition-all shadow-md cursor-pointer flex items-center justify-center gap-2"
+            >
+              Authenticate
+            </button>
+          </form>
+        </div>
+      </main>
+    );
+  }
+
   return (
     <main className="min-h-screen bg-zinc-950 text-zinc-100 font-sans p-6 md:p-12 relative overflow-hidden flex flex-col justify-between">
       {/* Background Decorative Grid */}
@@ -959,7 +1056,7 @@ export default function AdminSettings() {
                   />
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="space-y-1.5">
                     <label className="text-[10px] font-mono text-zinc-400 uppercase">Email Address</label>
                     <input
@@ -976,6 +1073,20 @@ export default function AdminSettings() {
                       type="text"
                       value={portfolioData.contactPhone || ""}
                       onChange={(e) => setPortfolioData({ ...portfolioData, contactPhone: e.target.value })}
+                      className="w-full bg-zinc-900 border border-zinc-800 px-3 py-2 rounded-xl focus:border-white/50 outline-none text-xs transition-all font-mono"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] font-mono text-zinc-400 uppercase flex items-center gap-1.5 justify-between">
+                      <span>Web3Forms API Key</span>
+                      <a href="https://web3forms.com" target="_blank" rel="noopener noreferrer" className="text-[8px] text-zinc-500 hover:text-white underline tracking-normal normal-case">Get Free Key</a>
+                    </label>
+                    <input
+                      type="text"
+                      value={portfolioData.web3formsKey || ""}
+                      onChange={(e) => setPortfolioData({ ...portfolioData, web3formsKey: e.target.value })}
+                      placeholder="e.g. 00000000-0000-0000-0000-000000000000"
                       className="w-full bg-zinc-900 border border-zinc-800 px-3 py-2 rounded-xl focus:border-white/50 outline-none text-xs transition-all font-mono"
                     />
                   </div>

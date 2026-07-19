@@ -10,40 +10,67 @@
   "aboutImage": "/data/images/profilePic.png",
   "experiences": [
     {
-      "company": "Google",
-      "role": "Senior Software Engineer",
-      "duration": "Jan 2025 - Present",
-      "logo": "https://img.icons8.com/color/144/google-logo.png",
-      "description": "Architected next-generation cloud infrastructure that handles millions of requests daily with extremely low latency.\nSpearheaded a distributed pipeline engine that automated complex continuous deployment across 4 global server clusters.\nCollaborated key product iterations alongside business analysts to deliver clean APIs and actionable engineering roadmaps.\nMentored junior developers on software engineering principles and streamlined team workflow systems.",
-      "linkedin": "https://linkedin.com/company/google",
-      "website": "https://google.com"
+      "company": "SEAL LAB",
+      "role": "AI/ML intern",
+      "duration": "Jul 2026 - Present",
+      "logo": "/experience-logos/seal-lab.webp",
+      "description": "Designed and developed AI-powered software solutions using modern Machine Learning and LLM technologies.\nContributed to software architecture, API integrations, and model optimization to address critical business challenges.\nImplemented workflow automation systems to streamline internal research and development processes.\nCollaborated with engineering teams to deploy ML models into highly scalable production environments.",
+      "linkedin": "https://www.linkedin.com/company/software-engineering-and-automation-lab-seal/posts/?feedView=all",
+      "website": "https://www.linkedin.com/company/software-engineering-and-automation-lab-seal/posts/?feedView=all"
     },
     {
-      "company": "Meta",
-      "role": "Software Engineer II",
-      "duration": "Mar 2023 - Dec 2024",
-      "logo": "https://img.icons8.com/color/144/meta-logo.png",
-      "description": "Developed robust cross-platform features using React Native, cutting startup load delays by 25% on mid-range phones.\nLed key frontend modernization processes that improved overall user interactions and system performance metric counts.\nResolved high-severity memory leak events and optimized client-side state caching mechanisms on core dashboards.\nCoordinated interface standards with graphic designers to publish accessible component sets.",
-      "linkedin": "https://linkedin.com/company/meta",
-      "website": "https://meta.com"
+      "company": "Quick Escapes",
+      "role": "Full Stack Developer",
+      "duration": "Jul 2026 - Present",
+      "logo": "/experience-logos/quick-escapes.webp",
+      "description": "Developing and maintaining responsive full-stack web applications to enhance customer engagement and user experience.\nIntegrating modern frontend UI components with scalable backend systems and databases.\nDesigning robust API endpoints to streamline third-party service connections and travel booking processes.\nOptimizing website performance and search engine visibility across dynamic client platforms.",
+      "linkedin": "https://www.linkedin.com/company/quickescapes/",
+      "website": "https://quickescapesglobal.com/"
     },
     {
-      "company": "Netflix",
-      "role": "Backend Engineer",
-      "duration": "Jun 2022 - Feb 2023",
-      "logo": "https://img.icons8.com/color/144/netflix.png",
-      "description": "Engineered event-driven microservices processing high-frequency messaging queues using Node.js and Redis setups.\nBuilt visual preference screens that improved user content recommendations and navigation click rates.\nRefined service logging protocols and automated testing runs, boosting overall deployment reliability metrics.\nReduced service bottlenecks through index adjustments on central document store environments.",
-      "linkedin": "https://linkedin.com/company/netflix",
-      "website": "https://netflix.com"
+      "company": "Quick Holidays",
+      "role": "Senior Automation Engineer",
+      "duration": "Jan 2026 - Present",
+      "logo": "/experience-logos/quick-holidays-logo.webp",
+      "description": "Managed CRM automation systems using GoHighLevel, n8n, and Make.com.\nBuilt lead management pipelines and automated follow-up sequences to maximize customer acquisition.\nDesigned automated appointment booking workflows and real-time client tracking dashboards.\nOptimized system efficiency, reducing manual administration times and workflow friction.",
+      "linkedin": "",
+      "website": "https://www.quickholidays.co.uk/"
     },
     {
-      "company": "Netflix",
-      "role": "Backend Engineer",
-      "duration": "Jun 2022 - Feb 2023",
-      "logo": "https://img.icons8.com/color/144/netflix.png",
-      "description": "Engineered event-driven microservices processing high-frequency messaging queues using Node.js and Redis setups.\nBuilt visual preference screens that improved user content recommendations and navigation click rates.\nRefined service logging protocols and automated testing runs, boosting overall deployment reliability metrics.\nReduced service bottlenecks through index adjustments on central document store environments.",
-      "linkedin": "https://linkedin.com/company/netflix",
-      "website": "https://netflix.com"
+      "company": "GPS Renting",
+      "role": "Automation Expert",
+      "duration": "Jan 2026 - Jun 2026",
+      "logo": "/experience-logos/GPS-Logo.webp",
+      "description": "Specialized as a GoHighLevel expert managing CRM pipelines and cold-to-warm lead conversion.\nDeveloped automated lead nurturing workflows to dramatically reduce manual workloads.\nIntegrated cross-channel notification triggers and engagement tracking tools for the sales team.\nMonitored pipeline analytics to refine communication strategies and boost rental lease conversions.",
+      "linkedin": "https://www.linkedin.com/company/gpsrenting/posts/?feedView=all",
+      "website": "https://gpsrenting.com/"
+    },
+    {
+      "company": "KWJA",
+      "role": "Automation Specialist",
+      "duration": "Mar 2026 - Jun 2026",
+      "logo": "/experience-logos/KWJA-logo.webp",
+      "description": "Built custom automation systems for CRM and business workflows using GoHighLevel, n8n, and Make.com.\nConnected multiple cloud applications to synchronize database records and lead information.\nOptimized automated follow-up sequences and lead management architectures for client accounts.",
+      "linkedin": "https://www.linkedin.com/company/kwja-holdings/",
+      "website": ""
+    },
+    {
+      "company": "Verxeon",
+      "role": "GHL(GoHighLevel) Expert",
+      "duration": "Feb 2026 - Jun 2026",
+      "logo": "/experience-logos/verxeon.webp",
+      "description": "Designed custom workflow automations and integrated external APIs within the GoHighLevel ecosystem.\nDeveloped AI-assisted processes using n8n to elevate business efficiency and customer response speed.\nConducted performance testing on automated CRM triggers to ensure reliable, high-uptime delivery.",
+      "linkedin": "https://www.linkedin.com/company/verxeon/posts/?feedView=all",
+      "website": "https://www.verxeon.com/"
+    },
+    {
+      "company": "FAST-NUCES",
+      "role": "Programming, Teaching & Research",
+      "duration": "Aug 2025 - Jun 2026",
+      "logo": "/experience-logos/fastnuislamabadofficial_logo.webp",
+      "description": "Assisted students with coding, debugging, and resolving programming tasks in lab environments.\nClarified core programming, object-oriented concepts, structural logic, and data structures.\nSupported faculty in preparing coursework files, grading lab assignments, and conducting evaluations.\nGuided students on initial programming foundations, teaching and research best practices.",
+      "linkedin": "https://www.linkedin.com/school/fast-nuces/",
+      "website": "https://nu.edu.pk/"
     }
   ],
   "techSettings": {
@@ -57,30 +84,30 @@
   "contactSubheading": "WE'RE HERE TO HELP YOU",
   "contactHeading": "Discuss Your Project & Engineering Needs",
   "contactParagraph": "Are you looking for high-performance systems, robust automation workflows, or backend integrations tailored to your requirements? Reach out to start a conversation.",
-  "contactEmail": "talha.sami.dev@gmail.com",
-  "contactPhone": "+92 300 1234567",
+  "contactEmail": "tlhaasami@gmail.com",
+  "contactPhone": "+923139549737",
   "socials": [
     {
       "name": "LinkedIn",
-      "url": "https://linkedin.com",
+      "url": "https://www.linkedin.com/in/tlhaasami/",
       "logo": "/logos/socials/linkedin.svg",
       "visible": true
     },
     {
       "name": "GitHub",
-      "url": "https://github.com",
+      "url": "https://github.com/tlhaasami",
       "logo": "/logos/socials/github.svg",
       "visible": true
     },
     {
       "name": "WhatsApp",
-      "url": "https://whatsapp.com",
+      "url": "https://wa.me/923139549737",
       "logo": "/logos/socials/whatsapp.svg",
       "visible": true
     },
     {
       "name": "LeetCode",
-      "url": "https://leetcode.com",
+      "url": "https://leetcode.com/u/tlhasami/",
       "logo": "/logos/socials/leetcode.svg",
       "visible": true
     },
@@ -88,13 +115,13 @@
       "name": "Codeforces",
       "url": "https://codeforces.com",
       "logo": "/logos/socials/codeforces.svg",
-      "visible": true
+      "visible": false
     },
     {
       "name": "Kaggle",
-      "url": "https://kaggle.com",
+      "url": "https://kaggle.com/tlhaasami",
       "logo": "/logos/socials/kaggle.svg",
-      "visible": true
+      "visible": false
     },
     {
       "name": "Twitter / X",
@@ -134,21 +161,21 @@
     },
     {
       "name": "Gmail",
-      "url": "mailto:talha.sami.dev@gmail.com",
+      "url": "mailto:tlhaasami@gmail.com",
       "logo": "/logos/socials/gmail.svg",
-      "visible": true
+      "visible": false
     },
     {
       "name": "Upwork",
       "url": "https://upwork.com",
       "logo": "/logos/socials/upwork.svg",
-      "visible": true
+      "visible": false
     },
     {
       "name": "Fiverr",
       "url": "https://fiverr.com",
       "logo": "/logos/socials/fiverr.svg",
-      "visible": true
+      "visible": false
     }
   ],
   "accentColor": "#0066FF",
@@ -209,6 +236,20 @@
       "image": "/data/certificates/Talha Sami - Intro to Programming.png",
       "link": "https://www.kaggle.com/learn/certification/tlhaasami/intro-to-programming",
       "visible": true
+    },
+    {
+      "name": "Intro to Deep Learning",
+      "issuer": "Kaggle",
+      "image": "/data/certificates/Talha Sami - Intro to Deep Learning.png",
+      "link": "https://www.kaggle.com/learn/certification/tlhaasami/intro-to-deep-learning",
+      "visible": true
+    },
+    {
+      "name": "Intermediate Machine Learning",
+      "issuer": "Kaggle",
+      "image": "/data/certificates/Talha Sami - Intermediate Machine Learning.png",
+      "link": "https://www.kaggle.com/learn/certification/tlhaasami/intermediate-machine-learning",
+      "visible": true
     }
   ],
   "achievements": [
@@ -246,7 +287,7 @@
       "name": "Quick Escapes",
       "tagline": "Premium Full-Stack Travel & Escape Booking Platform",
       "description": "A responsive web application built with the MERN stack to streamline holiday rentals and client booking management.",
-      "image": "/project-hero-sections/quick-escapes.png",
+      "image": "/project-hero-sections/quick-escapes.webp",
       "liveLink": "https://quickescapesglobal.com/",
       "techStack": [
         "MongoDB",
@@ -261,7 +302,7 @@
       "name": "GPS Renting CRM",
       "tagline": "Automation Pipeline & Real Estate Lead Orchestrator",
       "description": "An enterprise CRM pipeline and lead nurture engine automated within the GoHighLevel (GHL) ecosystem.",
-      "image": "/project-hero-sections/gps-renting.png",
+      "image": "/project-hero-sections/gps-renting.webp",
       "liveLink": "https://gpsrenting.com/",
       "techStack": [
         "GoHighLevel",
@@ -275,7 +316,7 @@
       "name": "Orafile",
       "tagline": "Interactive 3D File Sharing & Collaboration Hub",
       "description": "A collaborative file sharing portal built on the MERN stack featuring immersive 3D scene visualizer elements.",
-      "image": "/project-hero-sections/orafile.png",
+      "image": "/project-hero-sections/orafile.webp",
       "liveLink": "https://www.orafile.com/",
       "techStack": [
         "React",
@@ -291,7 +332,7 @@
       "name": "Quick Holidays",
       "tagline": "Dynamic Vacation Package Booking & CRM Portal",
       "description": "A robust holiday and itinerary booking platform built with the MERN stack and integrated with automated backoffice CRM logic.",
-      "image": "/project-hero-sections/quick-holidays.png",
+      "image": "/project-hero-sections/quick-holidays.webp",
       "liveLink": "https://www.quickholidays.co.uk/",
       "techStack": [
         "MongoDB",
@@ -306,7 +347,7 @@
       "name": "Personal Portfolio",
       "tagline": "Sleek Interactive Developer Portfolio & Admin Engine",
       "description": "A premium Next.js developer portfolio incorporating 3D elements, Framer Motion, and local storage overrides.",
-      "image": "/project-hero-sections/personal-portfolio.png",
+      "image": "/project-hero-sections/personal-portfolio.webp",
       "liveLink": "https://tlhaasami.netlify.app/",
       "techStack": [
         "Next.js",
@@ -393,5 +434,562 @@
         "B-Tree"
       ]
     }
-  ]
+  ],
+  "technologies": [
+    {
+      "name": "React",
+      "category": "Frontend",
+      "color": "#61dafb",
+      "logo": "/logos/technologies/react.svg"
+    },
+    {
+      "name": "Next.js",
+      "category": "Frontend",
+      "color": "#ffffff",
+      "logo": "/logos/technologies/nextdotjs.svg"
+    },
+    {
+      "name": "TypeScript",
+      "category": "Frontend",
+      "color": "#3178c6",
+      "logo": "/logos/technologies/typescript.svg"
+    },
+    {
+      "name": "Tailwind CSS",
+      "category": "Frontend",
+      "color": "#38bdf8",
+      "logo": "/logos/technologies/tailwindcss.svg"
+    },
+    {
+      "name": "HTML5",
+      "category": "Frontend",
+      "color": "#e34f26",
+      "logo": "/logos/technologies/html5.svg"
+    },
+    {
+      "name": "CSS3",
+      "category": "Frontend",
+      "color": "#1572b6",
+      "logo": "/logos/technologies/css3.svg"
+    },
+    {
+      "name": "JavaScript",
+      "category": "Frontend",
+      "color": "#f7df1e",
+      "logo": "/logos/technologies/javascript.svg"
+    },
+    {
+      "name": "Vue.js",
+      "category": "Frontend",
+      "color": "#4fc08d",
+      "logo": "/logos/technologies/vuedotjs.svg"
+    },
+    {
+      "name": "Angular",
+      "category": "Frontend",
+      "color": "#dd0031",
+      "logo": "/logos/technologies/angular.svg"
+    },
+    {
+      "name": "Svelte",
+      "category": "Frontend",
+      "color": "#ff3e00",
+      "logo": "/logos/technologies/svelte.svg"
+    },
+    {
+      "name": "Remix",
+      "category": "Frontend",
+      "color": "#ffffff",
+      "logo": "/logos/technologies/remix.svg"
+    },
+    {
+      "name": "Astro",
+      "category": "Frontend",
+      "color": "#ff5d01",
+      "logo": "/logos/technologies/astro.svg"
+    },
+    {
+      "name": "SolidJS",
+      "category": "Frontend",
+      "color": "#446b9e",
+      "logo": "/logos/technologies/solid.svg"
+    },
+    {
+      "name": "Vite",
+      "category": "Frontend",
+      "color": "#646cff",
+      "logo": "/logos/technologies/vite.svg"
+    },
+    {
+      "name": "Webpack",
+      "category": "Frontend",
+      "color": "#8dd6f9",
+      "logo": "/logos/technologies/webpack.svg"
+    },
+    {
+      "name": "Node.js",
+      "category": "Backend",
+      "color": "#339933",
+      "logo": "/logos/technologies/nodedotjs.svg"
+    },
+    {
+      "name": "Express",
+      "category": "Backend",
+      "color": "#ffffff",
+      "logo": "/logos/technologies/express.svg"
+    },
+    {
+      "name": "NestJS",
+      "category": "Backend",
+      "color": "#ea2845",
+      "logo": "/logos/technologies/nestjs.svg"
+    },
+    {
+      "name": "Python",
+      "category": "Backend",
+      "color": "#3776ab",
+      "logo": "/logos/technologies/python.svg"
+    },
+    {
+      "name": "Django",
+      "category": "Backend",
+      "color": "#092e20",
+      "logo": "/logos/technologies/django.svg"
+    },
+    {
+      "name": "FastAPI",
+      "category": "Backend",
+      "color": "#059669",
+      "logo": "/logos/technologies/fastapi.svg"
+    },
+    {
+      "name": "Flask",
+      "category": "Backend",
+      "color": "#ffffff",
+      "logo": "/logos/technologies/flask.svg"
+    },
+    {
+      "name": "Go (Golang)",
+      "category": "Backend",
+      "color": "#00add8",
+      "logo": "/logos/technologies/go.svg"
+    },
+    {
+      "name": "Rust",
+      "category": "Backend",
+      "color": "#cea475",
+      "logo": "/logos/technologies/rust.svg"
+    },
+    {
+      "name": "Ruby on Rails",
+      "category": "Backend",
+      "color": "#cc0000",
+      "logo": "/logos/technologies/rubyonrails.svg"
+    },
+    {
+      "name": "GraphQL",
+      "category": "Backend",
+      "color": "#e10098",
+      "logo": "/logos/technologies/graphql.svg"
+    },
+    {
+      "name": "Laravel",
+      "category": "Backend",
+      "color": "#ff2d20",
+      "logo": "/logos/technologies/laravel.svg"
+    },
+    {
+      "name": "Spring Boot",
+      "category": "Backend",
+      "color": "#6db33f",
+      "logo": "/logos/technologies/springboot.svg"
+    },
+    {
+      "name": "C# (.NET)",
+      "category": "Backend",
+      "color": "#178600",
+      "logo": "/logos/technologies/csharp.svg"
+    },
+    {
+      "name": "Flutter",
+      "category": "Mobile",
+      "color": "#02569b",
+      "logo": "/logos/technologies/flutter.svg"
+    },
+    {
+      "name": "React Native",
+      "category": "Mobile",
+      "color": "#61dafb",
+      "logo": "/logos/technologies/react.svg"
+    },
+    {
+      "name": "SwiftUI",
+      "category": "Mobile",
+      "color": "#f05138",
+      "logo": "/logos/technologies/swift.svg"
+    },
+    {
+      "name": "Kotlin",
+      "category": "Mobile",
+      "color": "#7f52ff",
+      "logo": "/logos/technologies/kotlin.svg"
+    },
+    {
+      "name": "Swift",
+      "category": "Mobile",
+      "color": "#f05138",
+      "logo": "/logos/technologies/swift.svg"
+    },
+    {
+      "name": "Android SDK",
+      "category": "Mobile",
+      "color": "#3ddc84",
+      "logo": "/logos/technologies/android.svg"
+    },
+    {
+      "name": "Objective-C",
+      "category": "Mobile",
+      "color": "#438eff",
+      "logo": "/logos/technologies/apple.svg"
+    },
+    {
+      "name": "Ionic",
+      "category": "Mobile",
+      "color": "#3880ff",
+      "logo": "/logos/technologies/ionic.svg"
+    },
+    {
+      "name": "PostgreSQL",
+      "category": "Databases",
+      "color": "#4169e1",
+      "logo": "/logos/technologies/postgresql.svg"
+    },
+    {
+      "name": "MongoDB",
+      "category": "Databases",
+      "color": "#47a248",
+      "logo": "/logos/technologies/mongodb.svg"
+    },
+    {
+      "name": "Redis",
+      "category": "Databases",
+      "color": "#dc382d",
+      "logo": "/logos/technologies/redis.svg"
+    },
+    {
+      "name": "MySQL",
+      "category": "Databases",
+      "color": "#4479a1",
+      "logo": "/logos/technologies/mysql.svg"
+    },
+    {
+      "name": "SQLite",
+      "category": "Databases",
+      "color": "#003b57",
+      "logo": "/logos/technologies/sqlite.svg"
+    },
+    {
+      "name": "Supabase",
+      "category": "Databases",
+      "color": "#3ecf8e",
+      "logo": "/logos/technologies/supabase.svg"
+    },
+    {
+      "name": "Firebase",
+      "category": "Databases",
+      "color": "#ffca28",
+      "logo": "/logos/technologies/firebase.svg"
+    },
+    {
+      "name": "DynamoDB",
+      "category": "Databases",
+      "color": "#4053d6",
+      "logo": "/logos/technologies/amazondynamodb.svg"
+    },
+    {
+      "name": "Elasticsearch",
+      "category": "Databases",
+      "color": "#005571",
+      "logo": "/logos/technologies/elasticsearch.svg"
+    },
+    {
+      "name": "MariaDB",
+      "category": "Databases",
+      "color": "#003545",
+      "logo": "/logos/technologies/mariadb.svg"
+    },
+    {
+      "name": "Prisma",
+      "category": "Databases",
+      "color": "#2d3748",
+      "logo": "/logos/technologies/prisma.svg"
+    },
+    {
+      "name": "Cassandra",
+      "category": "Databases",
+      "color": "#1287b1",
+      "logo": "/logos/technologies/apachecassandra.svg"
+    },
+    {
+      "name": "Docker",
+      "category": "DevOps",
+      "color": "#2496ed",
+      "logo": "/logos/technologies/docker.svg"
+    },
+    {
+      "name": "Kubernetes",
+      "category": "DevOps",
+      "color": "#326ce5",
+      "logo": "/logos/technologies/kubernetes.svg"
+    },
+    {
+      "name": "AWS",
+      "category": "DevOps",
+      "color": "#ff9900",
+      "logo": "/logos/technologies/amazonaws.svg"
+    },
+    {
+      "name": "Google Cloud",
+      "category": "DevOps",
+      "color": "#4285f4",
+      "logo": "/logos/technologies/googlecloud.svg"
+    },
+    {
+      "name": "Azure",
+      "category": "DevOps",
+      "color": "#0078d4",
+      "logo": "/logos/technologies/microsoftazure.svg"
+    },
+    {
+      "name": "GitHub Actions",
+      "category": "DevOps",
+      "color": "#2088ff",
+      "logo": "/logos/technologies/githubactions.svg"
+    },
+    {
+      "name": "GitLab CI/CD",
+      "category": "DevOps",
+      "color": "#fc6d26",
+      "logo": "/logos/technologies/gitlab.svg"
+    },
+    {
+      "name": "Terraform",
+      "category": "DevOps",
+      "color": "#844fba",
+      "logo": "/logos/technologies/terraform.svg"
+    },
+    {
+      "name": "Ansible",
+      "category": "DevOps",
+      "color": "#ee0000",
+      "logo": "/logos/technologies/ansible.svg"
+    },
+    {
+      "name": "Linux",
+      "category": "DevOps",
+      "color": "#fcc624",
+      "logo": "/logos/technologies/linux.svg"
+    },
+    {
+      "name": "Vercel",
+      "category": "DevOps",
+      "color": "#ffffff",
+      "logo": "/logos/technologies/vercel.svg"
+    },
+    {
+      "name": "Cloudflare",
+      "category": "DevOps",
+      "color": "#f38020",
+      "logo": "/logos/technologies/cloudflare.svg"
+    },
+    {
+      "name": "Nginx",
+      "category": "DevOps",
+      "color": "#009639",
+      "logo": "/logos/technologies/nginx.svg"
+    },
+    {
+      "name": "n8n",
+      "category": "Automation",
+      "color": "#ff6d5a",
+      "logo": "/logos/technologies/n8n.svg"
+    },
+    {
+      "name": "Zapier",
+      "category": "Automation",
+      "color": "#ff4a00",
+      "logo": "/logos/technologies/zapier.svg"
+    },
+    {
+      "name": "Make (Integromat)",
+      "category": "Automation",
+      "color": "#7e42f5",
+      "logo": "/logos/technologies/make.svg"
+    },
+    {
+      "name": "Twilio",
+      "category": "Automation",
+      "color": "#f22f46",
+      "logo": "/logos/technologies/twilio.svg"
+    },
+    {
+      "name": "SendGrid",
+      "category": "Automation",
+      "color": "#22b573",
+      "logo": "/logos/technologies/sendgrid.svg"
+    },
+    {
+      "name": "Stripe",
+      "category": "Automation",
+      "color": "#00afe1",
+      "logo": "/logos/technologies/stripe.svg"
+    },
+    {
+      "name": "Auth0",
+      "category": "Automation",
+      "color": "#eb5424",
+      "logo": "/logos/technologies/auth0.svg"
+    },
+    {
+      "name": "Clerk",
+      "category": "Automation",
+      "color": "#6c47ff",
+      "logo": "/logos/technologies/clerk.svg"
+    },
+    {
+      "name": "Salesforce",
+      "category": "Automation",
+      "color": "#009edb",
+      "logo": "/logos/technologies/salesforce.svg"
+    },
+    {
+      "name": "HubSpot",
+      "category": "Automation",
+      "color": "#ff7a59",
+      "logo": "/logos/technologies/hubspot.svg"
+    },
+    {
+      "name": "Slack API",
+      "category": "Automation",
+      "color": "#4a154b",
+      "logo": "/logos/technologies/slack.svg"
+    },
+    {
+      "name": "OpenAI",
+      "category": "AI",
+      "color": "#10a37f",
+      "logo": "/logos/technologies/openai.svg"
+    },
+    {
+      "name": "Anthropic Claude",
+      "category": "AI",
+      "color": "#d97706",
+      "logo": "/logos/technologies/anthropic.svg"
+    },
+    {
+      "name": "LangChain",
+      "category": "AI",
+      "color": "#1c3d5a",
+      "logo": "/logos/technologies/langchain.svg"
+    },
+    {
+      "name": "TensorFlow",
+      "category": "AI",
+      "color": "#ff6f00",
+      "logo": "/logos/technologies/tensorflow.svg"
+    },
+    {
+      "name": "PyTorch",
+      "category": "AI",
+      "color": "#ee4c2c",
+      "logo": "/logos/technologies/pytorch.svg"
+    },
+    {
+      "name": "Hugging Face",
+      "category": "AI",
+      "color": "#ffd21e",
+      "logo": "/logos/technologies/huggingface.svg"
+    },
+    {
+      "name": "Pinecone",
+      "category": "AI",
+      "color": "#282a36",
+      "logo": "null"
+    },
+    {
+      "name": "Qdrant",
+      "category": "AI",
+      "color": "#ff3838",
+      "logo": "/logos/technologies/qdrant.svg"
+    },
+    {
+      "name": "VS Code",
+      "category": "Tools",
+      "color": "#007acc",
+      "logo": "/logos/technologies/visualstudiocode.svg"
+    },
+    {
+      "name": "Visual Studio",
+      "category": "Tools",
+      "color": "#5c2d91",
+      "logo": "/logos/technologies/visualstudio.svg"
+    },
+    {
+      "name": "DOSBox",
+      "category": "Tools",
+      "color": "#000000",
+      "logo": "null"
+    },
+    {
+      "name": "Git",
+      "category": "Tools",
+      "color": "#f05032",
+      "logo": "/logos/technologies/git.svg"
+    },
+    {
+      "name": "GitHub",
+      "category": "Tools",
+      "color": "#181717",
+      "logo": "/logos/technologies/github.svg"
+    },
+    {
+      "name": "Postman",
+      "category": "Tools",
+      "color": "#ff6c37",
+      "logo": "/logos/technologies/postman.svg"
+    },
+    {
+      "name": "Figma",
+      "category": "Tools",
+      "color": "#f24e1e",
+      "logo": "/logos/technologies/figma.svg"
+    },
+    {
+      "name": "Neovim",
+      "category": "Tools",
+      "color": "#57A143",
+      "logo": "/logos/technologies/neovim.svg"
+    },
+    {
+      "name": "JetBrains",
+      "category": "Tools",
+      "color": "#000000",
+      "logo": "/logos/technologies/jetbrains.svg"
+    }
+  ],
+  "ballpitDefault": {
+    "count": 100,
+    "gravity": 0.6,
+    "friction": 0.99,
+    "wallBounce": 0.85,
+    "followCursor": false,
+    "colors": [
+      "#f8fafc",
+      "#1e293b",
+      "#f59e0b",
+      "#ca8a04",
+      "#0f172a"
+    ]
+  },
+  "web3formsKey": "9bf58e9b-8a52-49aa-b7f8-5c0c1c03efc5"
 }

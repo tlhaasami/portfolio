@@ -24,18 +24,14 @@ export default function SafeImage({
       setTimeout(() => setStatus("error"), 0);
       return;
     }
-    console.log(`[SafeImage] Reading image source from json: ${src}`);
-
     const img = imgRef.current;
     if (!img) return;
 
     const onLoad = () => {
-      console.log(`[SafeImage] Successfully loaded image: ${src}`);
       setStatus("loaded");
     };
 
     const onError = () => {
-      console.warn(`[SafeImage] Failed to load image: ${src}`);
       setStatus("error");
     };
 

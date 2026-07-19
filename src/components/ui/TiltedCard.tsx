@@ -59,19 +59,15 @@ export default function TiltedCard({
       }, 0);
       return;
     }
-    console.log(`[TiltedCard] Reading profile image from json: ${imageSrc}`);
-
     const img = imgRef.current;
     if (!img) return;
 
     const onLoad = () => {
-      console.log(`[TiltedCard] Successfully loaded image: ${imageSrc}`);
       setImageStatus("loaded");
       if (onLoaded) onLoaded();
     };
 
     const onError = () => {
-      console.error(`[TiltedCard] Failed to load image: ${imageSrc}`);
       setImageStatus("error");
       if (onLoaded) onLoaded();
     };

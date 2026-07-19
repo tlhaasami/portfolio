@@ -101,7 +101,7 @@ export default function Contact() {
     }
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
 
@@ -114,7 +114,37 @@ export default function Contact() {
       });
       localStorage.setItem("contact-inquiries", JSON.stringify(inquiries));
     } catch (err) {
-      console.error("Error saving inquiry:", err);
+      console.error("Error saving inquiry locally:", err);
+    }
+
+    // Submit to Web3Forms if API key is provided
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const web3Key = (data as any).web3formsKey || portfolioDataStatic.web3formsKey;
+    if (web3Key && web3Key.trim() !== "") {
+      try {
+        const response = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify({
+            access_key: web3Key,
+            name: formData.name,
+            email: formData.email,
+            subject: `New Portfolio Contact Inquiry from ${formData.name}`,
+            interest: formData.interest,
+            message: formData.message
+          })
+        });
+        
+        const result = await response.json();
+        if (!result.success) {
+          console.error("Web3Forms submission failed:", result);
+        }
+      } catch (err) {
+        console.error("Error submitting to Web3Forms:", err);
+      }
     }
 
     setSubmitted(true);
