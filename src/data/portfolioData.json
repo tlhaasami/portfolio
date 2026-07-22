@@ -284,6 +284,22 @@
   ],
   "featuredProjects": [
     {
+      "name": "Agent LifeLine",
+      "tagline": "Premium GHL CRM Analytics & AI Operations Assistant",
+      "description": "A premium operations intelligence hub that automates GHL CRM data analysis, daily backup sync, and context-bound AI querying.",
+      "image": "/project-hero-sections/Agent-LifeLine.png",
+      "liveLink": "https://agent-lifeline.netlify.app/",
+      "techStack": [
+        "React",
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "OpenAI API",
+        "GoHighLevel"
+      ],
+      "details": "LifeLine consolidates GHL sales agent performance metrics, talk times, conversion pipeline updates, and message logs into a glassmorphic dark-mode dashboard. Features include multi-format CSV/JSON file ingestion, automated backup to GitHub repository logs, and a secure context-bound AI Operations Assistant with system safeguard lockout rules."
+    },
+    {
       "name": "Quick Escapes",
       "tagline": "Premium Full-Stack Travel & Escape Booking Platform",
       "description": "A responsive web application built with the MERN stack to streamline holiday rentals and client booking management.",
